@@ -1,0 +1,11 @@
+pt-BR:
+  formtastic:
+    labels:
+      lead:
+        name: Nome
+        phone: Telefone
+        phone_code: DDD
+        address_search: Localização
+    actions:
+      subscribe: Inscreva-se já!
+      # get_discount: Quero desconto

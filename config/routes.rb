@@ -1,4 +1,8 @@
 MultiCommerce::Application.routes.draw do
+  root to: "home#index"
+  
+  resources :leads, only: [:create]
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

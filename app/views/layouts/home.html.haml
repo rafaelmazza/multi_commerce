@@ -1,0 +1,28 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title Wizard - Você Bilíngue
+    %meta{:content => "Café Azul Agência Digital - www.cafeazul.com.br", :name => "author"}/
+    %meta{:content => "Inscreva-se agora pelo site e ganhe desconto no curso desejado.", :name => "description"}/
+    %meta{:content => "curso, desconto", :name => "keywords"}/
+    %meta{:content => "pt-br", "http-equiv" => "content-language"}/
+    %link{:href => "/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    / %link{:href => "http://fonts.googleapis.com/css?family=Droid+Sans:400,700", :rel => "stylesheet", :type => "text/css"}/
+    = javascript_include_tag "home"
+    = stylesheet_link_tag "application"
+    = csrf_meta_tags
+  %body
+    #bg
+      .clear
+      #all
+        #header
+          #logo
+            %h1
+              = link_to "Wizard - Você Bilíngue", root_path, title: "Wizard - Você Bilíngue"
+          #go-to
+            %a{:href => "#"}
+              %span Ir para o site da Wizard &raquo;
+        = yield
+        #footer
+          %p &copy; Wizard - Direitos Reservados

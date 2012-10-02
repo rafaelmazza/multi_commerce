@@ -21,9 +21,11 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'haml'
+gem 'formtastic'
 
 group :test do
-  gem 'rspec-rails'
+  gem 'shoulda-matchers'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails', require: false
@@ -31,7 +33,12 @@ group :test do
   gem 'guard'
   gem 'guard-cucumber'
   gem 'guard-rspec'
-  gem 'growl'  
+  gem 'growl'
+  gem 'rb-fsevent', '~> 0.9.1'
+end
+
+group :development, :test do
+  gem 'rspec-rails'
 end
 
 # To use ActiveModel has_secure_password

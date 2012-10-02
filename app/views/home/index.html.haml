@@ -1,0 +1,58 @@
+#image-float
+  = image_tag "image-float.png", height: "468", width: "296"
+#sign-up
+  #sign-up-left
+    #text-1
+      %h2 Aproveite!
+      %h3
+        Faça inglês hoje mesmo
+        %br/
+        com desconto exclusivo
+    #text-2
+      %h4 Inscreva-se agora pelo site e ganhe um desconto exclusivo no seu curso de inglês com horários flexíveis.
+    #arrow
+      %span Preencha o formulário &raquo;
+      = image_tag "arrow.png", height: 136, width: 564
+  #box-sign-up
+    = semantic_form_for @lead, html: { id: "sign-up-form" } do |f|
+      = f.input :name, input_html: { class: "input-1" }
+      = f.input :email, input_html: { class: "input-1" }
+      = f.inputs phone: "Telefone", id: "phone" do
+        = f.input :phone_code, wrapper_html: { class: "ddd" }
+        = f.input :phone, wrapper_html: { class: "phone" }
+      /= f.hidden_field :city_id
+      /= f.input :city, label: "Cidade / Estado", as: :string, input_html: { class: "input-1 autocomplete" }
+      = f.input :address_search,
+                                  as: :string, 
+                                  input_html: { id: "address-search-field", 
+                                                class: "input-1 autocomplete",
+                                                placeholder: "Digite seu endereço, bairro, rua ou cep"}
+
+      = f.action :submit, label: :subscribe, button_html: { class: "btn" }, wrapper_html: { class: "btn-label" }
+    %span.text-sign-up As informações são confidenciais, para uso exclusivo da Wizard, e não serão repassadas para terceiros.
+#reasons
+  #five-reasons
+    %h2
+      %span.big 5
+      razões para estudar inglês
+    %ul
+      %li 01. Salário de até 80% maior
+      %li 02. Conhecer qualquer lugar do mundo
+      %li 03. Conhecer pessoas no mundo inteiro
+      %li 04. Entender filmes e livros
+      %li 05. 75% do conteúdo na internet está em inglês
+  #ten-reasons
+    %h2
+      %span.big 10
+      razões para estudar na wizard
+    %ul
+      %li 01. Tem sempre uma Wizard perto da sua casa, são mais de 1300 localidades
+      %li 02. Escola mais indicada pelos alunos aos amigos
+      %li 03. Com a Wizpen, a caneta que fala, você aprende se divertindo
+      %li 04. Acesso ao Wespeak.com, rede social voltada ao ensino de línguas
+      %li 05. Conversação desde a primeira aula
+      %li 06. Estude inglês, espanhol, alemão, italiano, francês, chinês e japonês
+      %li 07. Ambientes modernos e agradáveis
+      %li 08. Material de qualidade reconhecido pelo mercado
+      %li 09. Estude através do celular com o Wizclass
+      %li 10. Certificação TOEIC
