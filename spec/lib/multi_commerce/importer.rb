@@ -2,7 +2,7 @@ require 'spec_helper'
 
 WSURL = "http://www.mh1.com.br/wsunidades/wsClientes.asmx/getClientes?codParceiro=SerraAzul"
 
-describe MultiCommerce::UnitiesImporter do
+describe MultiCommerce::Importer do
   let(:xml) { File.read(Rails.root.join('spec', 'support', 'fixtures', 'unities.xml')) }
   before(:all) do
     # @xml = File.read(Rails.root.join('spec', 'fixtures', 'unities.xml'))

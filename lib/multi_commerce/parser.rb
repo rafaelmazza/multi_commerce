@@ -1,5 +1,5 @@
 module MultiCommerce
-  class UnitiesParser
+  class Parser
     def initialize(data)
       @data = data
     end
@@ -33,22 +33,22 @@ module MultiCommerce
         el[:name] = find "nomeFantasia", table.children
         el[:phone] = find "telefone", table.children
         el[:email] = find "email", table.children
-        # el[:address] = make_address table
-        el[:address] = find "enderecoCompleto", table.children
+        el[:address] = make_address table
+        # el[:address] = find "enderecoCompleto", table.children
         el[:status] = find "codStatus", table.children
         el[:situation] = find "situacao", table.children
         el[:franchise_acronym] = find "modalidade", table.children, /\w/
       end
     end
     
-    # def make_address(table)
-    #   [].tap do |elements|
-    #     elements << find("endereco", table.children)
-    #     elements << find("end_num", table.children)
-    #     elements << find("bairro", table.children)
-    #     elements << find("cidade", table.children)
-    #     elements << find("estado", table.children)
-    #   end.join ", "
-    # end
+    def make_address(table)
+      [].tap do |elements|
+        elements << find("endereco", table.children)
+        elements << find("end_num", table.children)
+        elements << find("bairro", table.children)
+        elements << find("cidade", table.children)
+        elements << find("estado", table.children)
+      end.join ", "
+    end
   end
 end

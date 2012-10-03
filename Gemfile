@@ -25,6 +25,8 @@ gem 'haml'
 gem 'formtastic'
 gem 'postgres_ext'
 gem 'geocoder'
+gem 'nokogiri'
+gem 'rest-client'
 
 group :test do
   gem 'shoulda-matchers'

@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'spec_helper'
 
-describe MultiCommerce::UnitiesParser do
+describe MultiCommerce::Parser do
   let(:erp_response) { File.read(Rails.root.join('spec', 'support', 'fixtures', 'unities.xml')) }
   # let(:geocoding) { File.read(Rails.root.join('spec', 'support', 'fixtures', 'geocoding.json')) }
   subject { described_class.new erp_response }
