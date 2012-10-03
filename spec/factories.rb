@@ -9,4 +9,14 @@ FactoryGirl.define do
     # latitude 37.0625
     # longitude -95.677068
   end
+  
+  factory :unity do
+    code "001"
+    sequence(:name) {|n| "Unidade #{n}"}
+    sequence(:address) {|n| "address #{n}"}
+    sequence(:email) {|n| "school#{n}@cafeazul.com.br"}
+    sequence(:phone) {|n| "phone #{n}"}
+    status "4"
+    situation "2"
+  end
 end

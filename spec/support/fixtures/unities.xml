@@ -1,0 +1,109 @@
+<DataSet xmlns="http://tempuri.org/">
+  <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="Table">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="codEmitente" type="xs:string" minOccurs="0" />
+                <xs:element name="nomeEmit" type="xs:string" minOccurs="0" />
+                <xs:element name="nomeMatriz" type="xs:string" minOccurs="0" />
+                <xs:element name="endereco" type="xs:string" minOccurs="0" />
+                <xs:element name="bairro" type="xs:string" minOccurs="0" />
+                <xs:element name="cidade" type="xs:string" minOccurs="0" />
+                <xs:element name="cep" type="xs:string" minOccurs="0" />
+                <xs:element name="estado" type="xs:string" minOccurs="0" />
+                <xs:element name="codStatus" type="xs:double" minOccurs="0" />
+                <xs:element name="nomeFantasia" type="xs:string" minOccurs="0" />
+                <xs:element name="pais" type="xs:string" minOccurs="0" />
+                <xs:element name="modalidade" type="xs:string" minOccurs="0" />
+                <xs:element name="email" type="xs:string" minOccurs="0" />
+                <xs:element name="telefone" type="xs:string" minOccurs="0" />
+                <xs:element name="cgc" type="xs:string" minOccurs="0" />
+                <xs:element name="codIBGE" type="xs:string" minOccurs="0" />
+                <xs:element name="enderecoCompleto" type="xs:string" minOccurs="0" />
+                <xs:element name="end_num" type="xs:string" minOccurs="0" />
+                <xs:element name="end_complemento" type="xs:string" minOccurs="0" />
+                <xs:element name="situacao" type="xs:int" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+    <NewDataSet xmlns="">
+      <Table diffgr:id="Table1" msdata:rowOrder="0">
+        <codEmitente>00000003</codEmitente>
+        <nomeEmit>M A P IDIOMAS LTDA</nomeEmit>
+        <nomeMatriz>00000003</nomeMatriz>
+        <endereco>Rua Valins</endereco>
+        <bairro>Centro</bairro>
+        <cidade>Aguaí</cidade>
+        <cep>13860000</cep>
+        <estado>SP</estado>
+        <codStatus>4</codStatus>
+        <nomeFantasia>AGUAI</nomeFantasia>
+        <pais>BRASIL</pais>
+        <modalidade>W-</modalidade>
+        <email>aguai@wizard.com.br</email>
+        <telefone>19 3661 1367</telefone>
+        <cgc>062846040001-93</cgc>
+        <codIBGE>3500303</codIBGE>
+        <enderecoCompleto>Rua Valins, Nº. 1042 - Centro - Aguaí/SP - 13860000</enderecoCompleto>
+        <end_num>1042</end_num>
+        <end_complemento />
+        <situacao>1</situacao>
+        <numeroContaBancaria>123</numeroContaBancaria>
+      </Table>
+      <Table diffgr:id="Table2" msdata:rowOrder="1">
+        <codEmitente>00000004</codEmitente>
+        <nomeEmit>VABENE LVROS DIDATICOS LTDA - ME</nomeEmit>
+        <nomeMatriz>00000004</nomeMatriz>
+        <endereco>Av das Auracárias</endereco>
+        <bairro>Shopping Maggio Taguatinga</bairro>
+        <cidade>Brasília</cidade>
+        <cep>72030100</cep>
+        <estado>DF</estado>
+        <codStatus>4</codStatus>
+        <nomeFantasia>AGUAS CLARAS</nomeFantasia>
+        <pais>BRASIL</pais>
+        <modalidade>W-</modalidade>
+        <email>aguasclaras@wizard.com.br</email>
+        <telefone>19 3652 2710</telefone>
+        <cgc>060031120001-82</cgc>
+        <codIBGE>5300108</codIBGE>
+        <enderecoCompleto>Av das Auracárias, Nº. L305 - BLA Loja 8/34 - Shopping Maggio Taguatinga - Brasília/DF - 72030100</enderecoCompleto>
+        <end_num>L305</end_num>
+        <end_complemento>BLA Loja 8/34</end_complemento>
+        <situacao>1</situacao>
+        <numeroContaBancaria>234</numeroContaBancaria>
+      </Table>
+      <Table diffgr:id="Table502" msdata:rowOrder="501">
+        <codEmitente>00018728</codEmitente>
+        <nomeEmit>ALINE ENGEL REIS DE SOUZA SANTANA</nomeEmit>
+        <nomeMatriz>00018728</nomeMatriz>
+        <endereco>R Estrada Dos Bandeirantes</endereco>
+        <bairro />
+        <cidade>Rio de Janeiro</cidade>
+        <cep>22710570</cep>
+        <estado>RJ</estado>
+        <codStatus>3</codStatus>
+        <nomeFantasia>RJ TAQUARA</nomeFantasia>
+        <pais>BRASIL</pais>
+        <modalidade>A-</modalidade>
+        <email>rj-taquara@alpschool.com.br</email>
+        <telefone />
+        <cgc>041541917-48</cgc>
+        <codIBGE>3304557</codIBGE>
+        <enderecoCompleto>R Estrada Dos Bandeirantes, Nº. 645 -  - Rio de Janeiro/RJ - 22710570</enderecoCompleto>
+        <end_num>645</end_num>
+        <end_complemento />
+        <situacao>3</situacao>
+        <numeroContaBancaria>345</numeroContaBancaria>
+      </Table>
+    </NewDataSet>
+  </diffgr:diffgram>
+</DataSet>

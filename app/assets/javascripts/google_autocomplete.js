@@ -12,10 +12,8 @@ function initialize() {
       geocoder.geocode({ 'address': input.value }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
           console.log(results);
-          console.log(results[0].geometry.location.Xa);
-          console.log(results[0].geometry.location.Ya);
-					// $('#address_coordinates_latitude').val(results[0].geometry.location.Xa)
-					// $('#address_coordinates_longitude').val(results[0].geometry.location.Ya)
+					$('#lead_latitude').val(results[0].geometry.location.Xa)
+					$('#lead_longitude').val(results[0].geometry.location.Ya)
         }
       });
 

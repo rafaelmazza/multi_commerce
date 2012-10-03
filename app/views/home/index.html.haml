@@ -20,10 +20,8 @@
       = f.input :name, input_html: { class: "input-1" }
       = f.input :email, input_html: { class: "input-1" }
       = f.inputs phone: "Telefone", id: "phone" do
-        = f.input :phone_code, wrapper_html: { class: "ddd" }
+        = f.input :phone_code, wrapper_html: { class: "phone_code" }
         = f.input :phone, wrapper_html: { class: "phone" }
-      /= f.hidden_field :city_id
-      /= f.input :city, label: "Cidade / Estado", as: :string, input_html: { class: "input-1 autocomplete" }
       = f.input :address_search,
                                   as: :string, 
                                   input_html: { id: "address-search-field", 

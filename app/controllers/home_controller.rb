@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   end
   
   def unities
-    
+    @lead = Lead.find(params[:id])
+    @unities = Unity.near(@lead)
   end
 end

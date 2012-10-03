@@ -1,0 +1,73 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "800",
+               "short_name" : "800",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "R. Euclides Pacheco",
+               "short_name" : "R. Euclides Pacheco",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "Tatuapé",
+               "short_name" : "Tatuapé",
+               "types" : [ "sublocality", "political" ]
+            },
+            {
+               "long_name" : "Sao Paulo",
+               "short_name" : "Sao Paulo",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "São Paulo",
+               "short_name" : "São Paulo",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "Brazil",
+               "short_name" : "BR",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "03321-000",
+               "short_name" : "03321-000",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "R. Euclides Pacheco, 800 - Tatuapé, Sao Paulo - São Paulo, 03321-000, Brazil",
+         "geometry" : {
+            "bounds" : {
+               "northeast" : {
+                  "lat" : -23.54789310,
+                  "lng" : -46.56706759999999
+               },
+               "southwest" : {
+                  "lat" : -23.5478940,
+                  "lng" : -46.56706780
+               }
+            },
+            "location" : {
+               "lat" : -23.5478940,
+               "lng" : -46.56706759999999
+            },
+            "location_type" : "RANGE_INTERPOLATED",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : -23.54654456970850,
+                  "lng" : -46.56571871970849
+               },
+               "southwest" : {
+                  "lat" : -23.54924253029150,
+                  "lng" : -46.56841668029149
+               }
+            }
+         },
+         "types" : [ "street_address" ]
+      }
+   ],
+   "status" : "OK"
+}

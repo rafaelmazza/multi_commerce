@@ -36,6 +36,8 @@ group :test do
   gem 'guard-rspec'
   gem 'growl'
   gem 'rb-fsevent', '~> 0.9.1'
+  gem 'webmock'
+  # gem 'nokogiri'
 end
 
 group :development, :test do

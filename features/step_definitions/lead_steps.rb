@@ -13,5 +13,5 @@ When /^I fill the subscribe form with valid lead info and submit$/ do
 end
 
 Then /^I see the list of unities near me$/ do
-  pending
+  page.should have_xpath("//div[@id='unities']/div[@class='unity']")
 end
