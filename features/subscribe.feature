@@ -1,5 +1,6 @@
 Feature: Lead subscribe
   Background:
+    Given there are a bunch unities
 
   # @javascript
   Scenario: Basic subscription - Part 1

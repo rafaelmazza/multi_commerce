@@ -1,4 +1,12 @@
 # encoding: UTF-8
+Given /^there are a bunch unities$/ do
+  create_unities
+end
+
+def create_unities
+  @unities ||= 3.times.map { create(:unity) }
+end
+
 Given /^I am on the home page$/ do
   visit root_path
 end
