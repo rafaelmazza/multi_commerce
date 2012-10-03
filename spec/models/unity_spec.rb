@@ -9,4 +9,19 @@ describe Unity do
   it { should have_db_column(:email).of_type(:string) }
   it { should have_db_column(:phone).of_type(:string) }
   it { should have_db_column(:address).of_type(:string) }
+  
+  # subject { described_class.new }
+  
+  # describe '.near' do
+  #   let(:lead) { create(:lead) }
+  #   before do
+  #     Unity.any_instance.stub(:geocode).and_return([1,1]) 
+  #     unities = 3.times.map { create(:unity) }
+  #   end
+  #   
+  #   it 'returns unities near specific location' do
+  #     # subject.near
+  #     Unity.near(lead)
+  #   end
+  # end
 end

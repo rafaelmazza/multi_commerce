@@ -12,7 +12,7 @@ describe MultiCommerce::UnitiesImporter do
   context '#perform' do
     it 'invoke parser passing unities xml' do
       parser = mock.as_null_object
-      MultiCommerce::Parser..stub(:new).with(xml).and_return(parser)
+      MultiCommerce::Parser.stub(:new).with(xml).and_return(parser)
       
       parser.should_receive :parse
       described_class.perform

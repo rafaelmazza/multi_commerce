@@ -70,6 +70,7 @@ GEM
     ffi (1.1.5)
     formtastic (2.2.1)
       actionpack (>= 3.0)
+    geocoder (1.1.4)
     gherkin (2.11.2)
       json (>= 1.4.6)
     growl (1.0.3)
@@ -198,6 +199,7 @@ DEPENDENCIES
   database_cleaner
   factory_girl_rails
   formtastic
+  geocoder
   growl
   guard
   guard-cucumber

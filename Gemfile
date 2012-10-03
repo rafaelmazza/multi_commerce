@@ -24,6 +24,7 @@ gem 'jquery-rails'
 gem 'haml'
 gem 'formtastic'
 gem 'postgres_ext'
+gem 'geocoder'
 
 group :test do
   gem 'shoulda-matchers'
@@ -37,7 +38,6 @@ group :test do
   gem 'growl'
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'webmock'
-  # gem 'nokogiri'
 end
 
 group :development, :test do
