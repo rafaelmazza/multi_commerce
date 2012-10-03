@@ -23,6 +23,7 @@ end
 gem 'jquery-rails'
 gem 'haml'
 gem 'formtastic'
+gem 'postgres_ext'
 
 group :test do
   gem 'shoulda-matchers'

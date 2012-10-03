@@ -100,7 +100,11 @@ GEM
     multi_json (1.3.6)
     nokogiri (1.5.5)
     pg (0.14.1)
+    pg_array_parser (0.0.8)
     polyglot (0.3.3)
+    postgres_ext (0.0.8)
+      activerecord (~> 3.2.0)
+      pg_array_parser (~> 0.0.3)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -186,6 +190,7 @@ DEPENDENCIES
   haml
   jquery-rails
   pg
+  postgres_ext
   rails (= 3.2.8)
   rb-fsevent (~> 0.9.1)
   rspec-rails

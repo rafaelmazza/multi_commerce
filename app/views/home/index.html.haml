@@ -15,6 +15,8 @@
       = image_tag "arrow.png", height: 136, width: 564
   #box-sign-up
     = semantic_form_for @lead, html: { id: "sign-up-form" } do |f|
+      = f.hidden_field :latitude
+      = f.hidden_field :longitude
       = f.input :name, input_html: { class: "input-1" }
       = f.input :email, input_html: { class: "input-1" }
       = f.inputs phone: "Telefone", id: "phone" do
@@ -56,3 +58,5 @@
       %li 08. Material de qualidade reconhecido pelo mercado
       %li 09. Estude através do celular com o Wizclass
       %li 10. Certificação TOEIC
+
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places", "google_autocomplete"

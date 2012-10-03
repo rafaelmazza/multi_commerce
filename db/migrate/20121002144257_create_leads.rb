@@ -6,6 +6,8 @@ class CreateLeads < ActiveRecord::Migration
       t.string :phone_code
       t.string :phone
       t.string :address_search
+      t.float :latitude
+      t.float :longitude
     end
   end
 end
