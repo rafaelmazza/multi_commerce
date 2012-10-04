@@ -1,2 +1,49 @@
-#unities
-  = render partial: "unity", collection: @unities
+#align
+  #search
+    = image_tag "search-icon.png", height: 66, width: 66
+    #search-alignment-form
+      %span Refine sua busca:
+      = form_tag "/busca", method: "post", id: "search-form" do
+        = hidden_field_tag "page", "1"
+        = text_field_tag :address, @lead.address_search, id: "input-search", placeholder: "Digite seu endereço, bairro, rua ou cep"
+        = submit_tag "Buscar »", class: "btn-search"
+
+  #lead_content
+    = semantic_form_for @lead do |f|
+      = f.hidden_field :unity_id
+
+      #unities
+        /= render partial: "unity", collection: @unities, locals: { address_search: @lead.address_search }
+        = render partial: "unity", collection: @unities
+        %br/
+        /= will_paginate @unities, previous_label: "«", next_label: "»"
+      /= render partial: "payment_template", locals: { f: f }
+      
+= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+
+:javascript
+  function initialize() {
+    var input = document.getElementById('input-search');
+    var options = {
+      types: ['geocode'],
+      componentRestrictions: {country: 'br'}
+    };
+    var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+    google.maps.event.addDomListener(input, 'keydown', function(e) {
+      if (e.keyCode == 13) { // hits enter
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ 'address': input.value }, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            console.log(results);
+  					$('#lead_latitude').val(results[0].geometry.location.Xa)
+  					$('#lead_longitude').val(results[0].geometry.location.Ya)
+          }
+        });
+
+        e.preventDefault();
+      } 
+    });
+
+  }
+  google.maps.event.addDomListener(window, 'load', initialize);
