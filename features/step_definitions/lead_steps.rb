@@ -1,6 +1,7 @@
 # encoding: UTF-8
 Given /^there are a bunch unities$/ do
   create_unities
+  Unity.stub(:near).and_return(@unities)
 end
 
 def create_unities
@@ -17,10 +18,18 @@ When /^I fill the subscribe form with valid lead info and submit$/ do
   fill_in "DDD", with: "11"
   fill_in "Telefone", with: "50727001"
   fill_in "Localização", with: "Moema"  
-  sleep 1
+  # sleep 1
   click_on "Inscreva-se já!"
 end
 
 Then /^I see the list of unities near me$/ do
   page.should have_xpath("//div[@class='unity']")
+end
+
+When /^I click subscribe on the first found unity$/ do
+  find('a.subscribe:first').click
+end
+
+Then /^I see the payment form$/ do
+  page.should have_xpath("//div[@id='payment']")
 end

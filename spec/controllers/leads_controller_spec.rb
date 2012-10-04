@@ -9,7 +9,7 @@ describe LeadsController do
       
       it 'redirects to unities page' do
         post :create, :lead => attributes_for(:lead)
-        response.should redirect_to action: :unities, controller: :home, id: assigns[:lead].id
+        response.should redirect_to action: :unities, controller: :home
       end
       
       context 'when email already exists' do

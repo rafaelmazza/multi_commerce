@@ -1,0 +1,68 @@
+#lead_content
+  = semantic_form_for @lead do |f|
+    #open-result
+      #open-result-top
+        %span.text-result-medium Qual o melhor horário para você estudar?
+        %fieldset#period
+          /- @course_periods.each do |period|
+          /  %label.course_period{"data-id" => period.id}
+          /    = button_tag period.title, type: "button"
+          /    %span= period.description
+          /= f.input :course_period, :as => :radio, collection: @course_periods
+        / %span.text-result-medium Curso:
+        / %fieldset#course
+        /   = f.input :course, :as => :radio, collection: @courses
+      #open-result-center
+        %span.text-result-medium Preencha seus dados:
+        %fieldset#your-data
+          = f.fields_for :address do |a|
+            = a.input :cep, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
+            = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
+            = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :neighbourhood, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :state, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          = f.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          = f.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          /= f.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+
+        %fieldset#your-data-right
+          /= render partial: "product", collection: @products, locals: { f: f }
+          #total
+            %span.total-left Total:
+            %span.total-right
+              /= number_to_currency(@lead.course.value / 100)
+        %span.text-result-medium Forma de Pagamento:
+        %fieldset#payment
+          %label
+            /= f.radio_button :payment, :boleto, checked: true
+            = image_tag "barcode.png"
+          %label
+            /= f.radio_button :payment, :cartao_visa, class: "credit-card"
+            = image_tag "visa.png"
+          %label
+            /= f.radio_button :payment, :cartao_master, class: "credit-card"
+            = image_tag "master.png"
+        %fieldset#credit-card
+          %span.text-result-medium Dados do cartão:
+          %li.wrapper
+            %label{for: "lead_credit_card_number"} Número:
+            = text_field_tag "lead[credit_card][number]", "", class: "input-1"
+          %li.wrapper
+            %label{for: "lead_credit_card_security_code"} Código de segurança:
+            = text_field_tag "lead[credit_card][security_code]", "", class: "input-1"
+          %li.wrapper
+            %label{for: "lead_credit_card_validate"} Expiração:
+            = text_field_tag "lead[credit_card][expiration_date]", "", class: "input-1"
+          %li.wrapper
+            %label{for: "lead_credit_card_name"} Nome no cartão:
+            = text_field_tag "lead[credit_card][owners_name]", "", class: "input-1"
+          %li.wrapper
+            %label{for: "lead_credit_card_installments"} Parcelas:
+            = select_tag "lead[credit_card][installments]", options_for_select((1..12).to_a), class: "input-1"
+        %fieldset#button
+          = f.submit "Comprar Curso", class: "btn-purchase"
+        #content-footer
+          = link_to "« voltar", :back, id: "content-footer-link-back"
+          = f.submit "Imprimir voucher e ir até a unidade", id: "content-footer-print", name: "voucher"

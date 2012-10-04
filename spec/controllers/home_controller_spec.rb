@@ -21,4 +21,23 @@ describe HomeController do
       assigns(:unities).should have(3).unities
     end
   end
+  
+  describe 'GET subscribe' do
+    let(:unity) { create(:unity) }
+    let(:lead) { create(:lead) }
+    
+    before do
+      controller.stub session: { lead_id: lead.id }
+    end
+    
+    it 'assigns choosen unity' do
+      get :subscribe, unity_id: unity
+      assigns(:unity).should == unity
+    end
+    
+    it 'assigns current lead' do
+      get :subscribe, unity_id: unity
+      assigns(:lead).should == lead
+    end
+  end
 end

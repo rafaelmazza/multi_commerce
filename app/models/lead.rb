@@ -14,5 +14,12 @@ class Lead < ActiveRecord::Base
   validates :phone, presence: true
   validates :phone, numericality: true
   
+  belongs_to :unity, counter_cache: true
+  
   geocoded_by :address_search
+  
+  def subscribe(unity)
+    self.unity = unity
+    save!
+  end
 end

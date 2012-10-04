@@ -18,6 +18,7 @@ FactoryGirl.define do
     sequence(:phone) {|n| "phone #{n}"}
     status "4"
     situation "2"
+    leads_count 0
   end
   
   factory :franchise do
