@@ -13,4 +13,6 @@ class Lead < ActiveRecord::Base
   validates :phone_code, numericality: true
   validates :phone, presence: true
   validates :phone, numericality: true
+  
+  geocoded_by :address_search
 end

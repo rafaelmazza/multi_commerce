@@ -16,10 +16,11 @@ When /^I fill the subscribe form with valid lead info and submit$/ do
   fill_in "Email", with: "rafael@cafeazul.com.br"
   fill_in "DDD", with: "11"
   fill_in "Telefone", with: "50727001"
-  fill_in "Localização", with: "São Paulo"
+  fill_in "Localização", with: "Moema"  
+  sleep 1
   click_on "Inscreva-se já!"
 end
 
 Then /^I see the list of unities near me$/ do
-  page.should have_xpath("//div[@id='unities']/div[@class='unity']")
+  page.should have_xpath("//div[@class='unity']")
 end

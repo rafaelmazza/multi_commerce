@@ -104,6 +104,75 @@
         <situacao>3</situacao>
         <numeroContaBancaria>345</numeroContaBancaria>
       </Table>
+      <Table diffgr:id="Table2" msdata:rowOrder="1">
+        <codEmitente>00000005</codEmitente>
+        <nomeEmit></nomeEmit>
+        <nomeMatriz>00000005</nomeMatriz>
+        <endereco>Alameda dos Arapanes</endereco>
+        <bairro>Moema</bairro>
+        <cidade>São Paulo</cidade>
+        <cep>04524002</cep>
+        <estado>SP</estado>
+        <codStatus>4</codStatus>
+        <nomeFantasia>Moema</nomeFantasia>
+        <pais>BRASIL</pais>
+        <modalidade>W-</modalidade>
+        <email>moema@wizard.com.br</email>
+        <telefone>11 5543 3272</telefone>
+        <cgc>060031120001-82</cgc>
+        <codIBGE>5300108</codIBGE>
+        <enderecoCompleto>Alameda dos Arapanes, 1298 - Moema - São Paulo/SP - 04524002</enderecoCompleto>
+        <end_num>1298</end_num>
+        <end_complemento></end_complemento>
+        <situacao>1</situacao>
+        <numeroContaBancaria></numeroContaBancaria>
+      </Table>
+      <Table diffgr:id="Table2" msdata:rowOrder="1">
+        <codEmitente>00000006</codEmitente>
+        <nomeEmit></nomeEmit>
+        <nomeMatriz>00000006</nomeMatriz>
+        <endereco>Rua Joao de Souza Dias</endereco>
+        <bairro>Campo Belo</bairro>
+        <cidade>São Paulo</cidade>
+        <cep>04618003</cep>
+        <estado>SP</estado>
+        <codStatus>4</codStatus>
+        <nomeFantasia>Campo Belo</nomeFantasia>
+        <pais>BRASIL</pais>
+        <modalidade>W-</modalidade>
+        <email>campobelo@wizard.com.br</email>
+        <telefone>11 5561 0783</telefone>
+        <cgc>060031120001-82</cgc>
+        <codIBGE>5300108</codIBGE>
+        <enderecoCompleto>Rua Joao de Souza Dias, 651 - Campo Belo - São Paulo/SP - 04618003</enderecoCompleto>
+        <end_num>651</end_num>
+        <end_complemento></end_complemento>
+        <situacao>1</situacao>
+        <numeroContaBancaria></numeroContaBancaria>
+      </Table>
+      <Table diffgr:id="Table2" msdata:rowOrder="1">
+        <codEmitente>00000007</codEmitente>
+        <nomeEmit></nomeEmit>
+        <nomeMatriz>00000007</nomeMatriz>
+        <endereco>Rua Ribeiro do Vale</endereco>
+        <bairro>Brooklin</bairro>
+        <cidade>São Paulo</cidade>
+        <cep>04568000</cep>
+        <estado>SP</estado>
+        <codStatus>4</codStatus>
+        <nomeFantasia>Brooklin</nomeFantasia>
+        <pais>BRASIL</pais>
+        <modalidade>W-</modalidade>
+        <email>campobelo@wizard.com.br</email>
+        <telefone>11 5531 2000</telefone>
+        <cgc>060031120001-82</cgc>
+        <codIBGE>5300108</codIBGE>
+        <enderecoCompleto>Rua Ribeiro do Vale, 363 - Brooklin - São Paulo/SP - 04568000</enderecoCompleto>
+        <end_num>363</end_num>
+        <end_complemento></end_complemento>
+        <situacao>1</situacao>
+        <numeroContaBancaria></numeroContaBancaria>
+      </Table>
     </NewDataSet>
   </diffgr:diffgram>
 </DataSet>

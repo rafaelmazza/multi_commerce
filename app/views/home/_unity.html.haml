@@ -1,0 +1,14 @@
+.unity.result-unity{ id: "unity_"+unity.id.to_s }
+  .result-left
+    /= submit_tag "Inscrever", class: "subscribe_button btn-search-sign-in", "data-id" => unity.id.to_s
+    = link_to "Inscrever", "/inscricao/#{unity.id.to_s}"
+
+    %span Inscreva-se agora e ganhe desconto na matrícula
+  .result-center
+    %h2= unity.name
+    %span= unity.address
+    %h2= unity.phone
+    = link_to "como chegar »", external_map_url(unity), class: "how-to-get", target: "_blank"
+  .result-right
+    = link_to (image_tag static_map_url(unity)), "#"
+  .payment_container
