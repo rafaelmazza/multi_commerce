@@ -19,4 +19,10 @@ FactoryGirl.define do
     status "4"
     situation "2"
   end
+  
+  factory :franchise do
+    name 'wizard'
+    url 'desconto.wizard.dev.br'
+    acronym 'W-'
+  end
 end

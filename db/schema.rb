@@ -11,7 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121003185501) do
+ActiveRecord::Schema.define(:version => 20121004174702) do
+
+  create_table "franchises", :force => true do |t|
+    t.string "name"
+    t.string "url"
+    t.string "acronym"
+  end
 
   create_table "leads", :force => true do |t|
     t.string "name"
