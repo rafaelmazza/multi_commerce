@@ -2,7 +2,7 @@ class Voucher < ActiveRecord::Base
   belongs_to :unity
   belongs_to :lead
   
-  attr_accessible :used_at
+  attr_accessible :used_at, :unity_id
   
   before_create :generate_code
   

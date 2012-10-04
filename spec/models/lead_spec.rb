@@ -19,6 +19,7 @@ describe Lead do
   it { should validate_numericality_of(:phone) }
   
   it { should belong_to(:unity) }
+  it { should have_many(:vouchers) }
   
   describe '#subscribe' do
     let(:lead) { create(:lead) }
@@ -33,8 +34,9 @@ describe Lead do
       lead.subscribe(unity)
       unity.reload.leads_count.should == 1
     end
-    # # pre-generate the voucher to have it associated
-    # # even if the lead doesn't subscribe or print the voucher
-    # generate_voucher
+    
+    it 'generates voucher' do
+      expect { lead.subscribe(unity) }.to change(Voucher, :count).by(1)
+    end
   end
 end

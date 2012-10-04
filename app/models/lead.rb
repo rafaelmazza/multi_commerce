@@ -15,11 +15,19 @@ class Lead < ActiveRecord::Base
   validates :phone, numericality: true
   
   belongs_to :unity, counter_cache: true
+  has_many :vouchers
   
   geocoded_by :address_search
   
   def subscribe(unity)
     self.unity = unity
+    generate_voucher
     save!
+  end
+  
+  private
+  
+  def generate_voucher
+    self.vouchers.create(unity_id: unity)
   end
 end
