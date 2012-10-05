@@ -7,7 +7,7 @@ class HomeController < ApplicationController
   
   def unities
     @lead = Lead.find(session[:lead_id])
-    @unities = Unity.near(@lead)
+    @unities = Unity.near(@lead).page params[:page]
   end
   
   def subscribe

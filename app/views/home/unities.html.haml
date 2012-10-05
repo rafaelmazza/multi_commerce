@@ -18,7 +18,7 @@
         /= render partial: "unity", collection: @unities, locals: { address_search: @lead.address_search }
         = render partial: "unity", collection: @unities
         %br/
-        /= will_paginate @unities, previous_label: "«", next_label: "»"
+        = paginate @unities
       /= render partial: "payment_template", locals: { f: f }
   
 

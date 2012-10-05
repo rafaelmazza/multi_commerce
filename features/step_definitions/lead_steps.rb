@@ -26,7 +26,7 @@ When /^I fill the subscribe form with valid lead info and submit$/ do
 end
 
 Then /^I see the list of unities near me$/ do
-  page.all('.unity').count.should == 5
+  page.all('.unity').count.should == 3
 end
 
 When /^I click subscribe on the first found unity$/ do

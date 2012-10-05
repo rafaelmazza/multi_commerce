@@ -27,6 +27,7 @@ gem 'postgres_ext'
 gem 'geocoder'
 gem 'nokogiri'
 gem 'rest-client'
+gem 'kaminari'
 
 group :test do
   gem 'shoulda-matchers'

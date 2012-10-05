@@ -9,3 +9,12 @@ pt-BR:
     actions:
       subscribe: Inscreva-se já!
       # get_discount: Quero desconto
+
+  # kaminari
+  views:
+    pagination:
+      first: "&laquo; Primeira"
+      last: "Última &raquo;"
+      previous: "&lsaquo; Anterior"
+      next: "Próxima &rsaquo;"
+      truncate: "..."
