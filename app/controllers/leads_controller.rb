@@ -1,7 +1,7 @@
 class LeadsController < ApplicationController
   def create
-    params[:lead][:latitude] = -23.605556 # tmp
-    params[:lead][:longitude] = -46.665833 # tmp
+    # params[:lead][:latitude] = -23.605556 # tmp
+    # params[:lead][:longitude] = -46.665833 # tmp
     
     @lead = Lead.find_or_create_by_email(email: params[:lead][:email])
     @lead.attributes = params[:lead]

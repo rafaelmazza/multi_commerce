@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
   
   factory :unity do
-    code "001"
+    sequence(:code) {|n| "00#{n}"}
     sequence(:name) {|n| "Unidade #{n}"}
     sequence(:address) {|n| "address #{n}"}
     sequence(:email) {|n| "school#{n}@cafeazul.com.br"}
