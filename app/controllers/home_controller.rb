@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
-  layout "home"
+  layout 'home'
+  layout 'voucher', only: 'voucher'
   
   def index
     @lead = Lead.new
@@ -13,6 +14,10 @@ class HomeController < ApplicationController
   def subscribe
     @lead = Lead.find(session[:lead_id])    
     @unity = Unity.find(params[:unity_id])
-    @lead.subscribe(@unity)
+    @voucher = @lead.subscribe(@unity)
+  end
+  
+  def voucher
+    @voucher = Voucher.find(params[:id])
   end
 end

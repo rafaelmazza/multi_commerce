@@ -65,4 +65,4 @@
           = f.submit "Comprar Curso", class: "btn-purchase"
         #content-footer
           = link_to "« voltar", :back, id: "content-footer-link-back"
-          = f.submit "Imprimir voucher e ir até a unidade", id: "content-footer-print", name: "voucher"
+          = link_to t('.print_voucher'), voucher_url(id: @voucher.id), id: "print-voucher"

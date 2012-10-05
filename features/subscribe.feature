@@ -11,3 +11,6 @@ Feature: Lead subscribe
 
     When I click subscribe on the first found unity
     Then I see the payment form
+    
+    When I follow print voucher
+    Then I should see the voucher

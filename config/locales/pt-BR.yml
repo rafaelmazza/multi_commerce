@@ -1,4 +1,8 @@
 pt-BR:
+  home:
+    subscribe:
+      print_voucher: "Imprimir voucher e ir até a unidade"
+    
   formtastic:
     labels:
       lead:

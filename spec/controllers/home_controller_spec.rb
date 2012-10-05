@@ -22,6 +22,7 @@ describe HomeController do
     let(:unities) { 3.times.map {mock.as_null_object} }
     
     before do
+      pending
       Lead.stub find: lead
       Unity.stub(:near).with(lead).and_return(unities)
     end
@@ -53,6 +54,29 @@ describe HomeController do
     it 'assigns current lead' do
       get :subscribe, unity_id: unity
       assigns(:lead).should == lead
+    end
+    
+    it 'assigns generated voucher' do
+      pending
+      get :subscribe, unity_id: unity
+      assigns(:voucher).should == voucher
+    end    
+  end
+  
+  describe 'GET voucher' do
+    let(:voucher) { mock 'voucher' }
+    before do
+      Voucher.stub(:find).with('voucher_id').and_return voucher
+    end
+    
+    it 'assigns voucher' do      
+      get :voucher, id: 'voucher_id'
+      assigns(:voucher).should == voucher
+    end
+    
+    it 'renders voucher layout' do
+      get :voucher, id: 'voucher_id'
+      response.should render_template('layouts/voucher')
     end
   end
   

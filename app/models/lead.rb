@@ -21,13 +21,13 @@ class Lead < ActiveRecord::Base
   
   def subscribe(unity)
     self.unity = unity
-    generate_voucher
     save!
+    generate_voucher    
   end
   
   private
   
   def generate_voucher
-    self.vouchers.create(unity_id: unity)
+    self.vouchers.create(unity_id: unity.id)
   end
 end

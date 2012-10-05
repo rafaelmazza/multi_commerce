@@ -34,5 +34,17 @@ When /^I click subscribe on the first found unity$/ do
 end
 
 Then /^I see the payment form$/ do
-  page.should have_xpath("//div[@id='payment']")
+  # page.should have_xpath("//div[@id='payment']")
+  page.should have_content "Forma de Pagamento"
+end
+
+When /^I follow print voucher$/ do
+  click_on I18n.t('home.subscribe.print_voucher')
+end
+
+Then /^I should see the voucher$/ do
+  current_path.should == voucher_path
+  lead = Lead.last
+  page.should have_content(lead.name)
+  page.should have_content(lead.unity.name)
 end

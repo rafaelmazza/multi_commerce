@@ -38,5 +38,11 @@ describe Lead do
     it 'generates voucher' do
       expect { lead.subscribe(unity) }.to change(Voucher, :count).by(1)
     end
+    
+    it 'returns generated voucher' do
+      voucher = mock('voucher')
+      lead.should_receive(:generate_voucher).and_return(voucher)
+      lead.subscribe(unity).should == voucher
+    end
   end
 end
