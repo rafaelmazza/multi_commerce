@@ -53,5 +53,7 @@ FactoryGirl.define do
     sequence(:description) { |n| "Description #{n}" }
     price 21.99
     # discount 10
+    
+    franchise
   end
 end

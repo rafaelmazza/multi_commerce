@@ -28,7 +28,7 @@
           /= f.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
 
         %fieldset#your-data-right
-          /= render partial: "product", collection: @products, locals: { f: f }
+          = render partial: "product", collection: @products, locals: { f: f }
           #total
             %span.total-left Total:
             %span.total-right

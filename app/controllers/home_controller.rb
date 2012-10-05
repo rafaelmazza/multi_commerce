@@ -15,6 +15,8 @@ class HomeController < ApplicationController
     @lead = Lead.find(session[:lead_id])    
     @unity = Unity.find(params[:unity_id])
     @voucher = @lead.subscribe(@unity)
+    
+    @products = current_franchise.products # tmp
   end
   
   def voucher

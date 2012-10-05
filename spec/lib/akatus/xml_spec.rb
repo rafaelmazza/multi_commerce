@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'spec_helper'
 
 describe Akatus::Xml do
@@ -5,17 +6,18 @@ describe Akatus::Xml do
 
     let(:address) do 
       build :address, 
-              street: "Rua Euclides Pacheco", 
-              complement: "AP 81 BL PR", 
-              number: "1035", 
-              city: "Sao Paulo", 
+              street: "Avenida Moema", 
+              complement: "Conjunto 65", 
+              number: "170", 
+              city: "São Paulo", 
               state: "SP", 
-              zipcode: "03321-000", 
-              district: "tatuape" 
+              zipcode: "04077-020", 
+              district: "Moema" 
     end
     
     let(:lead) do 
-      create :lead_with_products, 
+      # create :lead_with_products, 
+      create :lead, 
                 name: "John", 
                 email: "john@cafeazul.com.br", 
                 address: address 
@@ -73,23 +75,23 @@ describe Akatus::Xml do
         end
 
         it "should include logradouro" do
-          @address.css("logradouro").text.should == "Rua Euclides Pacheco"
+          @address.css("logradouro").text.should == "Avenida Moema"
         end
 
         it "should include complemento" do
-          @address.css("complemento").text.should == "AP 81 BL PR"
+          @address.css("complemento").text.should == "Conjunto 65"
         end
 
         it "should include numero" do
-          @address.css("numero").text.should == "1035"
+          @address.css("numero").text.should == "170"
         end
 
         it "should include bairro" do
-          @address.css("bairro").text.should == "tatuape"
+          @address.css("bairro").text.should == "Moema"
         end
 
         it "should include cidade" do
-          @address.css("cidade").text.should == "Sao Paulo"
+          @address.css("cidade").text.should == "São Paulo"
         end
 
         it "should include estado" do
@@ -101,7 +103,7 @@ describe Akatus::Xml do
         end
 
         it "should include cep" do
-          @address.css("cep").text.should == "03321-000"
+          @address.css("cep").text.should == "04077-020"
         end
       end
     end

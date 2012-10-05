@@ -60,7 +60,17 @@ describe HomeController do
       pending
       get :subscribe, unity_id: unity
       assigns(:voucher).should == voucher
-    end    
+    end
+    
+    it 'assign products' do
+      pending
+      controller.stub request: mock(:server_name => "desconto.wizard.dev.br").as_null_object
+      franchise = create(:franchise, name: 'wizard', url: 'desconto.wizard.dev.br')
+      products = [create(:product, franchise: franchise)]
+
+      get :subscribe, unity_id: unity
+      assigns(:products).should == products
+    end
   end
   
   describe 'GET voucher' do

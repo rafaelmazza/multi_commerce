@@ -1,0 +1,7 @@
+%label
+  = check_box_tag "lead[product_ids][]", product.id, true
+  %span.your-data-text-left
+    = product.name
+    \:
+  %span.your-data-text-right
+    = number_to_currency product.price
