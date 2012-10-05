@@ -13,4 +13,13 @@ class LeadsController < ApplicationController
       render "home/index"
     end
   end
+  
+  def update
+    @lead = Lead.find(session[:lead_id])
+    @lead.update_attributes params[:lead]
+    
+    if @lead.save    
+      redirect_to action: :unities, controller: :home
+    end
+  end
 end

@@ -15,7 +15,4 @@ class HomeController < ApplicationController
     @unity = Unity.find(params[:unity_id])
     @lead.subscribe(@unity)
   end
-  
-  def search
-  end
 end

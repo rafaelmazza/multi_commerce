@@ -3,11 +3,13 @@
     = image_tag "search-icon.png", height: 66, width: 66
     #search-alignment-form
       %span Refine sua busca:
-      = form_tag "/busca", method: "post", id: "search-form" do
+      = form_tag lead_path(@lead), method: "PUT", id: "search-form" do
         = hidden_field_tag "page", "1"
-        = text_field_tag :address, @lead.address_search, id: "input-search", placeholder: "Digite seu endereço, bairro, rua ou cep"
+        = hidden_field_tag "lead[latitude]"
+        = hidden_field_tag "lead[longitude]"        
+        = text_field_tag "lead[address_search]", @lead.address_search, id: "input-search", placeholder: "Digite seu endereço, bairro, rua ou cep"
         = submit_tag "Buscar »", class: "btn-search"
-
+        
   #lead_content
     = semantic_form_for @lead do |f|
       = f.hidden_field :unity_id
@@ -18,8 +20,7 @@
         %br/
         /= will_paginate @unities, previous_label: "«", next_label: "»"
       /= render partial: "payment_template", locals: { f: f }
-      
-= javascript_include_tag "https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"
+  
 
 :javascript
   function initialize() {
