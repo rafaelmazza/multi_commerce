@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121004200620) do
+ActiveRecord::Schema.define(:version => 20121005194410) do
+
+  create_table "addresses", :force => true do |t|
+    t.string  "street"
+    t.string  "complement"
+    t.string  "number"
+    t.string  "district"
+    t.string  "city"
+    t.string  "state"
+    t.string  "country"
+    t.string  "zipcode"
+    t.integer "lead_id"
+  end
 
   create_table "franchises", :force => true do |t|
     t.string "name"
@@ -28,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20121004200620) do
     t.float   "latitude"
     t.float   "longitude"
     t.integer "unity_id"
+  end
+
+  create_table "products", :force => true do |t|
+    t.integer "franchise_id"
+    t.string  "name",                                       :null => false
+    t.text    "description"
+    t.decimal "price",        :precision => 8, :scale => 2, :null => false
   end
 
   create_table "unities", :force => true do |t|

@@ -28,6 +28,7 @@ gem 'geocoder'
 gem 'nokogiri'
 gem 'rest-client'
 gem 'kaminari'
+gem 'faraday'
 
 group :test do
   gem 'shoulda-matchers'

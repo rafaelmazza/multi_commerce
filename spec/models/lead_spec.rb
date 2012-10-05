@@ -20,6 +20,7 @@ describe Lead do
   
   it { should belong_to(:unity) }
   it { should have_many(:vouchers) }
+  it { should have_one(:address) }
   
   describe '#subscribe' do
     let(:lead) { create(:lead) }

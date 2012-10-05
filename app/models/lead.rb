@@ -16,6 +16,7 @@ class Lead < ActiveRecord::Base
   
   belongs_to :unity, counter_cache: true
   has_many :vouchers
+  has_one :address
   
   geocoded_by :address_search
   
