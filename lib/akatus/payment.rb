@@ -8,43 +8,43 @@ class Akatus::Payment
                 "cartao_master" => Akatus::Responders::CreditCard
                }
 
-  def self.perform(lead_id)
-    lead = Lead.find lead_id
+  def self.perform(voucher_id)
+    voucher = Voucher.find voucher_id
 
-    xml_parser = Akatus::Xml.new lead, conf
+    xml_parser = Akatus::Xml.new voucher, conf
     xml = xml_parser.generate
 
-    logger ||= Logger.new(STDOUT)
-
-    logger.info ""
-    logger.info "XML we're posting:"
-    logger.info ""
-    logger.info xml.inspect
-
-    logger.info ""
-    logger.info "Our post and raw akatus response:"
-    logger.info ""
+    # logger ||= Logger.new(STDOUT)
+    # 
+    # logger.info ""
+    # logger.info "XML we're posting:"
+    # logger.info ""
+    # logger.info xml.inspect
+    # 
+    # logger.info ""
+    # logger.info "Our post and raw akatus response:"
+    # logger.info ""
 
     response = Akatus::Request.post conf["akatus"]["uri"], xml
 
-    logger.info ""
-    logger.info "Full response object:"
-    logger.info ""
-    logger.info response.inspect
-    
-    logger.info ""
-    logger.info "Akatus xml in response body:"
-    logger.info ""
-    logger.info response.body.inspect
-    logger.info ""
+    # logger.info ""
+    # logger.info "Full response object:"
+    # logger.info ""
+    # logger.info response.inspect
+    # 
+    # logger.info ""
+    # logger.info "Akatus xml in response body:"
+    # logger.info ""
+    # logger.info response.body.inspect
+    # logger.info ""
 
-    responder lead.payment, lead, response
+    responder voucher.payment_method, voucher, response
   end
 
   private
 
-  def self.responder(payment, lead, response)
-    RESPONDERS[payment].process(lead, response)
+  def self.responder(payment_method, voucher, response)
+    RESPONDERS[payment_method].process(voucher, response)
   end
 
   def self.conf

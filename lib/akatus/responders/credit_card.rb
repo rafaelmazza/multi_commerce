@@ -1,5 +1,5 @@
 class Akatus::Responders::CreditCard
-  def self.process(lead, response)
+  def self.process(voucher, response)
 
   	parsed = Nokogiri.parse(response.body)
 

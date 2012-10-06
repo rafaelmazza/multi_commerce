@@ -1,5 +1,5 @@
 class Akatus::Responders::Barcode
-  def self.process(lead, response)
+  def self.process(voucher, response)
   	
   end
 end
