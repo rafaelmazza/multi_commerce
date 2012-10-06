@@ -56,4 +56,12 @@ FactoryGirl.define do
     
     franchise
   end
+  
+  factory :voucher do
+    sequence(:code) { |n| "code#{n}" }
+    used_at nil
+    
+    # unity
+    # lead
+  end
 end

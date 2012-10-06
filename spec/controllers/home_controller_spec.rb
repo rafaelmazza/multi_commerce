@@ -10,20 +10,17 @@ describe HomeController do
       .with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'})
       .to_return(status: 200, body: geocoding, headers: {})
 
-    # 5.times { create :unity, latitude: -46.5648306, longitude: -23.5474725 }
-
     mock_search = mock 'search_result', coordinates: [-23.5474725, -46.5648306], latitude: -23.5474725, longitude: -46.5648306
     Geocoder.stub(:search).and_return [mock_search]
   end
   
   describe 'GET unities' do
-    # let(:let) { create(:lead) }
     let(:lead) { mock.as_null_object }
     let(:unities) { 3.times.map {mock.as_null_object} }
     
     before do
-      pending
       Lead.stub find: lead
+      unities.stub page: unities
       Unity.stub(:near).with(lead).and_return(unities)
     end
     
@@ -41,9 +38,17 @@ describe HomeController do
   describe 'GET subscribe' do
     let(:unity) { create(:unity) }
     let(:lead) { create(:lead) }
+    let(:franchise) { create(:franchise, name: 'wizard', url: 'desconto.wizard.dev.br') }
+    let(:products) { [create(:product, franchise: franchise)] }
+    let(:voucher) { mock 'voucher' }
     
     before do
       controller.stub session: { lead_id: lead.id }
+      # controller.request.stub server_name: 'desconto.wizard.dev.br'
+      controller.stub current_franchise: franchise
+      franchise.stub products: products
+      lead.stub subscribe: voucher      
+      Lead.stub find: lead
     end
     
     it 'assigns choosen unity' do
@@ -57,17 +62,11 @@ describe HomeController do
     end
     
     it 'assigns generated voucher' do
-      pending
       get :subscribe, unity_id: unity
       assigns(:voucher).should == voucher
     end
     
     it 'assign products' do
-      pending
-      controller.stub request: mock(:server_name => "desconto.wizard.dev.br").as_null_object
-      franchise = create(:franchise, name: 'wizard', url: 'desconto.wizard.dev.br')
-      products = [create(:product, franchise: franchise)]
-
       get :subscribe, unity_id: unity
       assigns(:products).should == products
     end
