@@ -112,11 +112,13 @@ describe Akatus::Xml do
       before { @node = subject.xpath("//produtos//produto").first }
 
       it "should include codigo" do
-        @node.css("codigo").text.should == lead.course.id.to_s
+        # @node.css("codigo").text.should == lead.course.id.to_s
+        @node.css("codigo").text.should == lead.id.to_s
       end
 
       it "should include descricao" do
-        @node.css("descricao").text.should == lead.course.name
+        # @node.css("descricao").text.should == lead.course.name
+        @node.css("descricao").text.should == lead.name
       end
 
       it "should include quantidade" do
@@ -135,9 +137,9 @@ describe Akatus::Xml do
         @node.css("frete").text.should == "0"
       end
 
-      it "should include desconto" do
-        @node.css("desconto").text.should == lead.course.discount.to_s
-      end
+      # it "should include desconto" do
+      #   @node.css("desconto").text.should == lead.course.discount.to_s
+      # end
     end
 
     context "transacao" do
