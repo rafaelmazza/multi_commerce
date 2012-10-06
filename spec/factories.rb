@@ -64,4 +64,11 @@ FactoryGirl.define do
     # unity
     # lead
   end
+  
+  factory :line_item do
+    voucher
+    product
+    
+    price 10
+  end
 end

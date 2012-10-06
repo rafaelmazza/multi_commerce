@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Voucher do
   it { should belong_to :unity }
   it { should belong_to :lead }
+  it { should have_many :line_items }
   
   it 'generates code when created' do
     MultiCommerce::VoucherGenerator.stub(:generate).and_return "code"

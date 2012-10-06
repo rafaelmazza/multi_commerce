@@ -1,6 +1,7 @@
 class Voucher < ActiveRecord::Base
   belongs_to :unity
   belongs_to :lead
+  has_many :line_items
   
   attr_accessible :used_at, :unity_id
   
