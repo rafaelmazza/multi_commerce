@@ -4,7 +4,7 @@ FactoryGirl.define do
     name "John Doo"
     email "john@cafeazul.com.br"
     phone_code "11"
-    phone "99119911"
+    phone "50527001"
     address_search "Moema, São Paulo, Brasil"
     latitude -23.605556
     longitude -46.665833
@@ -60,9 +60,20 @@ FactoryGirl.define do
   factory :voucher do
     sequence(:code) { |n| "code#{n}" }
     used_at nil
+    payment_method 'boleto'
     
-    # unity
+    unity
     # lead
+    
+    factory :voucher_with_line_items do
+      ignore do
+        line_items_count 1
+      end
+    
+      after(:create) do |voucher, evaluator|
+        FactoryGirl.create_list :line_item, evaluator.line_items_count, voucher: voucher
+      end
+    end
   end
   
   factory :line_item do

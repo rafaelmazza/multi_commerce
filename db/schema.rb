@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121006190455) do
+ActiveRecord::Schema.define(:version => 20121006214348) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(:version => 20121006190455) do
     t.string  "district"
     t.string  "city"
     t.string  "state"
-    t.string  "country"
+    t.string  "country",    :default => "BRA"
     t.string  "zipcode"
     t.integer "lead_id"
   end
@@ -76,6 +76,10 @@ ActiveRecord::Schema.define(:version => 20121006190455) do
     t.integer  "lead_id"
     t.string   "code"
     t.datetime "used_at"
+    t.decimal  "total",          :precision => 8, :scale => 2
+    t.string   "payment_method"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

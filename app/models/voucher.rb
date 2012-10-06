@@ -10,6 +10,10 @@ class Voucher < ActiveRecord::Base
   def use
     update_attributes used_at: Time.now
   end
+  
+  def total
+    self.total = line_items.map(&:price).sum
+  end
 
   private
 

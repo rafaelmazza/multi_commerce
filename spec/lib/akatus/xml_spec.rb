@@ -22,13 +22,18 @@ describe Akatus::Xml do
                 email: "john@cafeazul.com.br", 
                 address: address 
     end
+    
+    let(:voucher) do
+      create :voucher_with_line_items, lead: lead
+    end
 
     let(:conf) do
       { "akatus" => { "email" => "email@domain.com", "api_key" => "api_key" } }
     end
 
     subject do
-      akatus_xml = described_class.new lead, conf
+      # akatus_xml = described_class.new lead, conf
+      akatus_xml = described_class.new voucher, conf
       Nokogiri::XML akatus_xml.generate
     end
 
@@ -48,11 +53,11 @@ describe Akatus::Xml do
       before { @node = subject.xpath "//carrinho//pagador" }
 
       it "should include nome" do
-        @node.css("nome").text.should == "Joao"
+        @node.css("nome").text.should == "John"
       end
 
       it "should include email" do
-        @node.css("email").text.should == "joao@dynaum.com"
+        @node.css("email").text.should == "john@cafeazul.com.br"
       end
 
       context "telefones" do
@@ -63,7 +68,7 @@ describe Akatus::Xml do
         end
 
         it "should include numero" do
-          @phone.css("numero").text.should == "2199119911"
+          @phone.css("numero").text.should == "1150527001"
         end
       end
 
@@ -137,9 +142,9 @@ describe Akatus::Xml do
         @node.css("frete").text.should == "0"
       end
 
-      # it "should include desconto" do
-      #   @node.css("desconto").text.should == lead.course.discount.to_s
-      # end
+      it "should include desconto" do
+        @node.css("desconto").text.should == "0"
+      end
     end
 
     context "transacao" do
