@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007145321) do
+ActiveRecord::Schema.define(:version => 20121007164057) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20121007145321) do
     t.float   "latitude"
     t.float   "longitude"
     t.integer "unity_id"
+    t.string  "cpf"
   end
 
   create_table "line_items", :force => true do |t|

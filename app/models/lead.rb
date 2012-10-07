@@ -18,6 +18,8 @@ class Lead < ActiveRecord::Base
   has_many :vouchers
   has_one :address
   
+  attr_accessor :credit_card
+  
   geocoded_by :address_search
   
   def subscribe(unity)

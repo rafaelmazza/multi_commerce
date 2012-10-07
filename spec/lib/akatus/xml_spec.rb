@@ -16,7 +16,6 @@ describe Akatus::Xml do
     end
     
     let(:lead) do 
-      # create :lead_with_products, 
       create :lead, 
                 name: "John", 
                 email: "john@cafeazul.com.br", 
@@ -32,7 +31,6 @@ describe Akatus::Xml do
     end
 
     subject do
-      # akatus_xml = described_class.new lead, conf
       akatus_xml = described_class.new voucher, conf
       Nokogiri::XML akatus_xml.generate
     end
@@ -166,31 +164,112 @@ describe Akatus::Xml do
       end
     end
 
-    context "transacao" do
-      before { @node = subject.xpath "//carrinho//transacao" }
+    context 'when boleto' do
+      context "transacao" do
+        before { @node = subject.xpath "//carrinho//transacao" }
 
-      it "should include desconto_total" do
-        @node.css("desconto_total").text.should == "0.0"
+        it "should include desconto_total" do
+          @node.css("desconto_total").text.should == "0.0"
+        end
+
+        it "should include peso_total" do
+          @node.css("peso_total").text.should == "0"
+        end
+
+        it "should include frete_total" do
+          @node.css("frete_total").text.should == "0"
+        end
+
+        it "should include moeda" do
+          @node.css("moeda").text.should == "BRL"
+        end
+
+        it "should include referencia" do
+          @node.css("referencia").text.should == voucher.id.to_s
+        end
+
+        it "should include meio_de_pagamento" do
+          @node.css("meio_de_pagamento").text.should == "boleto"
+        end
       end
-
-      it "should include peso_total" do
-        @node.css("peso_total").text.should == "0"
+    end
+    
+    context 'when visa' do
+      let(:credit_card) do
+        CreditCard.new card_holder_name: 'JOHN DOO', number: '1234', cvv: '111', installments: 1, expiration_date: '2013-01-01'
       end
-
-      it "should include frete_total" do
-        @node.css("frete_total").text.should == "0"
+      
+      let(:lead) do 
+        create :lead, 
+                  name: "John", 
+                  email: "john@cafeazul.com.br",
+                  cpf: '123',
+                  address: address,
+                  credit_card: credit_card
       end
-
-      it "should include moeda" do
-        @node.css("moeda").text.should == "BRL"
+      
+      let(:voucher) do
+        create :voucher_with_line_items, payment_method: 'cartao_visa', lead: lead
       end
+      
+      context "transacao" do
+        before { @node = subject.xpath "//carrinho//transacao" }
+        
+        it 'includes numero' do
+          @node.css('numero').text.should == '1234'
+        end
+        
+        it 'includes parcelas' do
+          @node.css('parcelas').text.should == "1"
+        end
+        
+        it 'includes codigo_de_seguranca' do
+          @node.css('codigo_de_seguranca').text.should == '111'
+        end
+                
+        it 'includes expiracao' do
+          @node.css('expiracao').text.should == '2013-01-01'
+        end
 
-      it "should include referencia" do
-        @node.css("referencia").text.should == lead.id.to_s
-      end
+        it "should include desconto_total" do
+          @node.css("desconto_total").text.should == "0.0"
+        end
 
-      it "should include meio_de_pagamento" do
-        @node.css("meio_de_pagamento").text.should == "boleto"
+        it "should include peso_total" do
+          @node.css("peso_total").text.should == "0"
+        end
+
+        it "should include frete_total" do
+          @node.css("frete_total").text.should == "0"
+        end
+
+        it "should include moeda" do
+          @node.css("moeda").text.should == "BRL"
+        end
+
+        it "should include referencia" do
+          @node.css("referencia").text.should == voucher.id.to_s
+        end
+
+        it "should include meio_de_pagamento" do
+          @node.css("meio_de_pagamento").text.should == "cartao_visa"
+        end
+        
+        context 'portador' do
+          before { @node = subject.xpath "//carrinho//transacao//portador" }
+          
+          it 'includes nome' do
+            @node.css("nome").text.should == "JOHN DOO"
+          end
+
+          it 'includes cpf' do
+            @node.css("cpf").text.should == "123"
+          end
+          
+          it 'includes telefone' do
+            @node.css("telefone").text.should == "1150527001"
+          end
+        end
       end
     end
   end

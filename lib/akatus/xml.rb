@@ -1,7 +1,4 @@
 class Akatus::Xml
-  # def initialize(lead, conf)
-  #   @lead, @conf = lead, conf
-  # end  
   def initialize(voucher, conf)
     @voucher, @conf = voucher, conf
   end
@@ -32,31 +29,29 @@ class Akatus::Xml
   end
 
   def transacao
-    {
-      desconto_total: 0.0,
+    { desconto_total: 0.0,
       peso_total: 0,
       frete_total: 0,
       moeda: "BRL",
-      referencia: @voucher.id.to_s,
+      referencia: @voucher.id,
       meio_de_pagamento: @voucher.payment_method
-    }#.merge(cartao)
+    }.merge(cartao)
   end
 
-  # def cartao
-  #   return {} if @voucher.payment_method == "boleto"
-  # 
-  #   {
-  #     numero: @voucher.lead.credit_card.number,
-  #     parcelas: @voucher.lead.credit_card.installments,
-  #     codigo_de_seguranca: @voucher.lead.credit_card.security_code,
-  #     expiracao: @voucher.lead.credit_card.expiration_date,
-  #     portador: { 
-  #       nome: @voucher.lead.credit_card.owners_name,
-  #       cpf: @voucher.lead.cpf,
-  #       telefone: lead_phone
-  #     }
-  #   }
-  # end
+  def cartao
+    return {} if @voucher.payment_method == "boleto"
+    
+    { numero: @voucher.lead.credit_card.number,
+      parcelas: @voucher.lead.credit_card.installments,
+      codigo_de_seguranca: @voucher.lead.credit_card.cvv,
+      expiracao: @voucher.lead.credit_card.expiration_date,
+      portador: { 
+        nome: @voucher.lead.credit_card.card_holder_name,
+        cpf: @voucher.lead.cpf,
+        telefone: lead_phone
+      }
+    }
+  end
 
   def produtos
     @voucher.line_items.map do |line_item|
