@@ -59,18 +59,16 @@ class Akatus::Xml
   # end
 
   def produtos
-    [{
-        # codigo: @lead.course.id.to_s,
-        codigo: @voucher.id.to_s,
-        # descricao: @lead.course.name,
-        descricao: @voucher.lead.name,
-        quantidade: 1,
-        # preco: @lead.course.value,
-        preco: @voucher.total,
+    @voucher.line_items.map do |line_item|
+      { codigo: line_item.product.id,
+        descricao: line_item.product.description,
+        quantidade: line_item.quantity,
+        preco: line_item.price,
         peso: 0,
         frete: 0,
         desconto: 0
-    }]
+      }
+    end
   end
 
   def endereco

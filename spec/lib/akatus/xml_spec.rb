@@ -114,36 +114,55 @@ describe Akatus::Xml do
     end
 
     context "produtos" do
-      before { @node = subject.xpath("//produtos//produto").first }
+      before { @nodes = subject.xpath("//produtos//produto") }
 
-      it "should include codigo" do
-        # @node.css("codigo").text.should == lead.course.id.to_s
-        @node.css("codigo").text.should == lead.id.to_s
+      it "includes codigo" do
+        voucher.line_items.each_with_index do |line_item, index|
+          @node = @nodes[index]
+          @node.css("codigo").text.should == line_item.product.id.to_s
+        end        
+      end
+      
+      it "includes descricao" do
+        voucher.line_items.each_with_index do |line_item, index|
+          @node = @nodes[index]
+          @node.css("descricao").text.should == line_item.product.description
+        end
       end
 
-      it "should include descricao" do
-        # @node.css("descricao").text.should == lead.course.name
-        @node.css("descricao").text.should == lead.name
+      it "includes quantidade" do
+        voucher.line_items.each_with_index do |line_item, index|
+          @node = @nodes[index]
+          @node.css("quantidade").text.should == line_item.quantity.to_s
+        end        
+      end
+      
+      it "includes preco" do
+        voucher.line_items.each_with_index do |line_item, index|
+          @node = @nodes[index]
+          @node.css("preco").text.should == line_item.price.to_s
+        end        
       end
 
-      it "should include quantidade" do
-        @node.css("quantidade").text.should == "1"
+      it "includes peso" do
+        voucher.line_items.each_with_index do |line_item, index|
+          @node = @nodes[index]
+          @node.css("peso").text.should == "0"
+        end        
+      end
+      
+      it "includes frete" do
+        voucher.line_items.each_with_index do |line_item, index|
+          @node = @nodes[index]
+          @node.css("frete").text.should == "0"
+        end        
       end
 
-      it "should include preco" do
-        @node.css("preco").text.should == "21.99"
-      end
-
-      it "should include peso" do
-        @node.css("peso").text.should == "0"
-      end
-
-      it "should include frete" do
-        @node.css("frete").text.should == "0"
-      end
-
-      it "should include desconto" do
-        @node.css("desconto").text.should == "0"
+      it "includes desconto" do
+        voucher.line_items.each_with_index do |line_item, index|
+          @node = @nodes[index]
+          @node.css("desconto").text.should == "0"
+        end        
       end
     end
 
