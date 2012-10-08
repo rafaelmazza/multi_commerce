@@ -29,6 +29,9 @@ gem 'nokogiri'
 gem 'rest-client'
 gem 'kaminari'
 gem 'faraday'
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
 
 group :test do
   gem 'shoulda-matchers'

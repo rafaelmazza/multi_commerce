@@ -8,11 +8,11 @@ class Akatus::Payment
                 "cartao_master" => Akatus::Responders::CreditCard
                }
 
-  # def self.perform(voucher_id)
-  def self.perform(voucher)
-    # voucher = Voucher.find voucher_id
+  def self.perform(voucher_id, credit_card)
+  # def self.perform(voucher)
+    voucher = Voucher.find voucher_id
 
-    xml_parser = Akatus::Xml.new voucher, conf
+    xml_parser = Akatus::Xml.new voucher, credit_card, conf
     xml = xml_parser.generate
 
     logger ||= Logger.new(STDOUT)

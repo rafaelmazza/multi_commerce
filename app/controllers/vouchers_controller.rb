@@ -17,7 +17,11 @@ class VouchersController < ApplicationController
     @voucher.update_attributes(params[:voucher])
     @voucher.update! # updates total
     
-    render :text => Akatus::Payment.perform(@voucher)
-    # render :text => @voucher.lead.credit_card[:number].inspect
+    PaymentWorker.perform_async(@voucher.id, @voucher.lead.credit_card)
+    # render 'home/thank_you'
+    # redirect_to action: :thank_you, controller: :home, id: @voucher
+    redirect_to voucher_path(@voucher)
+    # render :text => PaymentWorker.perform_async(@voucher.id, @voucher.lead.credit_card)
+    # render :text => Akatus::Payment.perform(@voucher)
   end
 end

@@ -1,6 +1,6 @@
 class Akatus::Xml
-  def initialize(voucher, conf)
-    @voucher, @conf = voucher, conf
+  def initialize(voucher, credit_card, conf)
+    @voucher, @credit_card, @conf = voucher, credit_card, conf
   end
 
   def generate
@@ -41,16 +41,27 @@ class Akatus::Xml
   def cartao
     return {} if @voucher.payment_method == "boleto"
 
-    { numero: @voucher.lead.credit_card[:number],
-      parcelas: @voucher.lead.credit_card[:installments],
-      codigo_de_seguranca: @voucher.lead.credit_card[:cvv],
-      expiracao: @voucher.lead.credit_card[:expiration_date],
+    { numero: @credit_card['number'],
+      parcelas: @credit_card['installments'],
+      codigo_de_seguranca: @credit_card['cvv'],
+      expiracao: @credit_card['expiration_date'],
       portador: { 
-        nome: @voucher.lead.credit_card[:card_holder_name],
+        nome: @credit_card['card_holder_name'],
         cpf: @voucher.lead.cpf.gsub(/\D/, ''),
         telefone: lead_phone
       }
-    }    
+    }
+
+    # { numero: @voucher.lead.credit_card[:number],
+    #   parcelas: @voucher.lead.credit_card[:installments],
+    #   codigo_de_seguranca: @voucher.lead.credit_card[:cvv],
+    #   expiracao: @voucher.lead.credit_card[:expiration_date],
+    #   portador: { 
+    #     nome: @voucher.lead.credit_card[:card_holder_name],
+    #     cpf: @voucher.lead.cpf.gsub(/\D/, ''),
+    #     telefone: lead_phone
+    #   }
+    # }    
     # { numero: @voucher.lead.credit_card.number,
     #   parcelas: @voucher.lead.credit_card.installments,
     #   codigo_de_seguranca: @voucher.lead.credit_card.cvv,

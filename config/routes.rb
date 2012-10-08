@@ -1,4 +1,8 @@
+require 'sidekiq/web'
+
 MultiCommerce::Application.routes.draw do
+  mount Sidekiq::Web, at: "/sidekiq"
+  
   root to: "home#index"
   
   resources :leads, only: [:create, :update]
