@@ -1,5 +1,5 @@
 #lead_content
-  = semantic_form_for @voucher do |f|
+  = semantic_form_for @lead do |f|
     #open-result
       #open-result-top
         %span.text-result-medium Qual o melhor horário para você estudar?
@@ -15,36 +15,42 @@
       #open-result-center
         %span.text-result-medium Preencha seus dados:
         %fieldset#your-data
-          = semantic_fields_for @lead do |l|
-            = l.fields_for :address do |a|
-              = a.input :zipcode, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
-              = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
-              = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :state, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = l.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          = f.fields_for :address do |a|
+            = a.input :cep, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
+            = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
+            = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :neighbourhood, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :state, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          = f.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          = f.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          = f.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
 
         %fieldset#your-data-right
           = render partial: "product", collection: @products, locals: { f: f }
           #total
             %span.total-left Total:
             %span.total-right
-              = number_to_currency(@voucher.total)
+              /= number_to_currency(@lead.course.value / 100)
         %span.text-result-medium Forma de Pagamento:
         %fieldset#payment
-          %label
-            = f.radio_button :payment_method, :boleto, checked: true
-            = image_tag "barcode.png"
-          %label
-            = f.radio_button :payment_method, :cartao_visa, class: "credit-card"
-            = image_tag "visa.png"
-          %label
-            = f.radio_button :payment_method, :cartao_master, class: "credit-card"
-            = image_tag "master.png"
+          = f.fields_for :voucher do |v|
+            %label
+              /= f.radio_button :payment, :boleto, checked: true
+              /= radio_button_tag "voucher[payment_method]", :boleto, checked: true
+              = v.radio_button :payment_method, :boleto, checked: true
+              = image_tag "barcode.png"
+            %label
+              /= f.radio_button :payment, :cartao_visa, class: "credit-card"
+              /= radio_button_tag "voucher[payment_method]", :cartao_visa, class: "credit-card"
+              = v.radio_button :payment_method, :cartao_visa, class: "credit-card"
+              = image_tag "visa.png"
+            %label
+              /= f.radio_button :payment, :cartao_master, class: "credit-card"
+              /= radio_button_tag "voucher[payment_method]", :cartao_master, class: "credit-card"            
+              = v.radio_button :payment_method, :cartao_master, class: "credit-card"
+              = image_tag "master.png"
         %fieldset#credit-card
           %span.text-result-medium Dados do cartão:
           %li.wrapper

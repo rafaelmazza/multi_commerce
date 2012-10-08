@@ -3,7 +3,7 @@ class Voucher < ActiveRecord::Base
   belongs_to :lead
   has_many :line_items
   
-  attr_accessible :used_at, :unity_id
+  attr_accessible :used_at, :unity_id, :payment_method, :total
   
   before_create :generate_code
   
@@ -11,8 +11,27 @@ class Voucher < ActiveRecord::Base
     update_attributes used_at: Time.now
   end
   
-  def total
-    self.total = line_items.map(&:price).sum
+  # def total
+  #   self.total = line_items.map(&:price).sum
+  # end
+  
+  def add_product(product, quantity=1)
+    current_item = contains?(product)
+    if current_item.nil?
+      current_item = LineItem.new(quantity: quantity)
+      current_item.product = product
+      self.line_items << current_item      
+    end
+    current_item
+  end
+  
+  def contains?(product)
+    line_items.detect { |li| li.product.id == product.id }
+  end
+  
+  def update!
+    self.total = line_items.map(&:amount).sum
+    save # TODO: it should be here?
   end
 
   private

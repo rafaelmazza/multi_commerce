@@ -1,5 +1,5 @@
 class Lead < ActiveRecord::Base
-  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude
+  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :address_attributes, :credit_card
   
   validates :name, presence: true
   
@@ -21,6 +21,8 @@ class Lead < ActiveRecord::Base
   attr_accessor :credit_card
   
   geocoded_by :address_search
+  
+  accepts_nested_attributes_for :address
   
   def subscribe(unity)
     self.unity = unity

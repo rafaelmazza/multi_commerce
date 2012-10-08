@@ -29,7 +29,7 @@ class Akatus::Xml
   end
 
   def transacao
-    { desconto_total: 0.0,
+    { desconto_total: "0.00",
       peso_total: 0,
       frete_total: 0,
       moeda: "BRL",
@@ -58,10 +58,10 @@ class Akatus::Xml
       { codigo: line_item.product.id,
         descricao: line_item.product.description,
         quantidade: line_item.quantity,
-        preco: line_item.price,
+        preco: "%8.2f" % line_item.price,
         peso: 0,
         frete: 0,
-        desconto: 0
+        desconto: "0.00"
       }
     end
   end

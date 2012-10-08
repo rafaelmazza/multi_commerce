@@ -15,13 +15,13 @@
       #open-result-center
         %span.text-result-medium Preencha seus dados:
         %fieldset#your-data
-          = semantic_fields_for @lead do |l|
-            = l.fields_for :address do |a|
-              = a.input :zipcode, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          = f.fields_for :lead do |l|
+            = l .fields_for :address do |a|
+              = a.input :cep, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
               = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
               = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+              = a.input :neighbourhood, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = a.input :state, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
@@ -49,19 +49,19 @@
           %span.text-result-medium Dados do cartão:
           %li.wrapper
             %label{for: "lead_credit_card_number"} Número:
-            = text_field_tag "lead[credit_card][number]", "", class: "input-1"
+            = text_field_tag "voucher[lead_attributes][credit_card][number]", "", class: "input-1"
           %li.wrapper
             %label{for: "lead_credit_card_security_code"} Código de segurança:
-            = text_field_tag "lead[credit_card][security_code]", "", class: "input-1"
+            = text_field_tag "voucher[lead_attributes][credit_card][security_code]", "", class: "input-1"
           %li.wrapper
             %label{for: "lead_credit_card_validate"} Expiração:
-            = text_field_tag "lead[credit_card][expiration_date]", "", class: "input-1"
+            = text_field_tag "voucher[lead_attributes][credit_card][expiration_date]", "", class: "input-1"
           %li.wrapper
             %label{for: "lead_credit_card_name"} Nome no cartão:
-            = text_field_tag "lead[credit_card][owners_name]", "", class: "input-1"
+            = text_field_tag "voucher[lead_attributes][credit_card][owners_name]", "", class: "input-1"
           %li.wrapper
             %label{for: "lead_credit_card_installments"} Parcelas:
-            = select_tag "lead[credit_card][installments]", options_for_select((1..12).to_a), class: "input-1"
+            = select_tag "voucher[lead_attributes][credit_card][installments]", options_for_select((1..12).to_a), class: "input-1"
         %fieldset#button
           = f.submit "Comprar Curso", class: "btn-purchase"
         #content-footer

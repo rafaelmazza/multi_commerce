@@ -14,29 +14,29 @@ class Akatus::Payment
     xml_parser = Akatus::Xml.new voucher, conf
     xml = xml_parser.generate
 
-    # logger ||= Logger.new(STDOUT)
-    # 
-    # logger.info ""
-    # logger.info "XML we're posting:"
-    # logger.info ""
-    # logger.info xml.inspect
-    # 
-    # logger.info ""
-    # logger.info "Our post and raw akatus response:"
-    # logger.info ""
+    logger ||= Logger.new(STDOUT)
+    
+    logger.info ""
+    logger.info "XML we're posting:"
+    logger.info ""
+    logger.info xml.inspect
+    
+    logger.info ""
+    logger.info "Our post and raw akatus response:"
+    logger.info ""
 
     response = Akatus::Request.post conf["akatus"]["uri"], xml
 
-    # logger.info ""
-    # logger.info "Full response object:"
-    # logger.info ""
-    # logger.info response.inspect
-    # 
-    # logger.info ""
-    # logger.info "Akatus xml in response body:"
-    # logger.info ""
-    # logger.info response.body.inspect
-    # logger.info ""
+    logger.info ""
+    logger.info "Full response object:"
+    logger.info ""
+    logger.info response.inspect
+    
+    logger.info ""
+    logger.info "Akatus xml in response body:"
+    logger.info ""
+    logger.info response.body.inspect
+    logger.info ""
 
     responder voucher.payment_method, voucher, response
   end

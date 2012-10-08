@@ -16,5 +16,7 @@ class HomeController < ApplicationController
     @voucher = @lead.subscribe(@unity)
     
     @products = current_franchise.products # tmp
+    
+    @lead.build_address
   end
 end
