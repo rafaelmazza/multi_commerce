@@ -45,5 +45,10 @@ describe Lead do
       lead.should_receive(:generate_voucher).and_return(voucher)
       lead.subscribe(unity).should == voucher
     end
+    
+    it 'does not duplicate voucher for same unity' do
+      voucher = create(:voucher, lead: lead, unity: unity)
+      expect { lead.subscribe(unity) }.to_not change(Voucher, :count)
+    end
   end
 end

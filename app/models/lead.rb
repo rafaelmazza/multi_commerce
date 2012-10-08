@@ -31,6 +31,6 @@ class Lead < ActiveRecord::Base
   private
   
   def generate_voucher
-    self.vouchers.create(unity_id: unity.id)
+    self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
   end
 end
