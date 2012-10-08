@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
   layout 'home'
-  layout 'voucher', only: 'voucher'
   
   def index
     @lead = Lead.new
@@ -17,9 +16,5 @@ class HomeController < ApplicationController
     @voucher = @lead.subscribe(@unity)
     
     @products = current_franchise.products # tmp
-  end
-  
-  def voucher
-    @voucher = Voucher.find(params[:id])
   end
 end
