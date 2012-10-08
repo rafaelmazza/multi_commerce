@@ -52,13 +52,13 @@
             = text_field_tag "lead[credit_card][number]", "", class: "input-1"
           %li.wrapper
             %label{for: "lead_credit_card_security_code"} Código de segurança:
-            = text_field_tag "lead[credit_card][security_code]", "", class: "input-1"
+            = text_field_tag "lead[credit_card][cvv]", "", class: "input-1"
           %li.wrapper
             %label{for: "lead_credit_card_validate"} Expiração:
             = text_field_tag "lead[credit_card][expiration_date]", "", class: "input-1"
           %li.wrapper
             %label{for: "lead_credit_card_name"} Nome no cartão:
-            = text_field_tag "lead[credit_card][owners_name]", "", class: "input-1"
+            = text_field_tag "lead[credit_card][card_holder_name]", "", class: "input-1"
           %li.wrapper
             %label{for: "lead_credit_card_installments"} Parcelas:
             = select_tag "lead[credit_card][installments]", options_for_select((1..12).to_a), class: "input-1"

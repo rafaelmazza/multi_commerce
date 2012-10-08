@@ -18,7 +18,8 @@ describe Akatus::Payment do
 
       Akatus::Request.should_receive(:post).with "uri", "xml"
 
-      described_class.perform voucher.id
+      # described_class.perform voucher.id
+      described_class.perform voucher
     end
 
     context "when payment format is barcode" do

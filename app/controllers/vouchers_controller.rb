@@ -12,12 +12,12 @@ class VouchersController < ApplicationController
       @voucher.add_product(Product.find(product_id))
     end if params[:products]
     
-    @voucher.update_attributes(params[:voucher])    
-    
     @voucher.lead.update_attributes(params[:lead])
     
+    @voucher.update_attributes(params[:voucher])
     @voucher.update! # updates total
     
-    render :text => Akatus::Payment.perform(@voucher.id)
+    render :text => Akatus::Payment.perform(@voucher)
+    # render :text => @voucher.lead.credit_card[:number].inspect
   end
 end
