@@ -71,35 +71,4 @@ describe HomeController do
       assigns(:products).should == products
     end
   end
-  
-  describe 'GET voucher' do
-    let(:voucher) { mock 'voucher' }
-    before do
-      Voucher.stub(:find).with('voucher_id').and_return voucher
-    end
-    
-    it 'assigns voucher' do      
-      get :voucher, id: 'voucher_id'
-      assigns(:voucher).should == voucher
-    end
-    
-    it 'renders voucher layout' do
-      get :voucher, id: 'voucher_id'
-      response.should render_template('layouts/voucher')
-    end
-  end
-  
-  # describe 'POST search' do
-  #   it 'assigns unities' do
-  #     post :search, address: address
-  #     assigns(:unities).should have(3).items
-  #   end
-  #   
-  #   context 'when page is passed' do
-  #     it 'should return the respective page' do
-  #       get :search, address: address, page: 2
-  #       assigns(:unities).should have(2).items
-  #     end
-  #   end
-  # end
 end
