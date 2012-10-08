@@ -23,7 +23,7 @@
               = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :state, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+              = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = l.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }

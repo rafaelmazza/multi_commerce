@@ -47,7 +47,7 @@ class Akatus::Xml
       expiracao: @voucher.lead.credit_card.expiration_date,
       portador: { 
         nome: @voucher.lead.credit_card.card_holder_name,
-        cpf: @voucher.lead.cpf,
+        cpf: @voucher.lead.cpf.gsub(/\D/, ''),
         telefone: lead_phone
       }
     }
@@ -76,7 +76,7 @@ class Akatus::Xml
       cidade: @voucher.lead.address.city,
       estado: @voucher.lead.address.state,
       pais: @voucher.lead.address.country,
-      cep: @voucher.lead.address.zipcode
+      cep: @voucher.lead.address.zipcode.gsub(/\D/, '')
     } }
   end
 

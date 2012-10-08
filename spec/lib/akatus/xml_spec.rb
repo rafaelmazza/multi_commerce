@@ -106,7 +106,7 @@ describe Akatus::Xml do
         end
 
         it "should include cep" do
-          @address.css("cep").text.should == "04077-020"
+          @address.css("cep").text.should == "04077020"
         end
       end
     end
@@ -169,7 +169,7 @@ describe Akatus::Xml do
         before { @node = subject.xpath "//carrinho//transacao" }
 
         it "should include desconto_total" do
-          @node.css("desconto_total").text.should == "0.0"
+          @node.css("desconto_total").text.should == "0.00"
         end
 
         it "should include peso_total" do
@@ -203,7 +203,7 @@ describe Akatus::Xml do
         create :lead, 
                   name: "John", 
                   email: "john@cafeazul.com.br",
-                  cpf: '123',
+                  cpf: '980.106.539-77',
                   address: address,
                   credit_card: credit_card
       end
@@ -232,7 +232,7 @@ describe Akatus::Xml do
         end
 
         it "should include desconto_total" do
-          @node.css("desconto_total").text.should == "0.0"
+          @node.css("desconto_total").text.should == "0.00"
         end
 
         it "should include peso_total" do
@@ -263,7 +263,7 @@ describe Akatus::Xml do
           end
 
           it 'includes cpf' do
-            @node.css("cpf").text.should == "123"
+            @node.css("cpf").text.should == "98010653977"
           end
           
           it 'includes telefone' do
