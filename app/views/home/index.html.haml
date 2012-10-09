@@ -1,5 +1,5 @@
 #image-float
-  = image_tag "image-float.png", height: "468", width: "296"
+  = image_tag "application/image-float.png", height: "468", width: "296"
 #sign-up
   #sign-up-left
     #text-1
@@ -12,7 +12,7 @@
       %h4 Inscreva-se agora pelo site e ganhe um desconto exclusivo no seu curso de inglês com horários flexíveis.
     #arrow
       %span Preencha o formulário &raquo;
-      = image_tag "arrow.png", height: 136, width: 564
+      = image_tag "application/arrow.png", height: 136, width: 564
   #box-sign-up
     = semantic_form_for @lead, html: { id: "sign-up-form" } do |f|
       = f.hidden_field :latitude

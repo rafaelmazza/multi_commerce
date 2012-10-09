@@ -21,6 +21,10 @@ end
 module MultiCommerce
   class Application < Rails::Application
     
+    config.to_prepare do
+      Devise::SessionsController.layout "sign_in"
+    end
+    
     config.generators do |g|
       g.template_engine :haml
       g.test_framework  :rspec, :fixture => true, :views => false
