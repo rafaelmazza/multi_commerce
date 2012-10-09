@@ -33,6 +33,7 @@ gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim'
 gem 'devise'
+gem 'cancan'
 
 group :test do
   gem 'shoulda-matchers'
