@@ -16,6 +16,7 @@ MultiCommerce::Application.routes.draw do
   # match "voucher" => "home#voucher", via: :get, as: 'voucher'
   
   namespace :admin do
+    root to: "leads#index"
     resources :leads, only: [:index]
   end
 end

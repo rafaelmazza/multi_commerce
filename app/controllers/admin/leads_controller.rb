@@ -1,8 +1,4 @@
-class Admin::LeadsController < ApplicationController
-  layout 'admin'
-
-  # before_filter :authenticate_user!
-  
+class Admin::LeadsController < Admin::ApplicationController
   def index
     
   end
