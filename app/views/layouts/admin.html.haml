@@ -12,95 +12,11 @@
     = csrf_meta_tags
     
   %body
-    / Aside Block
-    %section{:role => "navigation"}
-      / Header with logo and headline
-      %header
-        %a{:href => "index.html", :title => "Back to Homepage"}
-        %h1 Lorem ipsum dolor sit amet!
-      / User Info
-      %section#user-info
-        %img{:alt => "Sample User Avatar", :src => "/assets/admin/sample_user.png"}
-          %div
-            %a{:href => "#", :title => "Account Settings and Profile Page"} Joe Tester
-            %em Administrator
-            %ul
-              %li
-                %a.button-link{:href => "#", :rel => "tooltip", :title => "This is my title!"} view website
-              %li
-                = link_to 'Sair', destroy_user_session_path, :method => :delete, :class => 'button-link'
-      / /User Info
-      / Main Navigation
-      %nav#main-nav
-        %ul
-          %li
-            %a.dashboard.no-submenu{:href => "index.html", :title => ""} Dashboard
-          / Use class .no-submenu to open link instead of a sub menu
-          / Use class .current to open submenu on page load
-          %li.current
-            %a.projects{:href => "#", :title => ""} Projects
-            %span{:title => "You have 3 new tasks"} 3
-            %ul
-              %li
-                %a{:href => "#", :title => ""} Add Project
-              %li
-                %a{:href => "#", :title => ""} Edit Project
-              %li
-                %a{:href => "#", :title => ""} Project Management
-              %li
-                %a{:href => "#", :title => ""} Project Gallery
-              %li
-                %a{:href => "#", :title => ""} Settings
-      %section.sidebar.nested
-        / Use class .nested for diferent style
-        %h2 Nested Section
-        %p Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Maec enas id augue ac metu aliquam.
-        %p
-          Sed pharetra placerat est suscipit sagittis. Phasellus
-          %a{:href => "#"} aliquam
-          males uada blandit. Donec adipiscing sem erat.
+    = render 'admin/shared/navigation'
     %section{:role => "main"}
       %article.full-block.clearfix
         %header
           %h2 Chromatron Admin Theme
         %section
-          .notification.success
-            %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
-            %p
-              %strong Error notification
-              = alert
-              = notice
+          = render 'admin/shared/notifications'
           = yield
-      .notification.error
-        %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
-        %p
-          %strong Error notification
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.
-      / /Notification
-      / Notification
-      .notification.success
-        %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
-        %p
-          %strong Success notification
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.
-      / /Notification
-      / Notification
-      .notification.information
-        %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
-        %p
-          %strong Information notification
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.
-      / /Notification
-      / Notification
-      .notification.attention
-        %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
-        %p
-          %strong Attention notification
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.
-      / /Notification
-      / Notification
-      .notification.note
-        %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
-        %p
-          %strong Note
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate, sapien quis fermentum luctus, libero.

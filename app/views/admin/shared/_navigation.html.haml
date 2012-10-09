@@ -1,0 +1,39 @@
+%section{:role => "navigation"}
+  %header
+    %a{:href => "index.html", :title => "Back to Homepage"}
+    %h1 Lorem ipsum dolor sit amet!
+  %section#user-info
+    %img{:alt => "Sample User Avatar", :src => "/assets/admin/sample_user.png"}
+      %div
+        %a{:href => "#", :title => "Account Settings and Profile Page"} Joe Tester
+        %em Administrator
+        %ul
+          %li
+            %a.button-link{:href => "#", :rel => "tooltip", :title => "This is my title!"} view website
+          %li
+            = link_to 'Sair', destroy_user_session_path, :method => :delete, :class => 'button-link'
+  %nav#main-nav
+    %ul
+      %li
+        %a.dashboard.no-submenu{:href => "index.html", :title => ""} Dashboard
+      %li.current
+        %a.projects{:href => "#", :title => ""} Projects
+        %span{:title => "You have 3 new tasks"} 3
+        %ul
+          %li
+            %a{:href => "#", :title => ""} Add Project
+          %li
+            %a{:href => "#", :title => ""} Edit Project
+          %li
+            %a{:href => "#", :title => ""} Project Management
+          %li
+            %a{:href => "#", :title => ""} Project Gallery
+          %li
+            %a{:href => "#", :title => ""} Settings
+  %section.sidebar.nested
+    %h2 Nested Section
+    %p Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Maec enas id augue ac metu aliquam.
+    %p
+      Sed pharetra placerat est suscipit sagittis. Phasellus
+      %a{:href => "#"} aliquam
+      males uada blandit. Donec adipiscing sem erat.
