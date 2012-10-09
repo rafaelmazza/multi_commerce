@@ -7,6 +7,8 @@ module MultiCommerce
     def parse
       parse_unity.each do |unity_params|
         unity = Unity.find_or_create_by_code unity_params[:code]
+        user = User.find_or_create_by_email(email: unity_params[:email], password: '123')
+        unity.users << user
         unity.update_attributes unity_params
       end
     end

@@ -10,6 +10,8 @@ describe Unity do
   it { should have_db_column(:phone).of_type(:string) }
   it { should have_db_column(:address).of_type(:string) }
   
+  it { should have_and_belong_to_many :users }
+  
   # subject { described_class.new }
   
   # describe '.near' do

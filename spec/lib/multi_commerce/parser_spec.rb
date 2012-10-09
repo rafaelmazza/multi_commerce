@@ -11,6 +11,10 @@ describe MultiCommerce::Parser do
       subject.parse
       Unity.first.code.should == "00000003"
     end
+    
+    it 'creates user for the unity' do
+      expect { subject.parse }.to change(User, :count).by(4)
+    end
   end
   
   context "#parse_unity" do
@@ -22,7 +26,6 @@ describe MultiCommerce::Parser do
       expected.first[:email].should == "aguai@wizard.com.br"
       expected.first[:phone].should == "19 3661 1367"
       expected.first[:address].should == "Rua Valins, 1042, Centro, Aguaí, SP"
-      # expected.first[:address].should == "Rua Valins, Nº. 1042 - Centro - Aguaí/SP - 13860000"
       expected.first[:franchise_acronym].should == "W"
       expected.first[:status].should == "4"
       expected.first[:situation].should == "1"
