@@ -5,6 +5,11 @@ class Ability
     user ||= User.new # guest user (not logged in)
     if user.role == 'manager'
       can :manage, :all
+    elsif user.role == 'unity'
+      # can :manage, Lead, unity_id: user.unity.id
+      can :manage, Lead do |lead|
+        user.unities.map(&:id).include?(lead.id)
+      end
     end
   end
 end

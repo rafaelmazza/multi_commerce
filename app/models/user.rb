@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :unities
   # has_many :franchises, through: :unities
   has_and_belongs_to_many :franchises
+  # has_many :leads, through: :unities, source: :franchise
   
   # restrict user to franchise domain
   def self.find_for_authentication(conditions={})
