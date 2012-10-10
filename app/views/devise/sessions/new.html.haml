@@ -11,7 +11,7 @@
           %label Senha
         %dd
           = f.password_field :password, class: 'large'
-    = f.hidden_field :domain, value: 'wizard'
+    = f.hidden_field :domain, value: current_franchise.url
     - if devise_mapping.rememberable?
       %p
         = f.check_box :remember_me

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :unities
   
   def self.find_for_authentication(conditions={})
+    p 'aqui'
     p conditions.inspect
     find(:first, :conditions => { :franchises => { :name => 'wizard' } }, :joins => :franchises)
   end
