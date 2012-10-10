@@ -10,10 +10,10 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   
   has_and_belongs_to_many :unities
+  has_many :franchises, through: :unities
   
+  # restrict user to franchise domain
   def self.find_for_authentication(conditions={})
-    p 'aqui'
-    p conditions.inspect
-    find(:first, :conditions => { :franchises => { :name => conditions.delete(:domain) } }, :joins => :franchises)
+    find(:first, :conditions => { :franchises => { :name => conditions.delete(:domain) } }, :joins => :franchises, :readonly => false)
   end
 end
