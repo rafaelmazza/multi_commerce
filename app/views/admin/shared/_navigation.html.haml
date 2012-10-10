@@ -5,7 +5,7 @@
   %section#user-info
     %img{:alt => "Sample User Avatar", :src => "/assets/admin/sample_user.png"}
       %div
-        %a{:href => "#", :title => "Account Settings and Profile Page"} Joe Tester
+        %a= link_to current_user.email, '#'
         %em Administrator
         %ul
           %li
