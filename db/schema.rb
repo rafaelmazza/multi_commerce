@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121009203213) do
+ActiveRecord::Schema.define(:version => 20121010134238) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20121009203213) do
     t.float   "latitude"
     t.float   "longitude"
     t.integer "leads_count",       :default => 0
+    t.integer "franchise_id"
   end
 
   create_table "unities_users", :id => false, :force => true do |t|

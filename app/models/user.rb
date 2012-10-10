@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
   def self.find_for_authentication(conditions={})
     p 'aqui'
     p conditions.inspect
-    find(:first, :conditions => { :franchises => { :name => 'wizard' } }, :joins => :franchises)
+    find(:first, :conditions => { :franchises => { :name => conditions.delete(:domain) } }, :joins => :franchises)
   end
 end

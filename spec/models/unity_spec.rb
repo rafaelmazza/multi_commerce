@@ -11,6 +11,7 @@ describe Unity do
   it { should have_db_column(:address).of_type(:string) }
   
   it { should have_and_belong_to_many :users }
+  it { should belong_to :franchise }
   
   # subject { described_class.new }
   
