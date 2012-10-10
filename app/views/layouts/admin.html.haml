@@ -10,13 +10,25 @@
     = javascript_include_tag "admin"
     = stylesheet_link_tag "admin"
     = csrf_meta_tags
-    
-  %body
-    = render 'admin/shared/navigation'
-    %section{:role => "main"}
-      %article.full-block.clearfix
-        %header
-          %h2 Chromatron Admin Theme
-        %section
-          = render 'admin/shared/notifications'
-          = yield
+
+  - if user_signed_in?
+    %body
+      = render 'admin/shared/navigation'
+      %section{:role => "main"}
+        %article.full-block.clearfix
+          %header
+            %h2 Chromatron Admin Theme
+          %section
+            = render 'admin/shared/notifications'
+            = yield
+  - else
+    %body.login
+      %section{:role => "main"}          
+        %a{:href => "index.html", :title => "Back to Homepage"}
+        = yield
+
+        .notification.error
+          %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
+          %p
+            %strong Error notification
+            = alert

@@ -1,6 +1,9 @@
 require 'sidekiq/web'
 
 MultiCommerce::Application.routes.draw do
+  devise_for :backend_users, path: 'backend'
+  mount RailsAdmin::Engine => '/backend', :as => 'rails_admin'
+
   devise_for :users
 
   mount Sidekiq::Web, at: "/sidekiq"

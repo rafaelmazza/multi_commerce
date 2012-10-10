@@ -34,6 +34,7 @@ gem 'sinatra', require: false
 gem 'slim'
 gem 'devise'
 gem 'cancan'
+gem 'rails_admin'
 
 group :test do
   gem 'shoulda-matchers'
