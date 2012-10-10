@@ -10,4 +10,9 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
   
   has_and_belongs_to_many :unities
+  
+  def self.find_for_authentication(conditions={})
+    p conditions.inspect
+    find(:first, :conditions => { :franchises => { :name => 'wizard' } }, :joins => :franchises)
+  end
 end
