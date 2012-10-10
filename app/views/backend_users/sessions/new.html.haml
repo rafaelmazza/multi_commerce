@@ -1,0 +1,18 @@
+%article#login-box
+  %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse et dignissim metus. Maecenas id augue ac metus tempus aliquam.
+  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+    %fieldset
+      %dl
+        %dt
+          %label Login
+        %dd
+          = f.text_field :email, class: 'large'
+        %dt
+          %label Senha
+        %dd
+          = f.password_field :password, class: 'large'
+    - if devise_mapping.rememberable?
+      %p
+        = f.check_box :remember_me
+        = f.label :remember_me
+    %button.right{:type => "submit"} Log in
