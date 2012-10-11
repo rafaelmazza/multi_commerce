@@ -3,5 +3,5 @@ class Franchise < ActiveRecord::Base
   
   has_many :products
   has_many :unities
-  has_many :leads, through: :unities # tmp
+  has_many :leads, through: :unities
 end

@@ -6,30 +6,32 @@
     %img{:alt => "Sample User Avatar", :src => "/assets/admin/sample_user.png"}
       %div
         %a= link_to current_user.email, '#'
-        %em Administrator
+        %em= current_user.role
         %ul
           %li
-            %a.button-link{:href => "#", :rel => "tooltip", :title => "This is my title!"} view website
+            %a.button-link{:href => "#", :rel => "tooltip", :title => "This is my title!"} trocar senha
           %li
-            = link_to 'Sair', destroy_user_session_path, :method => :delete, :class => 'button-link'
+            = link_to 'sair', destroy_user_session_path, :method => :delete, :class => 'button-link'
   %nav#main-nav
     %ul
-      %li
-        %a.dashboard.no-submenu{:href => "index.html", :title => ""} Dashboard
-      %li.current
-        %a.projects{:href => "#", :title => ""} Projects
-        %span{:title => "You have 3 new tasks"} 3
-        %ul
-          %li
-            %a{:href => "#", :title => ""} Add Project
-          %li
-            %a{:href => "#", :title => ""} Edit Project
-          %li
-            %a{:href => "#", :title => ""} Project Management
-          %li
-            %a{:href => "#", :title => ""} Project Gallery
-          %li
-            %a{:href => "#", :title => ""} Settings
+      - if current_user.manager?
+        %li
+          = link_to 'Leads', admin_leads_path, class: 'dashboard'
+          - current_user.franchises.each do |franchise|
+            %li.current
+              = link_to franchise.name, admin_leads_path(franchise_id: franchise), class: 'dashboard'
+              %span{:title => "You have 3 pending leads"} 3
+              %ul
+                %li
+                  = link_to 'Vouchers', '#'
+          
+      - current_user.unities.each do |unity|
+        %li.current
+          = link_to unity.name, admin_leads_path(unity_id: unity), class: 'dashboard'
+          %span{:title => "You have 3 pending leads"} 3
+          %ul
+            %li
+              = link_to 'Vouchers', '#'
   %section.sidebar.nested
     %h2 Nested Section
     %p Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Maec enas id augue ac metu aliquam.
