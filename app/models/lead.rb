@@ -4,19 +4,21 @@ class Lead < ActiveRecord::Base
   validates :name, presence: true
   
   validates :email, presence: true
-  validates :email, uniqueness: true
+  # validates :email, uniqueness: true
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   
   validates :address_search, presence: true
 
   validates :phone_code, presence: true
   validates :phone_code, numericality: true
+  validates :phone_code, length: { is: 2 }
   validates :phone, presence: true
   validates :phone, numericality: true
   
   sp_cellphone_check = Proc.new { |p| p.phone_code == '11' && p.phone =~ /^(5[2-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9]).+/ }
   # validates :phone, length: { is: 9 }, :if     => sp_cellphone_check
   validates :phone, length: { is: 8 }, :unless => sp_cellphone_check
+  validates :phone, length: { minimum: 8 }
   validates_ninth_digit :phone
   
   belongs_to :unity, counter_cache: true
