@@ -12,6 +12,7 @@ describe Unity do
   
   it { should have_and_belong_to_many :users }
   it { should belong_to :franchise }
+  it { should have_many :leads }
   
   # subject { described_class.new }
   

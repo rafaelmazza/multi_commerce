@@ -3,6 +3,7 @@ class Unity < ActiveRecord::Base
   
   has_and_belongs_to_many :users
   belongs_to :franchise
+  has_many :leads
   
   geocoded_by :address
 end

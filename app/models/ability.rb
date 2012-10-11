@@ -6,10 +6,11 @@ class Ability
     if user.role == 'manager'
       can :manage, :all
     elsif user.role == 'unity'
-      # can :manage, Lead, unity_id: user.unity.id
-      can :manage, Lead do |lead|
-        user.unities.map(&:id).include?(lead.id)
-      end
+      can :read, Lead
+      # can :manage, Lead do |lead|
+      #   p user.unities.map(&:id).inspect
+      #   user.unities.map(&:id).include?(lead.id)
+      # end
     end
   end
 end

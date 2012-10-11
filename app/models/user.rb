@@ -5,14 +5,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:email, :domain]
 
-  # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :unity_ids, :franchise_ids
-  # attr_accessible :title, :body
   
   has_and_belongs_to_many :unities
   # has_many :franchises, through: :unities
   has_and_belongs_to_many :franchises
   # has_many :leads, through: :unities, source: :franchise
+  has_many :leads, through: :unities # tmp: unity (should consider current unity)
+  # has_many :leads, through: :franchises # tmp: manager
+  has_many :manager_leads, through: :franchises, source: :leads # tmp: manager
+  
+  # scope :leads, lambda {|role| role == 'manager' ? where()}
   
   # restrict user to franchise domain
   def self.find_for_authentication(conditions={})
