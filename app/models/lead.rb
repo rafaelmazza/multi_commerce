@@ -14,6 +14,11 @@ class Lead < ActiveRecord::Base
   validates :phone, presence: true
   validates :phone, numericality: true
   
+  sp_cellphone_check = Proc.new { |p| p.phone_code == '11' && p.phone =~ /^(5[2-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9]).+/ }
+  # validates :phone, length: { is: 9 }, :if     => sp_cellphone_check
+  validates :phone, length: { is: 8 }, :unless => sp_cellphone_check
+  validates_ninth_digit :phone
+  
   belongs_to :unity, counter_cache: true
   has_many :vouchers
   has_one :address

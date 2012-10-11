@@ -35,6 +35,8 @@ gem 'slim'
 gem 'devise'
 gem 'cancan'
 gem 'rails_admin'
+gem 'client_side_validations'
+gem 'client_side_validations-formtastic'
 
 group :test do
   gem 'shoulda-matchers'

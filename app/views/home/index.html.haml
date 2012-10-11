@@ -14,14 +14,14 @@
       %span Preencha o formulário &raquo;
       = image_tag "application/arrow.png", height: 136, width: 564
   #box-sign-up
-    = semantic_form_for @lead, html: { id: "sign-up-form" } do |f|
+    = semantic_form_for @lead, html: { id: "sign-up-form" }, validate: true do |f|
       = f.hidden_field :latitude
       = f.hidden_field :longitude
       = f.input :name, input_html: { class: "input-1" }
       = f.input :email, input_html: { class: "input-1" }
       = f.inputs phone: "Telefone", id: "phone" do
         = f.input :phone_code, wrapper_html: { class: "phone_code" }
-        = f.input :phone, wrapper_html: { class: "phone" }
+        = f.input :phone, wrapper_html: { class: "phone" }, input_html: { maxlength: 9 }
       = f.input :address_search,
                                   as: :string, 
                                   input_html: { id: "address-search-field", 
