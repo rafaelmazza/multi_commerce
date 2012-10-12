@@ -18,6 +18,10 @@ MultiCommerce::Application.routes.draw do
   match "busca" => "home#search", via: :post
   # match "voucher" => "home#voucher", via: :get, as: 'voucher'
   
+  # match "/address" => "addresses#index", via: :get
+  match "addresses/:zipcode" => "addresses#show"
+  resources :addresses  
+  
   namespace :admin do
     root to: "leads#index"
     resources :leads, only: [:index]

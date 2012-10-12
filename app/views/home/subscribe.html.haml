@@ -1,5 +1,5 @@
 #lead_content
-  = semantic_form_for @voucher do |f|
+  = semantic_form_for @voucher, validate: true do |f|
     #open-result
       #open-result-top
         %span.text-result-medium Qual o melhor horário para você estudar?
@@ -15,7 +15,7 @@
       #open-result-center
         %span.text-result-medium Preencha seus dados:
         %fieldset#your-data
-          = semantic_fields_for @lead do |l|
+          = semantic_fields_for @lead, validate: true do |l|
             = l.fields_for :address do |a|
               = a.input :zipcode, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
@@ -38,13 +38,13 @@
         %fieldset#payment
           %label
             = f.radio_button :payment_method, :boleto, checked: true
-            = image_tag "barcode.png"
+            = image_tag "application/barcode.png"
           %label
             = f.radio_button :payment_method, :cartao_visa, class: "credit-card"
-            = image_tag "visa.png"
+            = image_tag "application/visa.png"
           %label
             = f.radio_button :payment_method, :cartao_master, class: "credit-card"
-            = image_tag "master.png"
+            = image_tag "application/master.png"
         %fieldset#credit-card
           %span.text-result-medium Dados do cartão:
           %li.wrapper

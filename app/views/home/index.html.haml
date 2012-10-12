@@ -72,8 +72,9 @@
         geocoder.geocode({ 'address': input.value }, function(results, status) {
           if (status == google.maps.GeocoderStatus.OK) {
             console.log(results);
-  					$('#lead_latitude').val(results[0].geometry.location.Xa)
-  					$('#lead_longitude').val(results[0].geometry.location.Ya)
+  					$('#lead_latitude').val(results[0].geometry.location.Xa);
+  					$('#lead_longitude').val(results[0].geometry.location.Ya);
+  					$(input).change();
           }
         });
 

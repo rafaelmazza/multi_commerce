@@ -16,7 +16,7 @@ describe LeadsController do
         let!(:lead) { create(:lead, name: 'Rafael', email: 'rafael@cafeazul.com.br') }
         
         it 'replace lead info' do
-          post :create, :lead => { name: 'John', email: 'rafael@cafeazul.com.br', phone_code: '11', phone: '501517001' }
+          post :create, :lead => { name: 'John', email: 'rafael@cafeazul.com.br', phone_code: '11', phone: '50151700' }
           lead.reload.name.should == 'John'
         end
       end
