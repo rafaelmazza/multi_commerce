@@ -26,7 +26,7 @@
               = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = l.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            /= l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
 
         %fieldset#your-data-right
           = render partial: "product", collection: @products, locals: { f: f }
@@ -37,31 +37,39 @@
         %span.text-result-medium Forma de Pagamento:
         %fieldset#payment
           %label
-            = f.radio_button :payment_method, :boleto, checked: true
+            = f.radio_button :payment_method, :boleto, checked: true, class: 'payment_method'
             = image_tag "application/barcode.png"
           %label
-            = f.radio_button :payment_method, :cartao_visa, class: "credit-card"
+            = f.radio_button :payment_method, :cartao_visa, class: ['payment_method', 'credit-card']
             = image_tag "application/visa.png"
           %label
-            = f.radio_button :payment_method, :cartao_master, class: "credit-card"
+            = f.radio_button :payment_method, :cartao_master, class: ['payment_method', 'credit-card']
             = image_tag "application/master.png"
         %fieldset#credit-card
           %span.text-result-medium Dados do cartão:
-          %li.wrapper
-            %label{for: "lead_credit_card_number"} Número:
-            = text_field_tag "lead[credit_card][number]", "", class: "input-1"
-          %li.wrapper
-            %label{for: "lead_credit_card_security_code"} Código de segurança:
-            = text_field_tag "lead[credit_card][cvv]", "", class: "input-1"
-          %li.wrapper
-            %label{for: "lead_credit_card_validate"} Expiração:
-            = text_field_tag "lead[credit_card][expiration_date]", "", class: "input-1"
-          %li.wrapper
-            %label{for: "lead_credit_card_name"} Nome no cartão:
-            = text_field_tag "lead[credit_card][card_holder_name]", "", class: "input-1"
-          %li.wrapper
-            %label{for: "lead_credit_card_installments"} Parcelas:
-            = select_tag "lead[credit_card][installments]", options_for_select((1..12).to_a), class: "input-1"
+          = semantic_fields_for @lead, validate: true do |l|
+            = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }, validate: true
+          = semantic_fields_for CreditCard.new, validate: true do |l|
+            = l.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = l.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = l.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+            = l.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+            = l.input :installments, as: :select, collection: options_for_select((1..12).to_a), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          / %li.wrapper
+          /   %label{for: "lead_credit_card_number"} Número:
+          /   = text_field_tag "lead[credit_card][number]", "", class: "input-1", validate: true
+          / %li.wrapper
+          /   %label{for: "lead_credit_card_security_code"} Código de segurança:
+          /   = text_field_tag "lead[credit_card][cvv]", "", class: "input-1"
+          / %li.wrapper
+          /   %label{for: "lead_credit_card_validate"} Expiração:
+          /   = text_field_tag "lead[credit_card][expiration_date]", "", class: "input-1"
+          / %li.wrapper
+          /   %label{for: "lead_credit_card_name"} Nome no cartão:
+          /   = text_field_tag "lead[credit_card][card_holder_name]", "", class: "input-1"
+          / %li.wrapper
+          /   %label{for: "lead_credit_card_installments"} Parcelas:
+          /   = select_tag "lead[credit_card][installments]", options_for_select((1..12).to_a), class: "input-1"
         %fieldset#button
           = f.submit "Comprar Curso", class: "btn-purchase"
         #content-footer

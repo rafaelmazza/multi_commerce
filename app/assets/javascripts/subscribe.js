@@ -1,4 +1,6 @@
 $(document).ready(function () {
+	// $('#credit-card').css('display', 'none');
+	
 	$('#lead_address_attributes_zipcode').keyup(function () {
 		var zipcode = $(this).val()
 		if (zipcode.match(/^\d{5}-?\d{3}$/)) {
@@ -15,4 +17,16 @@ $(document).ready(function () {
 			})
 		}
 	});
+	
+	$('input:radio.payment_method').change(function () {
+		if ($(this).hasClass('credit-card')) {
+			// $('#credit-card').css('display', 'inline');
+		} else {
+			// $('#credit-card').css('display', 'none');
+		}
+		$.post('/vouchers/43/update_payment_method', {payment_method: $(this).val()}, function (response) {
+			// $('form').resetClientSideValidations();
+			console.log(response);
+		});
+	})
 });

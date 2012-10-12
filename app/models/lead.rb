@@ -15,6 +15,9 @@ class Lead < ActiveRecord::Base
   validates :phone, presence: true
   validates :phone, numericality: true
   
+  payment_method_is_credit_card = Proc.new { |l| l.current_voucher and l.current_voucher.payment_method != 'boleto' }
+  validates :cpf, presence: true, if: payment_method_is_credit_card
+  
   sp_cellphone_check = Proc.new { |p| p.phone_code == '11' && p.phone =~ /^(5[2-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9]).+/ }
   # validates :phone, length: { is: 9 }, :if     => sp_cellphone_check
   validates :phone, length: { is: 8 }, :unless => sp_cellphone_check
@@ -26,6 +29,7 @@ class Lead < ActiveRecord::Base
   has_one :address
   
   attr_accessor :credit_card
+  attr_accessor :current_voucher
   
   geocoded_by :address_search
   
@@ -40,6 +44,6 @@ class Lead < ActiveRecord::Base
   private
   
   def generate_voucher
-    self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
+    @current_voucher ||= self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
   end
 end
