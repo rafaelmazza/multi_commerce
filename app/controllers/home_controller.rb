@@ -17,6 +17,8 @@ class HomeController < ApplicationController
     
     @products = current_franchise.products # tmp
     
+    @timetables = Timetable.all # TODO: better place for this?
+    
     @lead.build_address
   end
 end

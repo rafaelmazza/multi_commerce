@@ -1,11 +1,14 @@
 class Voucher < ActiveRecord::Base
   belongs_to :unity
   belongs_to :lead
+  belongs_to :timetable
   has_many :line_items
   
-  attr_accessible :used_at, :unity_id, :payment_method, :total
+  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id
   
   before_create :generate_code
+  
+  validates :timetable_id, presence: true # TODO: it's working?
   
   def use
     update_attributes used_at: Time.now

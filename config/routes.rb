@@ -11,8 +11,10 @@ MultiCommerce::Application.routes.draw do
   root to: "home#index"
   
   resources :leads, only: [:create, :update]
-  resources :vouchers, only: [:show, :update] do
-    post :update_payment_method, on: :member
+  # resources :vouchers, only: [:show, :update] do
+  resources :vouchers do
+    # post :update_payment_method, on: :member
+    put :checkout, on: :member
   end
   
   match "unidades" => "home#unities", via: :get

@@ -24,9 +24,34 @@ $(document).ready(function () {
 		} else {
 			// $('#credit-card').css('display', 'none');
 		}
-		$.post('/vouchers/43/update_payment_method', {payment_method: $(this).val()}, function (response) {
+		var voucher_id = $('#voucher_id').val();
+		console.log(voucher_id);
+		// $.post('/vouchers/' + voucher_id + '/update_payment_method', {payment_method: $(this).val()}, function (response) {
+		$.post('/vouchers/' + voucher_id, {_method: 'PUT', voucher: {payment_method: $(this).val()}}, function (response) {
 			// $('form').resetClientSideValidations();
 			console.log(response);
 		});
 	})
+	
+	$('div.btn-group').each(function(){
+    var group   = $(this);
+    var form    = group.parents('form').eq(0);
+    var name    = group.attr('data-toggle-name');
+    var hidden  = $('input[name="' + name + '"]', form);
+    $('button', group).each(function(){
+      var button = $(this);
+      button.live('click', function(){
+          hidden.val($(this).val());
+					console.log($(this).val());
+					var voucher_id = $('#voucher_id').val();
+					$.post('/vouchers/' + voucher_id, {_method: 'PUT', voucher: {timetable_id: $(this).val()}}, function (response) {
+						// $('form').resetClientSideValidations();
+						console.log(response);
+					});
+      });
+      if(button.val() == hidden.val()) {
+        button.addClass('active');
+      }
+    });
+  });
 });

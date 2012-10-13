@@ -1,17 +1,20 @@
 #lead_content
-  = semantic_form_for @voucher, validate: true do |f|
+  = semantic_form_for @voucher, url: checkout_voucher_path(@voucher), validate: true do |f|
+    = f.hidden_field :id
     #open-result
       #open-result-top
         %span.text-result-medium Qual o melhor horário para você estudar?
         %fieldset#period
-          /- @course_periods.each do |period|
-          /  %label.course_period{"data-id" => period.id}
-          /    = button_tag period.title, type: "button"
-          /    %span= period.description
-          /= f.input :course_period, :as => :radio, collection: @course_periods
-        / %span.text-result-medium Curso:
-        / %fieldset#course
-        /   = f.input :course, :as => :radio, collection: @courses
+        / - @timetables.each do |timetable|
+        /   %label.course_period{"data-id" => timetable.id}
+        /     = button_tag timetable.title, type: "button", class: 'timetable'
+        /     %span= timetable.description
+        /= f.input :timetable_id, as: :radio, collection: @timetables
+        / = hidden_field_tag "voucher[timetable_id]", timetable.id
+        - @timetables.each do |timetable|
+          .btn-group{"data-toggle" => "buttons-radio", "data-toggle-name" => "voucher[timetable_id]"}
+            = button_tag timetable.title, type: "button", class: 'btn', value: timetable.id, "data-toggle" => "button"
+        = f.hidden_field :timetable_id, value: nil
       #open-result-center
         %span.text-result-medium Preencha seus dados:
         %fieldset#your-data
@@ -55,21 +58,6 @@
             = l.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
             = l.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
             = l.input :installments, as: :select, collection: options_for_select((1..12).to_a), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-          / %li.wrapper
-          /   %label{for: "lead_credit_card_number"} Número:
-          /   = text_field_tag "lead[credit_card][number]", "", class: "input-1", validate: true
-          / %li.wrapper
-          /   %label{for: "lead_credit_card_security_code"} Código de segurança:
-          /   = text_field_tag "lead[credit_card][cvv]", "", class: "input-1"
-          / %li.wrapper
-          /   %label{for: "lead_credit_card_validate"} Expiração:
-          /   = text_field_tag "lead[credit_card][expiration_date]", "", class: "input-1"
-          / %li.wrapper
-          /   %label{for: "lead_credit_card_name"} Nome no cartão:
-          /   = text_field_tag "lead[credit_card][card_holder_name]", "", class: "input-1"
-          / %li.wrapper
-          /   %label{for: "lead_credit_card_installments"} Parcelas:
-          /   = select_tag "lead[credit_card][installments]", options_for_select((1..12).to_a), class: "input-1"
         %fieldset#button
           = f.submit "Comprar Curso", class: "btn-purchase"
         #content-footer

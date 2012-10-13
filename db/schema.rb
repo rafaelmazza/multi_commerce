@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121010175851) do
+ActiveRecord::Schema.define(:version => 20121012230608) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -82,6 +82,11 @@ ActiveRecord::Schema.define(:version => 20121010175851) do
     t.decimal "price",        :precision => 8, :scale => 2, :null => false
   end
 
+  create_table "timetables", :force => true do |t|
+    t.string "title"
+    t.string "description"
+  end
+
   create_table "unities", :force => true do |t|
     t.string  "code"
     t.string  "name"
@@ -130,6 +135,7 @@ ActiveRecord::Schema.define(:version => 20121010175851) do
     t.string   "payment_method"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "timetable_id"
   end
 
 end

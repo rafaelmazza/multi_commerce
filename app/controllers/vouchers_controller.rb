@@ -1,11 +1,14 @@
 class VouchersController < ApplicationController
+  respond_to :html, :json
+  
   layout 'voucher', only: [:show]
   
   def show
     @voucher = Voucher.find(params[:id])
   end
   
-  def update
+  # def update
+  def checkout
     @voucher = Voucher.find(params[:id])
     
     params[:products].each do |product_id|
@@ -30,9 +33,12 @@ class VouchersController < ApplicationController
     # render :text => Akatus::Payment.perform(@voucher)
   end
   
-  def update_payment_method
+  # def update_payment_method
+  def update
     @voucher = Voucher.find(params[:id])
-    @voucher.update_attribute(:payment_method, params[:payment_method])
-    render nothing: true
+    @voucher.update_attributes(params[:voucher])
+    # @voucher.update_attribute(:payment_method, params[:payment_method])
+    # render nothing: true
+    respond_with(@voucher)
   end
 end

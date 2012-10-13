@@ -9,16 +9,6 @@ FactoryGirl.define do
     latitude -23.605556
     longitude -46.665833
     address
-    
-    # factory :lead_with_products do
-    #   ignore do
-    #     products_count 3
-    #   end
-    # 
-    #   after(:create) do |lead, evaluator|
-    #     FactoryGirl.create_list :product, evaluator.products_count, lead: lead
-    #   end
-    # end
   end
   
   factory :unity do
@@ -44,7 +34,7 @@ FactoryGirl.define do
     sequence(:city) { |n| "cidade #{n}" }
     sequence(:state) { |n| "S#{n}" }
     sequence(:number) { |n| n }
-    sequence(:zipcode) { |n| n }
+    sequence(:zipcode) { |n| "12345-67#{n}" }
     sequence(:district) { |n| "bairro #{n}" }
   end
   
@@ -52,7 +42,6 @@ FactoryGirl.define do
     sequence(:name) { |n| "Produto #{n}" }
     sequence(:description) { |n| "Description #{n}" }
     price 21.99
-    # discount 10
     
     franchise
   end
