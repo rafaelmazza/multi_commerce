@@ -14,7 +14,7 @@
         - @timetables.each do |timetable|
           .btn-group{"data-toggle" => "buttons-radio", "data-toggle-name" => "voucher[timetable_id]"}
             = button_tag timetable.title, type: "button", class: 'btn', value: timetable.id, "data-toggle" => "button"
-        = f.hidden_field :timetable_id, value: nil
+        = f.hidden_field :timetable_id, value: Timetable.find_by_title('Flex').id
       #open-result-center
         %span.text-result-medium Preencha seus dados:
         %fieldset#your-data

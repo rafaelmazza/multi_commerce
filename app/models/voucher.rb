@@ -8,8 +8,6 @@ class Voucher < ActiveRecord::Base
   
   before_create :generate_code
   
-  validates :timetable_id, presence: true # TODO: it's working?
-  
   def use
     update_attributes used_at: Time.now
   end
