@@ -17,6 +17,8 @@ MultiCommerce::Application.routes.draw do
     put :checkout, on: :member
   end
   
+  match "update_payment_status" => "vouchers#update_payment_status", via: :post
+  
   match "unidades" => "home#unities", via: :get
   match "inscricao/:unity_id" => "home#subscribe", via: :get
   match "busca" => "home#search", via: :post
