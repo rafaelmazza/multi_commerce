@@ -1,5 +1,5 @@
 class Lead < ActiveRecord::Base
-  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :address_attributes, :credit_card, :unity_id
+  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :address_attributes, :credit_card, :unity_id, :credit_card_attributes
   
   validates :name, presence: true
   
@@ -35,15 +35,28 @@ class Lead < ActiveRecord::Base
   
   accepts_nested_attributes_for :address
   
+  payment_method_is_credit_card2 = Proc.new { |l| self.vouchers.find_or_create_by_unity_id(unity_id: unity.id).payment_method != 'boleto' }
+  before_validation :check_credit_card, if: payment_method_is_credit_card2
+  
+  def check_credit_card
+    credit_card.valid?
+    # true
+  end
+  
   def subscribe(unity)
     self.unity = unity
     save!
     generate_voucher    
   end
   
+  def credit_card_attributes=(attributes)
+    @credit_card = CreditCard.new(attributes)
+  end
+  
   private
   
   def generate_voucher
-    @current_voucher ||= self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
+    # @current_voucher ||= self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
+    self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
   end
 end

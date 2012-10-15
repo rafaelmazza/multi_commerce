@@ -30,7 +30,7 @@ $(document).ready(function () {
 		$.post('/vouchers/' + voucher_id, {_method: 'PUT', voucher: {payment_method: $(this).val()}}, function (response) {
 			// $('form').resetClientSideValidations();
 			console.log(response);
-		});
+		}, 'json');
 	})
 	
 	$('div.btn-group').each(function(){

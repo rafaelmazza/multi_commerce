@@ -15,10 +15,10 @@ class HomeController < ApplicationController
     @unity = Unity.find(params[:unity_id])
     @voucher = @lead.subscribe(@unity)
     
-    @products = current_franchise.products # tmp
+    # @products = current_franchise.products # tmp
+    # @timetables = Timetable.all # TODO: better place for this?
     
-    @timetables = Timetable.all # TODO: better place for this?
-    
+    # @lead.credit_card = CreditCard.new
     @lead.build_address
   end
 end

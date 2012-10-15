@@ -11,7 +11,7 @@
         /     %span= timetable.description
         /= f.input :timetable_id, as: :radio, collection: @timetables
         / = hidden_field_tag "voucher[timetable_id]", timetable.id
-        - @timetables.each do |timetable|
+        - Timetable.all.each do |timetable|
           .btn-group{"data-toggle" => "buttons-radio", "data-toggle-name" => "voucher[timetable_id]"}
             = button_tag timetable.title, type: "button", class: 'btn', value: timetable.id, "data-toggle" => "button"
         = f.hidden_field :timetable_id, value: Timetable.find_by_title('Flex').id
@@ -32,7 +32,7 @@
             /= l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
 
         %fieldset#your-data-right
-          = render partial: "product", collection: @products, locals: { f: f }
+          = render partial: "home/product", collection: current_franchise.products, locals: { f: f }
           #total
             %span.total-left Total:
             %span.total-right
@@ -52,12 +52,12 @@
           %span.text-result-medium Dados do cartão:
           = semantic_fields_for @lead, validate: true do |l|
             = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }, validate: true
-          = semantic_fields_for CreditCard.new, validate: true do |l|
-            = l.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = l.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = l.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
-            = l.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
-            = l.input :installments, as: :select, collection: options_for_select((1..12).to_a), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = l.semantic_fields_for :credit_card, validate: false do |c|
+              = c.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+              = c.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+              = c.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+              = c.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+              = c.input :installments, as: :select, collection: options_for_select((1..12).to_a), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
         %fieldset#button
           = f.submit "Comprar Curso", class: "btn-purchase"
         #content-footer

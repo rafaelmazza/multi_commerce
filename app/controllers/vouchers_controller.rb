@@ -7,23 +7,29 @@ class VouchersController < ApplicationController
     @voucher = Voucher.find(params[:id])
   end
   
-  # def update
   def checkout
     @voucher = Voucher.find(params[:id])
+    @lead = @voucher.lead
+    @lead.attributes = params[:lead]
     
     params[:products].each do |product_id|
       @voucher.add_product(Product.find(product_id))
     end if params[:products]
-    
-    if @voucher.lead.update_attributes(params[:lead])
-      if @voucher.update_attributes(params[:voucher])
-        @voucher.update! # updates total
-      else
-        render "home/subscribe"
-      end
+
+    if @voucher.lead.save && @voucher.update_attributes(params[:voucher])
+      @voucher.update! # updates total
+      # render action: :show, id: @voucher.id
+      # render :text => Akatus::Payment.perform(@voucher)
     else
-      render "home/subscribe"
+      render 'home/subscribe', layout: 'home'
     end
+    
+    # render text: Lead.new(params[:lead]).credit_card.number.inspect
+    # render text: @lead.credit_card.valid?.inspect
+    # if @lead.valid? #and @lead.credit_card.valid?
+    # else
+    #   render 'home/subscribe', layout: 'home'
+    # end
     
     # PaymentWorker.perform_async(@voucher.id, @voucher.lead.credit_card)
     # render 'home/thank_you'
@@ -33,12 +39,9 @@ class VouchersController < ApplicationController
     # render :text => Akatus::Payment.perform(@voucher)
   end
   
-  # def update_payment_method
   def update
     @voucher = Voucher.find(params[:id])
     @voucher.update_attributes(params[:voucher])
-    # @voucher.update_attribute(:payment_method, params[:payment_method])
-    # render nothing: true
     respond_with(@voucher)
   end
 end

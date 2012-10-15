@@ -38,6 +38,7 @@ gem 'rails_admin'
 gem 'client_side_validations'
 gem 'client_side_validations-formtastic'
 gem 'correios'
+# gem 'active_attr'
 
 group :test do
   gem 'shoulda-matchers'

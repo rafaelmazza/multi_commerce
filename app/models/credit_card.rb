@@ -16,4 +16,9 @@ class CreditCard
     self.expiration_date = attributes[:expiration_date]
     self.installments = 1
   end
+  
+  # TODO: refactor
+  def persisted?
+    false
+  end
 end
