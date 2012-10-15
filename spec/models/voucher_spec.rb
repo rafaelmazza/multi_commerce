@@ -8,9 +8,11 @@ describe Voucher do
   
   it 'generates code when created' do
     MultiCommerce::VoucherGenerator.stub(:generate).and_return "code"
-    
+
     voucher = Voucher.new
+    # voucher.stub valid?: true    
     voucher.save
+
     voucher.code.should == 'code'
   end
   

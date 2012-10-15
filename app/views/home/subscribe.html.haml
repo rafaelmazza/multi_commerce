@@ -18,18 +18,26 @@
       #open-result-center
         %span.text-result-medium Preencha seus dados:
         %fieldset#your-data
-          = semantic_fields_for @lead, validate: true do |l|
-            = l.fields_for :address do |a|
-              = a.input :zipcode, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
-              = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
-              = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            /= l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            /= l.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            /= l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          = f.semantic_fields_for :address do |a|
+            = a.input :zipcode, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
+            = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
+            = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          / = semantic_fields_for @lead, validate: true do |l|
+          /   = l.fields_for :address do |a|
+          /     = a.input :zipcode, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          /     = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
+          /     = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
+          /     = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          /     = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          /     = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          /     = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          /   /= l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          /   /= l.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          /   /= l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
 
         %fieldset#your-data-right
           = render partial: "home/product", collection: current_franchise.products, locals: { f: f }
@@ -52,8 +60,9 @@
           %span.text-result-medium Dados do cartão:
           / = semantic_fields_for @lead, validate: true do |l|
           /   = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }, validate: true
+          = f.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
           = f.semantic_fields_for :credit_card, validate: false do |c|
-            = c.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            / = c.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = c.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = c.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = c.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            

@@ -8,7 +8,7 @@ FactoryGirl.define do
     address_search "Moema, São Paulo, Brasil"
     latitude -23.605556
     longitude -46.665833
-    address
+    # address
   end
   
   factory :unity do
@@ -36,6 +36,8 @@ FactoryGirl.define do
     sequence(:number) { |n| n }
     sequence(:zipcode) { |n| "12345-67#{n}" }
     sequence(:district) { |n| "bairro #{n}" }
+    
+    # voucher
   end
   
   factory :product do
@@ -50,8 +52,10 @@ FactoryGirl.define do
     sequence(:code) { |n| "code#{n}" }
     used_at nil
     payment_method 'boleto'
+    cpf '123'
     
     unity
+    # address
     # lead
     
     factory :voucher_with_line_items do

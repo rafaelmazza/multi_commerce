@@ -1,5 +1,5 @@
 class Lead < ActiveRecord::Base  
-  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :address_attributes, :unity_id #, :credit_card_attributes, :credit_card
+  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :unity_id #, :address_attributes, :credit_card_attributes, :credit_card
   
   validates :name, presence: true
   
@@ -26,14 +26,14 @@ class Lead < ActiveRecord::Base
   
   belongs_to :unity, counter_cache: true
   has_many :vouchers
-  has_one :address
+  # has_one :address
   
   # attr_accessor :credit_card
   attr_accessor :current_voucher
   
   geocoded_by :address_search
   
-  accepts_nested_attributes_for :address
+  # accepts_nested_attributes_for :address
   
   # payment_method_is_credit_card2 = Proc.new { |l| unity && self.vouchers.find_or_create_by_unity_id(unity_id: unity.id).payment_method != 'boleto' }
   # before_validation :check_credit_card, if: payment_method_is_credit_card2

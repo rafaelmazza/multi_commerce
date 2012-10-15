@@ -1,8 +1,8 @@
 class Akatus::Xml
   # def initialize(voucher, credit_card, conf)
-  def initialize(voucher, conf, credit_card=nil)
+  def initialize(voucher, conf)
     # @voucher, @credit_card, @conf = voucher, credit_card, conf
-    @voucher, @conf, @credit_card = voucher, conf, credit_card
+    @voucher, @conf = voucher, conf
   end
 
   def generate
@@ -41,16 +41,15 @@ class Akatus::Xml
   end
 
   def cartao
-    # return {} if @voucher.payment_method == "boleto"
-    return {} if @credit_card
+    return {} if @voucher.payment_method == "boleto"
 
-    { numero: @credit_card.number,
-      parcelas: @credit_card.installments,
-      codigo_de_seguranca: @credit_card.cvv,
-      expiracao: @credit_card.expiration_date,
+    { numero: @voucher.credit_card.number,
+      parcelas: @voucher.credit_card.installments,
+      codigo_de_seguranca: @voucher.credit_card.cvv,
+      expiracao: @voucher.credit_card.expiration_date,
       portador: { 
-        nome: @credit_card.card_holder_name,
-        cpf: @voucher.lead.cpf.gsub(/\D/, ''),
+        nome: @voucher.credit_card.card_holder_name,
+        cpf: @voucher.cpf.gsub(/\D/, ''),
         telefone: lead_phone
       }
     }
@@ -72,14 +71,14 @@ class Akatus::Xml
   def endereco
     { endereco: {
       tipo: "entrega",
-      logradouro: @voucher.lead.address.street,
-      complemento: @voucher.lead.address.complement,
-      numero: @voucher.lead.address.number,
-      bairro: @voucher.lead.address.district,
-      cidade: @voucher.lead.address.city,
-      estado: @voucher.lead.address.state,
-      pais: @voucher.lead.address.country,
-      cep: @voucher.lead.address.zipcode.gsub(/\D/, '')
+      logradouro: @voucher.address.street,
+      complemento: @voucher.address.complement,
+      numero: @voucher.address.number,
+      bairro: @voucher.address.district,
+      cidade: @voucher.address.city,
+      estado: @voucher.address.state,
+      pais: @voucher.address.country,
+      cep: @voucher.address.zipcode.gsub(/\D/, '')
     } }
   end
 

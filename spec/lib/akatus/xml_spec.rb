@@ -18,12 +18,11 @@ describe Akatus::Xml do
     let(:lead) do 
       create :lead, 
                 name: "John", 
-                email: "john@cafeazul.com.br", 
-                address: address 
+                email: "john@cafeazul.com.br"
     end
     
     let(:voucher) do
-      create :voucher_with_line_items, lead: lead
+      create :voucher_with_line_items, lead: lead, address: address
     end
 
     let(:conf) do
@@ -196,21 +195,21 @@ describe Akatus::Xml do
     
     context 'when visa' do
       let(:credit_card) do
-        # CreditCard.new card_holder_name: 'JOHN DOO', number: '1234', cvv: '111', installments: 1, expiration_date: '2013-01-01'
-        {card_holder_name: 'JOHN DOO', number: '1234', cvv: '111', installments: 1, expiration_date: '2013-01-01'}
+        CreditCard.new card_holder_name: 'JOHN DOO', number: '1234', cvv: '111', installments: 1, expiration_date: '2013-01-01'
+        # {card_holder_name: 'JOHN DOO', number: '1234', cvv: '111', installments: 1, expiration_date: '2013-01-01'}
       end
       
       let(:lead) do 
         create :lead, 
                   name: "John", 
-                  email: "john@cafeazul.com.br",
-                  cpf: '980.106.539-77',
-                  address: address,
-                  credit_card: credit_card
+                  email: "john@cafeazul.com.br"
+                  # cpf: '980.106.539-77'
+                  # address: address,
+                  # credit_card: credit_card
       end
       
       let(:voucher) do
-        create :voucher_with_line_items, payment_method: 'cartao_visa', lead: lead
+        create :voucher_with_line_items, payment_method: 'cartao_visa', lead: lead, address: address, credit_card: credit_card, cpf: '98010653977'
       end
       
       context "transacao" do

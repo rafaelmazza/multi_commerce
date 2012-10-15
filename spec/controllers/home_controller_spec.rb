@@ -40,7 +40,7 @@ describe HomeController do
     let(:lead) { create(:lead) }
     let(:franchise) { create(:franchise, name: 'wizard', url: 'desconto.wizard.dev.br') }
     let(:products) { [create(:product, franchise: franchise)] }
-    let(:voucher) { mock 'voucher' }
+    let(:voucher) { mock('voucher').as_null_object }
     
     before do
       controller.stub session: { lead_id: lead.id }

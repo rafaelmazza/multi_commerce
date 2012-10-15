@@ -8,9 +8,8 @@ class Akatus::Payment
                 "cartao_master" => Akatus::Responders::CreditCard
                }
 
-  def self.perform(voucher_id, credit_card=nil)
-  # def self.perform(voucher)
-    voucher = Voucher.find voucher_id
+  def self.perform(voucher)
+    # voucher = Voucher.find voucher_id
 
     xml_parser = Akatus::Xml.new voucher, conf
     xml = xml_parser.generate

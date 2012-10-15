@@ -3,17 +3,21 @@ class Voucher < ActiveRecord::Base
   belongs_to :lead
   belongs_to :timetable
   has_many :line_items
+  has_one :address
   
-  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, :lead_attributes
+  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, :lead_attributes, :address_attributes, :cpf
   
   before_create :generate_code
   
   attr_accessor :credit_card
   
-  accepts_nested_attributes_for :lead
+  accepts_nested_attributes_for :address
   
-  payment_method_is_credit_card = Proc.new { payment_method != 'boleto' }
-  before_validation :check_credit_card, if: payment_method_is_credit_card
+  # payment_method_is_credit_card = Proc.new { payment_method != 'boleto' }
+  payment_method_is_credit_card = Proc.new { |v| v.payment_method != 'boleto' }
+  after_validation :check_credit_card, if: payment_method_is_credit_card
+  
+  validates :cpf, presence: true, on: :update, if: payment_method_is_credit_card
   
   def check_credit_card
     credit_card.valid? if credit_card

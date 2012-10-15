@@ -14,13 +14,8 @@ class HomeController < ApplicationController
     @lead = Lead.find(session[:lead_id])    
     @unity = Unity.find(params[:unity_id])
     @voucher = @lead.subscribe(@unity)
-    
-    # @products = current_franchise.products # tmp
-    # @timetables = Timetable.all # TODO: better place for this?
-    
-    # @lead.credit_card = CreditCard.new # TODO: refactor
+
     @voucher.credit_card = CreditCard.new # TODO: refactor
-    # @lead.build_credit_card
-    @lead.build_address
+    @voucher.build_address
   end
 end
