@@ -1,15 +1,15 @@
 class LeadsController < ApplicationController
-  layout "home"
+  layout 'home'
   
   def create
     @lead = Lead.find_or_create_by_email(email: params[:lead][:email])
     @lead.attributes = params[:lead]
+    session[:lead_id] = @lead.id
     
     if @lead.save
-      session[:lead_id] = @lead.id
       redirect_to action: :unities, controller: :home
     else
-      render "home/index"
+      render 'home/index'
     end
   end
   
@@ -20,7 +20,7 @@ class LeadsController < ApplicationController
     if @lead.save
       redirect_to action: :unities, controller: :home
     else
-      render "home/index"
+      render 'home/index'
     end
   end
 end
