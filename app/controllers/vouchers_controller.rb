@@ -16,27 +16,17 @@ class VouchersController < ApplicationController
       @voucher.add_product(Product.find(product_id))
     end if params[:products]
 
-    if @voucher.lead.save && @voucher.update_attributes(params[:voucher])
-      @voucher.update! # updates total
-      # render action: :show, id: @voucher.id
-      # render :text => Akatus::Payment.perform(@voucher)
-    else
-      render 'home/subscribe', layout: 'home'
-    end
-    
-    # render text: Lead.new(params[:lead]).credit_card.number.inspect
-    # render text: @lead.credit_card.valid?.inspect
-    # if @lead.valid? #and @lead.credit_card.valid?
+    # if @voucher.lead.save && @voucher.update_attributes(params[:voucher])
+    #   Akatus::Payment.perform(@voucher.id, @lead.credit_card)
+    #   # PaymentWorker.perform_async(@voucher.id, @voucher.lead.credit_card)      
+    #   @voucher.update! # updates total      
+    #   render action: :show, id: @voucher.id
     # else
     #   render 'home/subscribe', layout: 'home'
     # end
     
-    # PaymentWorker.perform_async(@voucher.id, @voucher.lead.credit_card)
-    # render 'home/thank_you'
-    # redirect_to action: :thank_you, controller: :home, id: @voucher
-    # redirect_to voucher_path(@voucher)
-    # render :text => PaymentWorker.perform_async(@voucher.id, @voucher.lead.credit_card)
-    # render :text => Akatus::Payment.perform(@voucher)
+    @voucher.attributes = params[:voucher]
+    render :text => @voucher.valid?.inspect
   end
   
   def update

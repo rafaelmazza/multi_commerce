@@ -18,7 +18,9 @@ class HomeController < ApplicationController
     # @products = current_franchise.products # tmp
     # @timetables = Timetable.all # TODO: better place for this?
     
-    # @lead.credit_card = CreditCard.new
+    # @lead.credit_card = CreditCard.new # TODO: refactor
+    @voucher.credit_card = CreditCard.new # TODO: refactor
+    # @lead.build_credit_card
     @lead.build_address
   end
 end

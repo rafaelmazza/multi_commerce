@@ -1,5 +1,5 @@
 #lead_content
-  = semantic_form_for @voucher, url: checkout_voucher_path(@voucher), validate: true do |f|
+  = semantic_form_for @voucher, url: checkout_voucher_path(@voucher), validate: false do |f|
     = f.hidden_field :id
     #open-result
       #open-result-top
@@ -27,8 +27,8 @@
               = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = l.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            /= l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            /= l.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             /= l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
 
         %fieldset#your-data-right
@@ -50,14 +50,21 @@
             = image_tag "application/master.png"
         %fieldset#credit-card
           %span.text-result-medium Dados do cartão:
-          = semantic_fields_for @lead, validate: true do |l|
-            = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }, validate: true
-            = l.semantic_fields_for :credit_card, validate: false do |c|
-              = c.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = c.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              = c.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
-              = c.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
-              = c.input :installments, as: :select, collection: options_for_select((1..12).to_a), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+          / = semantic_fields_for @lead, validate: true do |l|
+          /   = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }, validate: true
+          = f.semantic_fields_for :credit_card, validate: false do |c|
+            = c.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = c.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = c.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = c.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+            = c.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+            = c.input :installments, as: :select, collection: options_for_select((1..12).to_a), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+            / = l.semantic_fields_for :credit_card, validate: false do |c|
+            /   = c.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            /   = c.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            /   = c.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+            /   = c.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+            /   = c.input :installments, as: :select, collection: options_for_select((1..12).to_a), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
         %fieldset#button
           = f.submit "Comprar Curso", class: "btn-purchase"
         #content-footer

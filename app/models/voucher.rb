@@ -4,9 +4,21 @@ class Voucher < ActiveRecord::Base
   belongs_to :timetable
   has_many :line_items
   
-  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id
+  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, :lead_attributes
   
   before_create :generate_code
+  
+  attr_accessor :credit_card
+  
+  accepts_nested_attributes_for :lead
+  
+  payment_method_is_credit_card = Proc.new { payment_method != 'boleto' }
+  before_validation :check_credit_card, if: payment_method_is_credit_card
+  
+  def check_credit_card
+    credit_card.valid? if credit_card
+    # true
+  end
   
   def use
     update_attributes used_at: Time.now
@@ -33,6 +45,10 @@ class Voucher < ActiveRecord::Base
   def update!
     self.total = line_items.map(&:amount).sum
     save # TODO: it should be here?
+  end
+  
+  def credit_card_attributes=(attributes)
+    @credit_card = CreditCard.new(attributes)
   end
 
   private

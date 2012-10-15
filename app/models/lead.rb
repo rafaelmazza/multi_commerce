@@ -1,5 +1,5 @@
-class Lead < ActiveRecord::Base
-  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :address_attributes, :credit_card, :unity_id, :credit_card_attributes
+class Lead < ActiveRecord::Base  
+  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :address_attributes, :unity_id #, :credit_card_attributes, :credit_card
   
   validates :name, presence: true
   
@@ -15,8 +15,8 @@ class Lead < ActiveRecord::Base
   validates :phone, presence: true
   validates :phone, numericality: true
   
-  payment_method_is_credit_card = Proc.new { |l| l.current_voucher and l.current_voucher.payment_method != 'boleto' }
-  validates :cpf, presence: true, if: payment_method_is_credit_card
+  # payment_method_is_credit_card = Proc.new { |l| l.current_voucher and l.current_voucher.payment_method != 'boleto' }
+  # validates :cpf, presence: true, if: payment_method_is_credit_card
   
   sp_cellphone_check = Proc.new { |p| p.phone_code == '11' && p.phone =~ /^(5[2-9]|6[0-9]|7[01234569]|8[0-9]|9[0-9]).+/ }
   # validates :phone, length: { is: 9 }, :if     => sp_cellphone_check
@@ -28,20 +28,20 @@ class Lead < ActiveRecord::Base
   has_many :vouchers
   has_one :address
   
-  attr_accessor :credit_card
+  # attr_accessor :credit_card
   attr_accessor :current_voucher
   
   geocoded_by :address_search
   
   accepts_nested_attributes_for :address
   
-  payment_method_is_credit_card2 = Proc.new { |l| self.vouchers.find_or_create_by_unity_id(unity_id: unity.id).payment_method != 'boleto' }
-  before_validation :check_credit_card, if: payment_method_is_credit_card2
-  
-  def check_credit_card
-    credit_card.valid?
-    # true
-  end
+  # payment_method_is_credit_card2 = Proc.new { |l| unity && self.vouchers.find_or_create_by_unity_id(unity_id: unity.id).payment_method != 'boleto' }
+  # before_validation :check_credit_card, if: payment_method_is_credit_card2
+  # 
+  # def check_credit_card
+  #   credit_card.valid? if credit_card
+  #   # true
+  # end
   
   def subscribe(unity)
     self.unity = unity
@@ -49,9 +49,9 @@ class Lead < ActiveRecord::Base
     generate_voucher    
   end
   
-  def credit_card_attributes=(attributes)
-    @credit_card = CreditCard.new(attributes)
-  end
+  # def credit_card_attributes=(attributes)
+  #   @credit_card = CreditCard.new(attributes)
+  # end
   
   private
   

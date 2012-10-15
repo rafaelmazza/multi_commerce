@@ -13,9 +13,6 @@ class Akatus::Responders::CreditCard
   	logger.info "Payment status"
   	logger.info payment_status
 
-    #     if payment_status
-    #       lead.set(:payment_status, payment_status.text) 
-    #   lead.set(:matriculado, true) && lead.set(:prospectado, false) if payment_status.text == "Aprovado"
-    # end
+    voucher.update_attribute(:status, payment_status.text) if payment_status
   end
 end

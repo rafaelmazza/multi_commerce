@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Akatus::Payment do
   describe ".perform" do
     let(:voucher) { create :voucher }
-    let(:barcode) { mock.as_null_obejct }
+    let(:barcode) { mock.as_null_object }
     let(:conf) do
       { "akatus" => { "uri" => "uri" } }
     end
@@ -11,15 +11,18 @@ describe Akatus::Payment do
     before do
       YAML.stub(:load_file).and_return conf
     end
+    
+    context 'when paying with credit card' do
+      let(:credit_card) { mock.as_null_object }
+      
+      it "should parse voucher to xml and send to akatus" do
+        xml_parser = mock :xml_parser, generate: "xml"
+        Akatus::Xml.should_receive(:new).with(voucher, conf).and_return xml_parser
 
-    it "should parse voucher to xml and send to akatus" do
-      xml_parser = mock :xml_parser, generate: "xml"
-      Akatus::Xml.should_receive(:new).with(voucher, conf).and_return xml_parser
+        Akatus::Request.should_receive(:post).with "uri", "xml"
 
-      Akatus::Request.should_receive(:post).with "uri", "xml"
-
-      # described_class.perform voucher.id
-      described_class.perform voucher
+        described_class.perform voucher.id, credit_card
+      end
     end
 
     context "when payment format is barcode" do
@@ -27,10 +30,10 @@ describe Akatus::Payment do
         voucher.payment_method = "boleto"
         xml_mock = mock generate: "barcode_request"
         Akatus::Xml.stub(:new).and_return xml_mock
-        Akatus::Request.stub(:post).with("uri", "barcode_request").and_return "barcode_reponse"
+        Akatus::Request.stub(:post).with("uri", "barcode_request").and_return "barcode_response"
     
         # Akatus::Responders::Barcode.should_receive("process").with "barcode_reponse"
-        Akatus::Responders::Barcode.should_receive("process").with voucher, "barcode_reponse"
+        Akatus::Responders::Barcode.should_receive("process").with voucher, "barcode_response"
     
         described_class.perform voucher.id
       end

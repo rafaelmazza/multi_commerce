@@ -66,9 +66,9 @@ describe HomeController do
       assigns(:voucher).should == voucher
     end
     
-    it 'assign products' do
-      get :subscribe, unity_id: unity
-      assigns(:products).should == products
-    end
+    # it 'assign products' do
+    #   get :subscribe, unity_id: unity
+    #   assigns(:products).should == products
+    # end
   end
 end
