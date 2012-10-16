@@ -14,8 +14,5 @@ class HomeController < ApplicationController
     @lead = Lead.find(session[:lead_id])    
     @unity = Unity.find(params[:unity_id])
     @voucher = @lead.subscribe(@unity)
-
-    @voucher.credit_card = CreditCard.new # TODO: refactor
-    @voucher.build_address
   end
 end

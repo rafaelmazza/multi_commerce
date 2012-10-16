@@ -46,7 +46,7 @@ class Lead < ActiveRecord::Base
   def subscribe(unity)
     self.unity = unity
     save!
-    generate_voucher    
+    generate_voucher  
   end
   
   # def credit_card_attributes=(attributes)
@@ -56,7 +56,8 @@ class Lead < ActiveRecord::Base
   private
   
   def generate_voucher
-    # @current_voucher ||= self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
-    self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
+    voucher = self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
+    voucher.build_address unless voucher.address
+    voucher
   end
 end

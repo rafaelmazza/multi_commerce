@@ -1,5 +1,5 @@
 class Address < ActiveRecord::Base
-  attr_accessible :zipcode, :street, :complement, :number, :district, :city, :state
+  attr_accessible :zipcode, :street, :complement, :number, :district, :city, :state, :country, :voucher_id
   
   validates :zipcode, presence: true
   validates :zipcode, format: /^\d{5}-?\d{3}$/

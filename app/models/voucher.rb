@@ -5,13 +5,20 @@ class Voucher < ActiveRecord::Base
   has_many :line_items
   has_one :address
   
-  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, :lead_attributes, :address_attributes, :cpf
+  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, :lead_attributes, :address_attributes, :cpf, :line_item_ids
   
   before_create :generate_code
   
   attr_accessor :credit_card
   
   accepts_nested_attributes_for :address
+  
+  # after_initialize :build_address, if: lambda { address.nil? }
+  after_initialize :build_credit_card
+  
+  def build_credit_card
+    self.credit_card = CreditCard.new
+  end
   
   # payment_method_is_credit_card = Proc.new { payment_method != 'boleto' }
   payment_method_is_credit_card = Proc.new { |v| v.payment_method != 'boleto' }

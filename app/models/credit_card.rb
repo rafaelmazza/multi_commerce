@@ -8,13 +8,11 @@ class CreditCard
   validates :installments, presence: true
   validates :cvv, presence: true
   validates :expiration_date, presence: true
-  
-  def initialize(attributes={})
-    self.card_holder_name = attributes[:card_holder_name]
-    self.number = attributes[:number]
-    self.cvv = attributes[:cvv]
-    self.expiration_date = attributes[:expiration_date]
-    self.installments = 1
+
+  def initialize(attributes = {})
+    attributes.each do |name, value|
+      send("#{name}=", value)
+    end
   end
   
   def persisted?

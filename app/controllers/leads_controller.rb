@@ -7,6 +7,7 @@ class LeadsController < ApplicationController
     session[:lead_id] = @lead.id
     
     if @lead.save
+      session[:lead_id] = @lead.id # TODO: refactor
       redirect_to action: :unities, controller: :home
     else
       render 'home/index'
