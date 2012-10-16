@@ -31,5 +31,6 @@ MultiCommerce::Application.routes.draw do
   namespace :admin do
     root to: "leads#index"
     resources :leads, only: [:index]
+    resources :vouchers, only: [:index]
   end
 end

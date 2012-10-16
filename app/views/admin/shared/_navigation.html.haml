@@ -23,7 +23,7 @@
               %span{:title => "You have 3 pending leads"} 3
               %ul
                 %li
-                  = link_to 'Vouchers', '#'
+                  = link_to 'Vouchers', admin_vouchers_path
           
       - current_user.unities.each do |unity|
         %li.current
@@ -32,10 +32,10 @@
           %ul
             %li
               = link_to 'Vouchers', '#'
-  %section.sidebar.nested
-    %h2 Nested Section
-    %p Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Maec enas id augue ac metu aliquam.
-    %p
-      Sed pharetra placerat est suscipit sagittis. Phasellus
-      %a{:href => "#"} aliquam
-      males uada blandit. Donec adipiscing sem erat.
+  / %section.sidebar.nested
+  /   %h2 Nested Section
+  /   %p Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Maec enas id augue ac metu aliquam.
+  /   %p
+  /     Sed pharetra placerat est suscipit sagittis. Phasellus
+  /     %a{:href => "#"} aliquam
+  /     males uada blandit. Donec adipiscing sem erat.

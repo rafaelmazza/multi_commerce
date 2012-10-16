@@ -1,5 +1,21 @@
 # encoding: UTF-8
 FactoryGirl.define do
+  factory :user do
+    sequence(:email) {|n| "user#{n}@cafeazul.com.br"}
+    password '123'
+    
+    trait :unity do
+      role 'unity'
+    end
+    
+    trait :manager do
+      role 'manager'
+    end
+    
+    factory :user_unity, traits: [:unity]
+    factory :user_manager, traits: [:manager]
+  end
+  
   factory :lead do
     name "John Doo"
     email "john@cafeazul.com.br"
