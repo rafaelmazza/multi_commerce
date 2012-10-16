@@ -3,15 +3,15 @@
     %a{:href => "index.html", :title => "Back to Homepage"}
     %h1 Lorem ipsum dolor sit amet!
   %section#user-info
-    %img{:alt => "Sample User Avatar", :src => "/assets/admin/sample_user.png"}
-      %div
-        %a= link_to current_user.email, '#'
-        %em= current_user.role
-        %ul
-          %li
-            %a.button-link{:href => "#", :rel => "tooltip", :title => "This is my title!"} trocar senha
-          %li
-            = link_to 'sair', destroy_user_session_path, :method => :delete, :class => 'button-link'
+    / %img{:alt => "Sample User Avatar", :src => "/assets/admin/sample_user.png"}
+    %div
+      %a= link_to current_user.email, '#'
+      %em= current_user.role
+      %ul
+        %li
+          = link_to 'trocar senha', edit_user_registration_path, class: 'button-link'
+        %li
+          = link_to 'sair', destroy_user_session_path, :method => :delete, :class => 'button-link'
   %nav#main-nav
     %ul
       - if current_user.manager?
@@ -31,7 +31,7 @@
           %span{:title => "You have 3 pending leads"} 3
           %ul
             %li
-              = link_to 'Vouchers', '#'
+              = link_to 'Vouchers', admin_vouchers_path
   / %section.sidebar.nested
   /   %h2 Nested Section
   /   %p Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. Maec enas id augue ac metu aliquam.
