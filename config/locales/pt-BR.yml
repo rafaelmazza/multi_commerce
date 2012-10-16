@@ -10,6 +10,19 @@ pt-BR:
         phone: Telefone
         phone_code: DDD
         address_search: Localização
+      address:
+        zipcode: CEP
+        street: Rua
+        complement: Complemento
+        number: Número
+        district: Bairro
+        city: Cidade
+        state: Estado
+      credit_card:
+        card_holder_name: Nome do portador
+        number: Número
+        expiration_date: Data de vencimento
+        installments: Número de parcelas
     actions:
       subscribe: Inscreva-se já!
       # get_discount: Quero desconto
