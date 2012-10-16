@@ -44,7 +44,8 @@
           #total
             %span.total-left Total:
             %span.total-right
-              = number_to_currency(@voucher.total)
+              /= number_to_currency(current_franchise.products.sum(&:price))
+              = voucher_total
         %span.text-result-medium Forma de Pagamento:
         %fieldset#payment
           %label
