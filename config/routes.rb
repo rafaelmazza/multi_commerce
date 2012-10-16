@@ -33,4 +33,6 @@ MultiCommerce::Application.routes.draw do
     resources :leads, only: [:index]
     resources :vouchers, only: [:index]
   end
+  
+  match "installments" => "vouchers#installments" #tmp
 end

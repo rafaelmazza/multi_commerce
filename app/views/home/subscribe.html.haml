@@ -45,7 +45,8 @@
             %span.total-left Total:
             %span.total-right
               /= number_to_currency(current_franchise.products.sum(&:price))
-              = voucher_total
+              = hidden_field_tag 'voucher_total', voucher_total
+              = number_to_currency(voucher_total)
         %span.text-result-medium Forma de Pagamento:
         %fieldset#payment
           %label
@@ -68,7 +69,8 @@
             = c.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             = c.input :cvv, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
             = c.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }, placeholder: 'MM/AAAA'     
-            = c.input :installments, as: :select, collection: options_for_select((1..12).to_a, 1), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
+            = c.input :installments, as: :select, collection: options_for_select((1..12).to_a, 1), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }       
+            #installments-placeholder
             / = l.semantic_fields_for :credit_card, validate: false do |c|
             /   = c.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
             /   = c.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
@@ -80,3 +82,12 @@
         #content-footer
           = link_to "« voltar", :back, id: "content-footer-link-back"
           = link_to t('.print_voucher'), voucher_url(@voucher), id: "print-voucher"
+          
+%script#installments-options{type: "text/x-handlebars-template"}
+  %ul
+    {{descricao}}
+    {{#each parcelas}}
+    %li  
+      {{this.quantidade}}x - R$ {{this.valor}} (R$ {{this.total}})
+      / %input{type: 'radio', name: 'voucher[credit_card_attributes][installments]'} {{this.quantidade}}x - R$ {{this.valor}} (R$ {{this.total}})
+    {{/each}}

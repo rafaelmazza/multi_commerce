@@ -39,6 +39,23 @@ class VouchersController < ApplicationController
     render nothing: true
   end
   
+  # TODO: tmp
+  def installments
+    # uri = URI('https://www.akatus.com/api/v1/parcelamento/simulacao.json?email=akatus@cafeazul.com.br&amount=100&payment_method=cartao_visa&api_key=6494F2BA-CDEA-487A-9633-3B2CBFCA47F6')
+    uri = URI('https://www.akatus.com/api/v1/parcelamento/simulacao.json')
+    p = { 
+      :email => 'akatus@cafeazul.com.br',
+      :amount => params['amount'].gsub('\D', ''),
+      :payment_method => params['payment_method'],
+      :api_key => '6494F2BA-CDEA-487A-9633-3B2CBFCA47F6'
+    }
+    uri.query = URI.encode_www_form(p)
+    res = Net::HTTP.start(uri.host, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
+      http.get uri.request_uri, 'User-Agent' => 'MyLib v1.2'
+    end
+    respond_with(res.body)
+  end
+  
   private
   
   def validate_akatus_token
