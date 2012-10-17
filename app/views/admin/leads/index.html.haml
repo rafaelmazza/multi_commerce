@@ -1,23 +1,24 @@
 - content_for :title, 'Leads'
 = render 'admin/shared/navbar'
 
-%table.table.table-hover
-  %thead
-    %tr
-      %th= check_box_tag ''
-      %th Nome
-      %th Email
-      %th Telefone
-      %th Prospectado
-      %th Matriculado      
-      %th Criado em
-  %tbody
-  - @leads.each do |lead|
-    %tr.success
-      %td= check_box_tag ''
-      %td= lead.name
-      %td= lead.email
-      %td= lead.phone
-      %td
-      %td
-      %td
+= form_tag prospect_admin_leads_path, id: 'bulk_form' do |f|
+  %table.table.table-hover
+    %thead
+      %tr
+        %th= check_box_tag false, false, nil, {id: 'toggle-checkboxes'}
+        %th Nome
+        %th Email
+        %th Telefone
+        %th Prospectado
+        %th Matriculado      
+        %th Criado em
+    %tbody
+    - @leads.each do |lead|
+      %tr.success
+        %td= check_box_tag 'bulk_ids[]', lead.id
+        %td= lead.name
+        %td= lead.email
+        %td= lead.phone
+        %td= lead.prospected_at
+        %td= lead.enrolled_at
+        %td= lead.created_at

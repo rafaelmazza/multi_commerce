@@ -24,7 +24,25 @@ FactoryGirl.define do
     address_search "Moema, São Paulo, Brasil"
     latitude -23.605556
     longitude -46.665833
-    # address
+    
+    trait :not_prospected do
+      prospected_at nil
+    end
+    
+    trait :not_enrolled do
+      enrolled_at nil
+    end
+    
+    trait :prospected do
+      prospected_at 2.weeks.ago
+    end
+    
+    trait :enrolled do
+      enrolled_at 2.weeks.ago
+    end
+    
+    factory :not_prospected_lead, traits: [:not_prospected, :not_enrolled]
+    # factory :prospected, traits: [:prospected]
   end
   
   factory :unity do

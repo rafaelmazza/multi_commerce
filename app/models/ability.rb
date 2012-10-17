@@ -6,7 +6,7 @@ class Ability
     if user.role == 'manager'
       can :manage, :all
     elsif user.role == 'unity'
-      can :read, Lead
+      can :manage, Lead
       can :read, Voucher
       # can :manage, Lead do |lead|
       #   p user.unities.map(&:id).inspect

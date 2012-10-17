@@ -1,5 +1,5 @@
 class Lead < ActiveRecord::Base  
-  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :unity_id #, :address_attributes, :credit_card_attributes, :credit_card
+  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :unity_id, :prospected_at, :enrolled_at, :created_at, :updated_at #, :address_attributes, :credit_card_attributes, :credit_card
   
   validates :name, presence: true
   
