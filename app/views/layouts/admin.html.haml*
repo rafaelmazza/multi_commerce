@@ -1,0 +1,34 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title Wizard - Você Bilíngue
+    %meta{:content => "Café Azul Agência Digital - www.cafeazul.com.br", :name => "author"}/
+    %meta{:content => "pt-br", "http-equiv" => "content-language"}/
+    %link{:href => "/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    %link{:href => "http://fonts.googleapis.com/css?family=Droid+Sans:400,700", :rel => "stylesheet", :type => "text/css"}/
+    = javascript_include_tag "admin"
+    = stylesheet_link_tag "admin"
+    = csrf_meta_tags
+
+  - if user_signed_in?
+    %body
+      = render 'admin/shared/navigation'
+      %section{:role => "main"}
+        %article.full-block.clearfix
+          %header
+            %h2 Chromatron Admin Theme
+          %section
+            = render 'admin/shared/notifications'
+            = yield
+  - else
+    %body.login
+      %section{:role => "main"}          
+        %a{:href => "index.html", :title => "Back to Homepage"}
+        = yield
+
+        .notification.error
+          %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
+          %p
+            %strong Error notification
+            = alert

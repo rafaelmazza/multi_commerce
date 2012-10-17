@@ -1,2 +1,21 @@
-- @vouchers.each do |voucher|
-  %p= voucher.inspect
+/ - @vouchers.each do |voucher|
+/   %p= voucher.inspect
+
+- content_for :title, 'Vouchers'
+  
+%table.table
+  %thead
+    %tr
+      %th= check_box_tag ''
+      %th Código
+      %th Total
+      %th Status
+  %tbody
+  - @vouchers.each do |lead|
+    %tr
+      %td= check_box_tag ''
+      %td= lead.code
+      %td= lead.total
+      %td
+        %span.label.label-warning= lead.status
+      

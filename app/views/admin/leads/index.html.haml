@@ -1,2 +1,22 @@
-- @leads.each do |lead|
-  %p= lead.inspect
+- content_for :title, 'Leads'
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th= check_box_tag ''
+      %th Nome
+      %th Email
+      %th Telefone
+      %th Prospectado
+      %th Matriculado      
+      %th Criado em
+  %tbody
+  - @leads.each do |lead|
+    %tr.success
+      %td= check_box_tag ''
+      %td= lead.name
+      %td= lead.email
+      %td= lead.phone
+      %td
+      %td
+      %td
