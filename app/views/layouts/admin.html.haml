@@ -12,71 +12,70 @@
     = stylesheet_link_tag "admin"
     = csrf_meta_tags
 
-  - if user_signed_in?
     %body{style: "padding-top: 60px;"}
-      .navbar.navbar-inverse.navbar-fixed-top
-        .navbar-inner
-          .container
-            %button.btn.btn-navbar
-              %span.icon-bar
-              %span.icon-bar
-              %span.icon-bar
-            %a.brand{href: "./index.html"} MultiCommerce
-            .nav-collapse.collapse
-              %ul.nav
-                %li.active
-                  = link_to 'Leads', admin_leads_path
-                %li
-                  = link_to 'Vouchers', admin_vouchers_path
-              %ul.pull-right
-                / %li
-                /   = link_to 'editar', edit_user_registration_path
-                %li
-                  = link_to 'sair', destroy_user_session_path, :method => :delete
-      / %header
-      /   .container 
-      /     %h1 Leads
-      .container
-        .navbar
+      - if alert
+        .container
+          .alert
+            %button.close{"data-dismiss" => "alert"} ×
+            %strong Atenção!
+            = alert
+      - if user_signed_in?
+        .navbar.navbar-inverse.navbar-fixed-top
           .navbar-inner
             .container
-              %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
+              %button.btn.btn-navbar
                 %span.icon-bar
                 %span.icon-bar
                 %span.icon-bar
-              %a.brand{href:"#"}= yield :title
-              .nav-collapse
+              %a.brand{href: "./index.html"} MultiCommerce
+              .nav-collapse.collapse
+                %ul.nav
+                  %li.active
+                    = link_to 'Leads', admin_leads_path
+                  %li
+                    = link_to 'Vouchers', admin_vouchers_path
                 %ul.nav.pull-right
-                  / %li.active
-                  /   %a{href:"#"} Home
-                  / %li
-                  /   %a{href:"#"} Home
-                  %li.dropdown
-                    %a.dropdown-toggle{href: '#', "data-toggle" => "dropdown"} 
-                      Items selecionados
-                      %b.caret
-                    %ul.dropdown-menu
-                      %li
-                        %a{href: '#'} Prospectar
-                        %a{href: '#'} Matricular
+                  %li
+                    = link_to 'editar', edit_user_registration_path
+                  %li
+                    = link_to 'sair', destroy_user_session_path, :method => :delete            
       .container
         = yield
-      / = render 'admin/shared/navigation'
-      / %section{:role => "main"}
-      /   %article.full-block.clearfix
-      /     %header
-      /       %h2 Chromatron Admin Theme
-      /     %section
-      /       = render 'admin/shared/notifications'
-      /       = yield
-  - else
-    %body.login
-      %section{:role => "main"}          
-        %a{:href => "index.html", :title => "Back to Homepage"}
-        = yield
-    
-        .notification.error
-          %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
-          %p
-            %strong Error notification
-            = alert
+
+  / - if user_signed_in?
+  /   %body{style: "padding-top: 60px;"}
+  /     .container
+  /       .alert
+  /         %button.close{"data-dismiss" => "alert"} ×
+  /         %strong Atenção!
+  /         = alert
+  /     .navbar.navbar-inverse.navbar-fixed-top
+  /       .navbar-inner
+  /         .container
+  /           %button.btn.btn-navbar
+  /             %span.icon-bar
+  /             %span.icon-bar
+  /             %span.icon-bar
+  /           %a.brand{href: "./index.html"} MultiCommerce
+  /           .nav-collapse.collapse
+  /             %ul.nav
+  /               %li.active
+  /                 = link_to 'Leads', admin_leads_path
+  /               %li
+  /                 = link_to 'Vouchers', admin_vouchers_path
+  /             %ul.nav.pull-right
+  /               %li
+  /                 = link_to 'editar', edit_user_registration_path
+  /               %li
+  /                 = link_to 'sair', destroy_user_session_path, :method => :delete
+  /     .container
+  /       = yield
+  / - else
+  /   %body{style: "padding-top: 60px;"}
+  /     - if alert
+  /       .container
+  /         .alert
+  /           %button.close{"data-dismiss" => "alert"} ×
+  /           %strong Atenção!
+  /           = alert
+  /     = yield

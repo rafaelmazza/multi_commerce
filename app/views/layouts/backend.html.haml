@@ -11,13 +11,11 @@
     = stylesheet_link_tag "admin"
     = csrf_meta_tags
 
-  %body.login
-    %section{:role => "main"}          
-      %a{:href => "index.html", :title => "Back to Homepage"}
-      = yield
-
-      .notification.error
-        %a.close-notification{:href => "#", :rel => "tooltip", :title => "Hide Notification"} x
-        %p
-          %strong Error notification
+  %body
+    - if alert
+      .container
+        .alert
+          %button.close{"data-dismiss" => "alert"} ×
+          %strong Atenção!
           = alert
+    = yield
