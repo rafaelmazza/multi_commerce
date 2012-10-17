@@ -33,6 +33,12 @@ class Lead < ActiveRecord::Base
   
   geocoded_by :address_search
   
+  # SCOPES
+  scope :prospected, proc { |constraint| where("prospected_at #{constraint}") }
+  scope :enrolled, proc { |constraint| where("enrolled_at #{constraint}") }
+  # scope :by_period, proc { |started_at, ended_at| where("created_at BETWEEN '#{started_at}' AND '#{ended_at}'") }
+  scope :by_period, proc { |field, started_at, ended_at| where("#{field} BETWEEN '#{started_at}' AND '#{ended_at}'") }
+  
   # accepts_nested_attributes_for :address
   
   # payment_method_is_credit_card2 = Proc.new { |l| unity && self.vouchers.find_or_create_by_unity_id(unity_id: unity.id).payment_method != 'boleto' }

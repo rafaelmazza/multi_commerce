@@ -3,7 +3,11 @@ $(document).ready(function() {
   // jQuery('#bulk_form').submit(); return false;
   $('a.bulk_action').click(function() {
     // $('#' + 'bulk_prospect' + '_form').submit(); 
-    $('#bulk_form').submit(); 
+    if ($(':checked').length > 0) {
+      $('#bulk_form').submit(); 
+    } else {
+      alert('nothing selected');
+    }
     return false;
   });
   
@@ -13,4 +17,6 @@ $(document).ready(function() {
       console.log(checkBoxes);
       checkBoxes.attr("checked", !checkBoxes.attr("checked"));
   });
+  
+  $('.date').datepicker()
 });

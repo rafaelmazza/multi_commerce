@@ -112,6 +112,7 @@ GEM
       guard (>= 1.1)
       rspec (~> 2.11)
     haml (3.1.7)
+    has_scope (0.5.1)
     hike (1.2.1)
     i18n (0.6.1)
     jasmine (1.2.1)
@@ -286,6 +287,7 @@ DEPENDENCIES
   guard-jasmine
   guard-rspec
   haml
+  has_scope
   jasmine
   jquery-rails
   kaminari
