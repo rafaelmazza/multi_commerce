@@ -14,11 +14,11 @@
           .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
             %input.span2{"size" => "16", "type" => "text", "value" => "12-02-2012", "name" => "by_period[started_at]"}
             %span.add-on
-              %i.icon-th
+              %i.icon-calendar
           .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}    
             %input.span2{"size" => "16", "type" => "text", "value" => "12-02-2012", "name" => "by_period[ended_at]"}
             %span.add-on
-              %i.icon-th
+              %i.icon-calendar
           %button.btn.btn-primary{:type => "submit"} Buscar
 
 = form_tag prospect_admin_leads_path, id: 'bulk_form' do |f|

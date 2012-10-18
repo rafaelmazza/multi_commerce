@@ -34,7 +34,7 @@ MultiCommerce::Application.routes.draw do
     resources :leads, only: [:index] do
       post :prospect, on: :collection
     end
-    resources :vouchers, only: [:index] do
+    resources :vouchers, only: [:index, :show] do
       resources :payments, only: [:index]
     end
   end

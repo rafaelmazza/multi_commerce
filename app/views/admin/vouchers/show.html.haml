@@ -1,0 +1,32 @@
+%fieldset
+  %legend Voucher
+  %p
+    %label 
+      %strong Nome
+    = @voucher.lead.name
+  %p
+    %label 
+      %strong Email
+    = @voucher.lead.email
+  %p
+    %label 
+      %strong Telefone
+    = phone(@voucher.lead)
+  / %p
+  /   = @voucher.unity.name
+  / %p
+  /   = @voucher.unity.address
+  %p
+    %label 
+      %strong Código
+    = @voucher.code
+  %p
+    %label 
+      %strong Total
+    = number_to_currency(@voucher.total)
+  %p
+    %label 
+      %strong Status
+    = @voucher.status
+    
+/= render 'admin/payments/index', payments: @voucher.payments

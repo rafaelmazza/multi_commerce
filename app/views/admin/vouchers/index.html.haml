@@ -9,12 +9,12 @@
       %th Total
       %th Status
   %tbody
-  - @vouchers.each do |lead|
-    %tr
+  - @vouchers.each do |voucher|
+    %tr{"data-url" => admin_voucher_path(voucher)}
       %td= check_box_tag ''
-      %td= lead.code
-      %td= lead.total
+      %td= voucher.code
+      %td= number_to_currency voucher.total
       %td
-        %span.label.label-warning= lead.status
+        %span.label.label-warning= voucher.status
 
 = paginate @vouchers

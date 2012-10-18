@@ -1,4 +1,4 @@
-jQuery ->
+$ ->
 	class IndexView extends Backbone.View
 		el: $ 'body'
 		
