@@ -1,4 +1,5 @@
 #lead_content
+  %p= alert
   = semantic_form_for @voucher, url: checkout_voucher_path(@voucher), validate: false do |f|
     = f.hidden_field :id
     #open-result

@@ -22,7 +22,9 @@ class VouchersController < ApplicationController
       if payment.success?
         render action: :show, id: @voucher.id
       else
-        render text: payment.inspect
+        # render text: payment.inspect
+        flash[:alert] = payment.description # TODO: error instead of alert
+        render 'home/subscribe', layout: 'home'
       end
     else
       render 'home/subscribe', layout: 'home'
