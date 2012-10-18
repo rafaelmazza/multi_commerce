@@ -195,7 +195,7 @@ describe Akatus::Xml do
     
     context 'when visa' do
       let(:credit_card) do
-        CreditCard.new card_holder_name: 'JOHN DOO', number: '1234', cvv: '111', installments: 1, expiration_date: '2013-01-01'
+        CreditCard.new card_holder_name: 'JOHN DOO', number: '1234', security_code: '111', installments: 1, expiration_date: '2013-01-01'
         # {card_holder_name: 'JOHN DOO', number: '1234', cvv: '111', installments: 1, expiration_date: '2013-01-01'}
       end
       

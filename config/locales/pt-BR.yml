@@ -23,6 +23,7 @@ pt-BR:
         number: Número
         expiration_date: Data de vencimento
         installments: Número de parcelas
+        security_code: Código de segurança
     actions:
       subscribe: Inscreva-se já!
       # get_discount: Quero desconto

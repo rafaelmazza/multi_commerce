@@ -45,7 +45,7 @@ class Akatus::Xml
 
     { numero: @voucher.credit_card.number,
       parcelas: @voucher.credit_card.installments,
-      codigo_de_seguranca: @voucher.credit_card.cvv,
+      codigo_de_seguranca: @voucher.credit_card.security_code,
       expiracao: @voucher.credit_card.expiration_date,
       portador: { 
         nome: @voucher.credit_card.card_holder_name,

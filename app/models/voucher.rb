@@ -13,19 +13,16 @@ class Voucher < ActiveRecord::Base
   
   accepts_nested_attributes_for :address
   
-  # after_initialize :build_address, if: lambda { address.nil? }
   after_initialize :build_credit_card
   
   def build_credit_card
     self.credit_card = CreditCard.new
   end
   
-  # payment_method_is_credit_card = Proc.new { payment_method != 'boleto' }
-  payment_method_is_credit_card = Proc.new { |v| v.payment_method && v.payment_method != 'boleto' }
-  after_validation :check_credit_card, if: payment_method_is_credit_card
+  payment_method_is_credit_card = Proc.new { |v| v.payment_method? && v.payment_method != 'boleto' }
+  after_validation :validate_credit_card, if: payment_method_is_credit_card
   
-  validates :cpf, presence: true, on: :update, if: payment_method_is_credit_card
-  validates :cpf, cpf: true
+  validates :cpf, cpf: true, presence: true, on: :update, if: payment_method_is_credit_card
   
   # CSV
   comma do
@@ -40,7 +37,7 @@ class Voucher < ActiveRecord::Base
     cpf
   end
   
-  def check_credit_card
+  def validate_credit_card
     credit_card.valid? if credit_card
     # true
   end
