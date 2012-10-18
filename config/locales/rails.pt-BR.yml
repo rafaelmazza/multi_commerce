@@ -98,6 +98,7 @@ pt-BR:
   errors: &errors
     format: ! '%{attribute} %{message}'
     messages:
+      cpf: CPF inválido
       ninth_digit: deve possuir 9 dígitos
       accepted: deve ser aceito
       blank: não pode ficar em branco

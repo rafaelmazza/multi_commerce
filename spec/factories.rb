@@ -86,7 +86,7 @@ FactoryGirl.define do
     sequence(:code) { |n| "code#{n}" }
     used_at nil
     payment_method 'boleto'
-    cpf '123'
+    cpf '56053209554'
     
     unity
     # address
