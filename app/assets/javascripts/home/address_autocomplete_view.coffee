@@ -28,5 +28,6 @@ $ ->
             $(@el).change()
         )
         e.preventDefault()
-              
-  google.maps.event.addDomListener(window, 'load', (new AddressAutocompleteView));
+
+  # google.maps.event.addDomListener(window, 'load', (new AddressAutocompleteView));
+  new AddressAutocompleteView

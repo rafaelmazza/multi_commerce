@@ -61,25 +61,25 @@ $(document).ready(function () {
 	// 	}, 'json');
 	// })
 	
-	$('div.btn-group').each(function(){
-    var group   = $(this);
-    var form    = group.parents('form').eq(0);
-    var name    = group.attr('data-toggle-name');
-    var hidden  = $('input[name="' + name + '"]', form);
-    $('button', group).each(function(){
-      var button = $(this);
-      button.live('click', function(){
-          hidden.val($(this).val());
-					console.log($(this).val());
-					var voucher_id = $('#voucher_id').val();
-					$.post('/vouchers/' + voucher_id, {_method: 'PUT', voucher: {timetable_id: $(this).val()}}, function (response) {
-						// $('form').resetClientSideValidations();
-						console.log(response);
-					});
-      });
-      if(button.val() == hidden.val()) {
-        button.addClass('active');
-      }
-    });
-  });
+  // $('div.btn-group').each(function(){
+  //     var group   = $(this);
+  //     var form    = group.parents('form').eq(0);
+  //     var name    = group.attr('data-toggle-name');
+  //     var hidden  = $('input[name="' + name + '"]', form);
+  //     $('button', group).each(function(){
+  //       var button = $(this);
+  //       button.live('click', function(){
+  //           hidden.val($(this).val());
+  //        console.log($(this).val());
+  //        var voucher_id = $('#voucher_id').val();
+  //        $.post('/vouchers/' + voucher_id, {_method: 'PUT', voucher: {timetable_id: $(this).val()}}, function (response) {
+  //          // $('form').resetClientSideValidations();
+  //          console.log(response);
+  //        });
+  //       });
+  //       if(button.val() == hidden.val()) {
+  //         button.addClass('active');
+  //       }
+  //     });
+  //   });
 });

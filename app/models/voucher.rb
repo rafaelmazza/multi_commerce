@@ -21,7 +21,7 @@ class Voucher < ActiveRecord::Base
   end
   
   # payment_method_is_credit_card = Proc.new { payment_method != 'boleto' }
-  payment_method_is_credit_card = Proc.new { |v| v.payment_method != 'boleto' }
+  payment_method_is_credit_card = Proc.new { |v| v.payment_method && v.payment_method != 'boleto' }
   after_validation :check_credit_card, if: payment_method_is_credit_card
   
   validates :cpf, presence: true, on: :update, if: payment_method_is_credit_card
