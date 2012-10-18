@@ -1,22 +1,22 @@
 $(document).ready(function () {
 	// $('#credit-card').css('display', 'none');
 	
-	$('#voucher_address_attributes_zipcode').keyup(function () {
-		var zipcode = $(this).val()
-		if (zipcode.match(/^\d{5}-?\d{3}$/)) {
-			$.get('/addresses/' + zipcode, function (response) {
-				console.log(response);
-				if (response['error']) {
-					alert(response['error']);
-				} else {
-					$('#voucher_address_attributes_street').val(response.street).change();
-					$('#voucher_address_attributes_district').val(response.district).change();
-					$('#voucher_address_attributes_city').val(response.city).change();
-					$('#voucher_address_attributes_state').val(response.state).change();
-				}
-			})
-		}
-	});
+	// $('#voucher_address_attributes_zipcode').keyup(function () {
+	// 	var zipcode = $(this).val()
+	// 	if (zipcode.match(/^\d{5}-?\d{3}$/)) {
+	// 		$.get('/addresses/' + zipcode, function (response) {
+	// 			console.log(response);
+	// 			if (response['error']) {
+	// 				alert(response['error']);
+	// 			} else {
+	// 				$('#voucher_address_attributes_street').val(response.street).change();
+	// 				$('#voucher_address_attributes_district').val(response.district).change();
+	// 				$('#voucher_address_attributes_city').val(response.city).change();
+	// 				$('#voucher_address_attributes_state').val(response.state).change();
+	// 			}
+	// 		})
+	// 	}
+	// });
 
 	$('input:radio.credit-card').change(function () {
 		var paymentMethod = this.value;

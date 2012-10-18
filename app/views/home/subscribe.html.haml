@@ -19,13 +19,13 @@
         %span.text-result-medium Preencha seus dados:
         %fieldset#your-data
           = f.semantic_fields_for :address do |a|
-            = a.input :zipcode, input_html: { class: "input-1", autocomplete: 'off' }, wrapper_html: { class: "wrapper" }
-            = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
-            = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
-            = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-            = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :zipcode, input_html: { id: 'zipcode', class: "input-1", autocomplete: 'off' }, wrapper_html: { class: "wrapper" }
+            = a.input :street, input_html: { id: 'street', class: "input-4" }, wrapper_html: { class: "wrapper" }
+            = a.input :complement, input_html: { id: 'complement', class: "input-4" }, wrapper_html: { class: "wrapper" }
+            = a.input :number, input_html: { id: 'number', class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :district, input_html: { id: 'district', class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :city, input_html: { id: 'city', class: "input-1" }, wrapper_html: { class: "wrapper" }
+            = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { id: 'state', class: "input-1" }, wrapper_html: { class: "wrapper" }
           / = semantic_fields_for @lead, validate: true do |l|
           /   = l.fields_for :address do |a|
           /     = a.input :zipcode, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }

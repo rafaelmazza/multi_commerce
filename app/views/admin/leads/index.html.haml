@@ -10,7 +10,7 @@
       .accordion-inner
         = form_tag admin_leads_path, method: 'GET' do |f|
           /= text_field_tag 'by_period[field]', 'created_at'
-          = select_tag 'by_period[field]', options_for_select(['', 'created_at', 'prospected_at'])
+          = select_tag 'by_period[field]', options_for_select(['created_at', 'prospected_at'])
           .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
             %input.span2{"size" => "16", "type" => "text", "value" => "12-02-2012", "name" => "by_period[started_at]"}
             %span.add-on
