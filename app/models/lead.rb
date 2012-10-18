@@ -1,5 +1,5 @@
-class Lead < ActiveRecord::Base  
-  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :cpf, :unity_id, :prospected_at, :enrolled_at, :created_at, :updated_at #, :address_attributes, :credit_card_attributes, :credit_card
+class Lead < ActiveRecord::Base
+  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :unity_id, :prospected_at, :enrolled_at, :created_at, :updated_at #, :address_attributes, :credit_card_attributes, :credit_card
   
   validates :name, presence: true
   
@@ -38,6 +38,18 @@ class Lead < ActiveRecord::Base
   scope :enrolled, proc { |constraint| where("enrolled_at #{constraint}") }
   # scope :by_period, proc { |started_at, ended_at| where("created_at BETWEEN '#{started_at}' AND '#{ended_at}'") }
   scope :by_period, proc { |field, started_at, ended_at| where("#{field} BETWEEN '#{started_at}' AND '#{ended_at}'") }
+  
+  # CSV
+  comma do
+    name
+    email
+    phone_code
+    phone
+    prospected_at
+    enrolled_at
+    created_at { |created_at| created_at.strftime("%d/%m/%Y %H:%M") }
+    updated_at
+  end
   
   # accepts_nested_attributes_for :address
   

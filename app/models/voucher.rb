@@ -27,6 +27,19 @@ class Voucher < ActiveRecord::Base
   validates :cpf, presence: true, on: :update, if: payment_method_is_credit_card
   validates :cpf, cpf: true
   
+  # CSV
+  comma do
+    lead :name
+    code
+    used_at
+    unity_id
+    payment_method
+    total
+    timetable title: 'Horario'
+    status
+    cpf
+  end
+  
   def check_credit_card
     credit_card.valid? if credit_card
     # true

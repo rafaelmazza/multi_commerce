@@ -40,6 +40,7 @@ gem 'client_side_validations-formtastic'
 gem 'correios'
 gem 'has_scope'
 # gem 'active_attr'
+gem 'comma', '~> 3.0'
 
 group :test do
   gem 'shoulda-matchers'

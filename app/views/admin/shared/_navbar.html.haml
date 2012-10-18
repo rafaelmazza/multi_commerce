@@ -22,9 +22,11 @@
               %ul.dropdown-menu
                 %li
                   = link_to 'Marcar como prospectado', prospect_admin_leads_path, id: 'bulk_prospect', class: ['bulk_action']
-                  %a{href: '#'} Matricular
+                  %a{href: '#'} Matricular          
                 %li.divider
-                  Marcar como
                 %li
                   = link_to 'Desmarcar como prospectado', prospect_admin_leads_path, id: 'bulk_prospect', class: ['bulk_action']
                   %a{href: '#'} Matricular
+                %li.divider
+                %li
+                  = link_to 'Exportar para Excel', admin_leads_path(params.merge(:format => :csv))

@@ -1,4 +1,5 @@
 class Admin::LeadsController < Admin::ApplicationController
+  respond_to :html, :csv
   load_and_authorize_resource
   
   has_scope :prospected
@@ -7,6 +8,7 @@ class Admin::LeadsController < Admin::ApplicationController
   
   def index
     @leads = apply_scopes(current_user.leads).all
+    respond_with(@leads)
   end
   
   def prospect
