@@ -18,9 +18,12 @@ class VouchersController < ApplicationController
 
     if @voucher.update_attributes(params[:voucher])
       @voucher.update! # updates total
-      Akatus::Payment.perform(@voucher)
-      # PaymentWorker.perform_async(@voucher.id, @voucher.lead.credit_card)
-      render action: :show, id: @voucher.id
+      payment = Akatus::Payment.perform(@voucher)
+      if payment.success?
+        render action: :show, id: @voucher.id
+      else
+        render text: payment.inspect
+      end
     else
       render 'home/subscribe', layout: 'home'
     end

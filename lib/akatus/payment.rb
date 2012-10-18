@@ -1,6 +1,14 @@
 require 'yaml'
 
-class Akatus::Payment
+class Akatus::Payment < ActiveRecord::Base
+  attr_accessible :status, :description, :akatus_transaction, :url
+  
+  belongs_to :voucher
+  
+  def success?
+    status? && status != 'erro'
+  end
+  
   @queue = :payment
   RESPONDERS = { 
                 "boleto"        => Akatus::Responders::Barcode,

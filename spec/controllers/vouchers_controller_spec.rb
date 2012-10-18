@@ -42,4 +42,12 @@ describe VouchersController do
       end
     end
   end
+  
+  # describe 'POST checkout' do
+  #   let(:voucher) { create(:voucher) }
+  # 
+  #   it 'should' do
+  #     post :checkout, id: voucher.id
+  #   end
+  # end
 end

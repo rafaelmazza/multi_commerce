@@ -1,0 +1,20 @@
+- content_for :title, 'Payments'
+/= render 'admin/shared/navbar'
+  
+%table.table
+  %thead
+    %tr
+      /%th= check_box_tag ''
+      %th ID
+      %th Status
+      %th Descrição
+  %tbody
+  - @payments.each do |payment|
+    %tr
+      /%td= check_box_tag ''
+      %td= payment.id
+      %td
+        %span.label.label-warning= payment.status
+      %td= payment.description
+
+/= paginate @payments
