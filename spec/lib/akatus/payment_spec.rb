@@ -40,5 +40,19 @@ describe Akatus::Payment do
         described_class.perform voucher
       end
     end
+    
+    # context "when payment format is barcode" do
+    #   it "should pass response to barcode responder" do
+    #     stub_request(:post, 'uri').to_timeout
+    #     voucher.payment_method = "cartao_visa"
+    #     xml_mock = mock generate: "barcode_request"
+    #     Akatus::Xml.stub(:new).and_return xml_mock
+    #     Akatus::Request.stub(:post).with("uri", "barcode_request").and_return(response)
+    #         
+    #     Akatus::Responders::CreditCard.should_not_receive("process").with voucher, response
+    # 
+    #     expect { described_class.perform voucher }.to raise_error(Akatus::ConnectionFailed)
+    #   end
+    # end
   end
 end

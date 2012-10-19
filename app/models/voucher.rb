@@ -6,7 +6,8 @@ class Voucher < ActiveRecord::Base
   has_one :address
   has_many :payments, class_name: Akatus::Payment
   
-  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, :lead_attributes, :address_attributes, :cpf, :line_item_ids
+  attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, 
+                  :lead_attributes, :address_attributes, :cpf, :line_item_ids, :transaction_key, :payment_url
   
   before_create :generate_code
   
@@ -21,8 +22,6 @@ class Voucher < ActiveRecord::Base
   end
   
   payment_method_is_credit_card = Proc.new { |v| v.payment_method? && v.payment_method != 'boleto' }
-  after_validation :validate_credit_card, if: payment_method_is_credit_card
-  
   validates :cpf, cpf: true, presence: true, on: :update, if: payment_method_is_credit_card
   
   # CSV
@@ -38,19 +37,16 @@ class Voucher < ActiveRecord::Base
     cpf
   end
   
+  validate :validate_credit_card
+  
   def validate_credit_card
-    credit_card.valid? if credit_card
-    # true
+    errors.add(:credit_card, 'credit card validation errors') if credit_card? and not credit_card.valid?
   end
   
   def use
     update_attributes used_at: Time.now
   end
-  
-  # def total
-  #   self.total = line_items.map(&:price).sum
-  # end
-  
+    
   def add_product(product, quantity=1)
     current_item = contains?(product)
     if current_item.nil?
@@ -65,7 +61,7 @@ class Voucher < ActiveRecord::Base
     line_items.detect { |li| li.product.id == product.id }
   end
   
-  def update!
+  def update_total!
     self.total = line_items.map(&:amount).sum
     save # TODO: it should be here?
   end
@@ -78,5 +74,9 @@ class Voucher < ActiveRecord::Base
 
   def generate_code
     self.code = MultiCommerce::VoucherGenerator.generate
+  end
+  
+  def credit_card?
+    payment_method? && payment_method != 'boleto'
   end
 end

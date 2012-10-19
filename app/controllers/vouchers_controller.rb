@@ -4,6 +4,15 @@ class VouchersController < ApplicationController
   before_filter :validate_akatus_token, only: :update_payment_status
   
   layout 'voucher', only: [:show]
+  layout 'home'
+  
+  rescue_from Akatus::ConnectionFailed, with: :connection_failed
+  rescue_from Akatus::PaymentFailed, with: :connection_failed
+  
+  def connection_failed(error)
+    flash[:alert] = error.message
+    render 'home/subscribe'
+  end
   
   def show
     @voucher = Voucher.find(params[:id])
@@ -15,19 +24,15 @@ class VouchersController < ApplicationController
     params[:products].each do |product_id|
       @voucher.add_product(Product.find(product_id))
     end if params[:products]
-
-    if @voucher.update_attributes(params[:voucher])
-      @voucher.update! # updates total
-      payment = Akatus::Payment.perform(@voucher)
-      if payment.success?
-        render action: :show, id: @voucher.id
-      else
-        # render text: payment.inspect
-        flash[:alert] = payment.description # TODO: error instead of alert
-        render 'home/subscribe', layout: 'home'
-      end
+    
+    @voucher.update_attributes(params[:voucher])
+    
+    if @voucher.valid?
+      @voucher.update_total!
+      Akatus::Payment.perform(@voucher)
+      render action: :show, id: @voucher.id
     else
-      render 'home/subscribe', layout: 'home'
+      render 'home/subscribe'
     end
   end
   

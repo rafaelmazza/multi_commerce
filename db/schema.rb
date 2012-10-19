@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121018194325) do
+ActiveRecord::Schema.define(:version => 20121019195356) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -78,16 +78,6 @@ ActiveRecord::Schema.define(:version => 20121018194325) do
     t.integer  "quantity",                                 :default => 1, :null => false
   end
 
-  create_table "payments", :force => true do |t|
-    t.integer  "voucher_id"
-    t.string   "status"
-    t.string   "description"
-    t.string   "akatus_transaction"
-    t.string   "url"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
   create_table "products", :force => true do |t|
     t.integer "franchise_id"
     t.string  "name",                                       :null => false
@@ -144,13 +134,15 @@ ActiveRecord::Schema.define(:version => 20121018194325) do
     t.integer  "lead_id"
     t.string   "code"
     t.datetime "used_at"
-    t.decimal  "total",          :precision => 8, :scale => 2
+    t.decimal  "total",           :precision => 8, :scale => 2
     t.string   "payment_method"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "timetable_id"
     t.string   "status"
     t.string   "cpf"
+    t.string   "transaction_key"
+    t.string   "payment_url"
   end
 
 end
