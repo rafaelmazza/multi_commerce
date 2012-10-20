@@ -1,0 +1,5 @@
+- if resource.errors.messages.length > 0
+  .container
+    .alert
+      %button.close{"data-dismiss" => "alert"} ×
+      = devise_error_messages!

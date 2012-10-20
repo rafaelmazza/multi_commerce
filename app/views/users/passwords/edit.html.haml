@@ -1,0 +1,17 @@
+= render 'admin/shared/devise_notifications'
+.container.box
+  .content
+    .row
+      .form
+        %h2 Definir senha
+        = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+          %fieldset
+            = f.hidden_field :reset_password_token
+
+            = f.label :password, "Nova senha"
+            = f.password_field :password
+
+            = f.label :password_confirmation, "Confirme a nova senha"
+            = f.password_field :password_confirmation
+
+            %p= f.submit "Salvar nova senha", class: 'btn btn-primary'

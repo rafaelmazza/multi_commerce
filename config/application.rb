@@ -22,7 +22,8 @@ module MultiCommerce
   class Application < Rails::Application
     
     # config.to_prepare do
-    #   Devise::SessionsController.layout "sign_in"
+    #   Devise::SessionsController.layout "admin"
+    #   Devise::PasswordsController.layout "admin"
     # end
     
     config.generators do |g|

@@ -13,12 +13,13 @@
     = csrf_meta_tags
 
     %body{style: "padding-top: 60px;"}
-      - if alert
+      - if alert || notice
         .container
           .alert
             %button.close{"data-dismiss" => "alert"} ×
             %strong Atenção!
-            = alert
+            = notice if notice
+            = alert if alert
       - if user_signed_in?
         .navbar.navbar-inverse.navbar-fixed-top
           .navbar-inner
