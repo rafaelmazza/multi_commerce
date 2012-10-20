@@ -15,7 +15,7 @@ class VouchersController < ApplicationController
   end
   
   def show
-    @voucher = Voucher.find(params[:id])
+    @voucher = Voucher.find(params[:id])  
   end
   
   def checkout

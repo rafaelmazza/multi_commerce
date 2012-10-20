@@ -39,6 +39,7 @@ class Akatus::Payment
       response = Akatus::Request.post conf["akatus"]["uri"], xml
       # responder voucher.payment_method, voucher, response
       process(voucher, response)
+      UserMailer.delay.payment_processed(voucher)
     rescue Faraday::Error::ConnectionFailed => error
       raise Akatus::ConnectionFailed, 'connection failed'
     rescue Faraday::Error::TimeoutError => error
