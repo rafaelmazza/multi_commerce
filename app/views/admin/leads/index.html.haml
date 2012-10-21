@@ -29,7 +29,7 @@
 = page_entries_info @leads, entry_name: ''
 
 = form_tag prospect_admin_leads_path, id: 'bulk_form' do |f|
-  %table.table.table-hover
+  %table.table.table-hover.table-bordered
     %thead
       %tr
         %th= check_box_tag false, false, nil, {id: 'toggle-checkboxes'}

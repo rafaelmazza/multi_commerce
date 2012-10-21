@@ -4,7 +4,6 @@ class VouchersController < ApplicationController
   before_filter :validate_akatus_token, only: :update_payment_status
   
   layout 'voucher', only: [:show]
-  layout 'home'
   
   rescue_from Akatus::ConnectionFailed, with: :connection_failed
   rescue_from Akatus::PaymentFailed, with: :connection_failed

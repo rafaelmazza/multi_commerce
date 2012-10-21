@@ -1,15 +1,24 @@
 - content_for :title, 'Vouchers'
-= render 'admin/shared/navbar'
+= render 'navbar'
 
 = render 'search'
-  
+
+%p.btn-group.pull-right
+  = link_to 'Aprovados', admin_vouchers_path({q: params[:q] ? params[:q].merge({status_eq: 'Aprovado'}) : {status_eq: 'Aprovado'}}), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Aprovado')]
+  = link_to 'Em análise', admin_vouchers_path({q: params[:q] ? params[:q].merge({status_eq: 'Em análise'}) : {status_eq: 'Em análise'}}), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Em análise')]
+  = link_to 'Cancelados', admin_vouchers_path({q: params[:q] ? params[:q].merge({status_eq: 'Cancelados'}) : {status_eq: 'Cancelados'}}), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Cancelado')]
+  = link_to 'Aguardando pagamento', admin_vouchers_path({q: params[:q] ? params[:q].merge({status_eq: 'Aguardando Pagamento'}) : {status_eq: 'Aguardando Pagamento'}}), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Aguardando Pagamento')]
+  = link_to 'Todos', admin_vouchers_path, class: ['btn', ('active' if not params[:q])]
+
+= page_entries_info @vouchers, entry_name: ''
+
 %table.table.table-hover
   %thead
     %tr
       %th= check_box_tag ''
       %th Código
-      %th Total
-      %th Status
+      %th= sort_link(@search, :status, "Total")
+      %th= sort_link(@search, :status, "Status")
   %tbody
   - @vouchers.each do |voucher|
     %tr{"data-url" => admin_voucher_path(voucher)}

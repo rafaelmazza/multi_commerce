@@ -1,0 +1,18 @@
+.container
+  .navbar
+    .navbar-inner
+      .container
+        %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav-collapse"}
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        = link_to (yield :title), admin_vouchers_path, class: 'brand'
+        .nav-collapse
+          %ul.nav.pull-right
+            %li.dropdown
+              %a.dropdown-toggle{href: '#', "data-toggle" => "dropdown"} 
+                Items selecionados
+                %b.caret
+              %ul.dropdown-menu
+                %li
+                  = link_to 'Exportar para Excel', admin_vouchers_path(params.merge(:format => :csv))

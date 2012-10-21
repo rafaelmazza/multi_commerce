@@ -4,7 +4,7 @@ class Voucher < ActiveRecord::Base
   belongs_to :timetable
   has_many :line_items
   has_one :address
-  has_many :payments, class_name: Akatus::Payment
+  # has_many :payments, class_name: Akatus::Payment
   
   attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, 
                   :lead_attributes, :address_attributes, :cpf, :line_item_ids, :transaction_key, :payment_url
@@ -23,6 +23,11 @@ class Voucher < ActiveRecord::Base
   
   payment_method_is_credit_card = Proc.new { |v| v.payment_method? && v.payment_method != 'boleto' }
   validates :cpf, cpf: true, presence: true, on: :update, if: payment_method_is_credit_card
+  
+  # Aguardando Pagamento, Em Análise, Aprovado ou Cancelado.
+  
+  # scope :paid, where(status: 'Aprovado')
+  # scope :pending, where("vouchers.status != ?", 'Aprovado')
   
   # CSV
   comma do

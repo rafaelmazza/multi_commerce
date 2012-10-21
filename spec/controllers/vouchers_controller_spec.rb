@@ -33,6 +33,7 @@ describe VouchersController do
       Akatus::Payment.stub conf: {'akatus' => {'token_nip' => 'valid_token'}}
       voucher.should_receive(:update_attribute).with(:status, 'Aprovado')
       post :update_payment_status, token: 'valid_token', transacao_id: 'id', status: 'Aprovado', referencia: 'referencia'
+      voucher.status.sould == 'Aprovado'
     end
     
     context 'when token is invalid' do

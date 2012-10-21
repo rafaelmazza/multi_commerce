@@ -2,7 +2,7 @@
 %html{:xmlns => "http://www.w3.org/1999/xhtml"}
   %head
     %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
-    %title Wizard - Você Bilíngue
+    %title MultiCommerce
     %meta{:content => "Café Azul Agência Digital - www.cafeazul.com.br", :name => "author"}/
     %meta{:content => "pt-br", "http-equiv" => "content-language"}/
     / %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
@@ -28,14 +28,15 @@
                 %span.icon-bar
                 %span.icon-bar
                 %span.icon-bar
-              %a.brand{href: "./index.html"} MultiCommerce
+              = link_to 'MultiCommerce', admin_root_url, class: 'brand'
+              / = current_page?(admin_root_path)
               .nav-collapse.collapse
                 %ul.nav
-                  %li.active
+                  %li{"class" => ("active" if current_page?(admin_root_path))}
                     = link_to 'Dashboard', admin_root_path
-                  %li
+                  %li{"class" => ("active" if current_page?(admin_leads_path(pending: true)))}
                     = link_to 'Leads', admin_leads_path(pending: true)
-                  %li
+                  %li{"class" => ("active" if current_page?(admin_vouchers_path))}
                     = link_to 'Vouchers', admin_vouchers_path
                 %ul.nav.pull-right
                   %li.dropdown
