@@ -1,5 +1,5 @@
 class Franchise < ActiveRecord::Base
-  attr_accessible :name, :url, :acronym
+  attr_accessible :name, :url, :acronym, :payment_enabled
   
   has_many :products
   has_many :unities

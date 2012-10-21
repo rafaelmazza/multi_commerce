@@ -14,5 +14,12 @@ class HomeController < ApplicationController
     @lead = Lead.find(session[:lead_id])    
     @unity = Unity.find(params[:unity_id])
     @voucher = @lead.subscribe(@unity)
+    skip_payment(@voucher) unless current_franchise.payment_enabled?
+  end
+  
+  private
+  
+  def skip_payment(voucher)
+    redirect_to controller: :vouchers, action: :show, id: voucher
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121019195356) do
+ActiveRecord::Schema.define(:version => 20121021183533) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -44,9 +44,10 @@ ActiveRecord::Schema.define(:version => 20121019195356) do
   add_index "backend_users", ["reset_password_token"], :name => "index_backend_users_on_reset_password_token", :unique => true
 
   create_table "franchises", :force => true do |t|
-    t.string "name"
-    t.string "url"
-    t.string "acronym"
+    t.string  "name"
+    t.string  "url"
+    t.string  "acronym"
+    t.boolean "payment_enabled", :default => false
   end
 
   create_table "franchises_users", :id => false, :force => true do |t|
