@@ -6,7 +6,7 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        = link_to 'Leads', admin_leads_path(pending: true), class: 'brand'
+        = link_to 'Leads', admin_leads_path(q: {prospected_at_null: true}), class: 'brand'
         /%a.brand{href:"#"}= yield :title
         / %ul.nav
         /   %li= link_to 'Exportar para Excel', admin_leads_path(params.merge(:format => :csv))

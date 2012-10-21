@@ -1,4 +1,3 @@
-- content_for :title, 'Vouchers'
 = render 'navbar'
 
 = render 'search'
@@ -23,13 +22,13 @@
       %th= sort_link(@search, :used_at, "Validado em")      
   %tbody
   - @vouchers.each do |voucher|
-    %tr{"data-url" => admin_voucher_path(voucher)}
+    %tr{"data-url" => admin_voucher_path(voucher), class: ("success" if voucher.status == 'Aprovado')}
       / %td= check_box_tag ''
       %td= voucher.lead.name
       %td= voucher.code
       %td= number_to_currency voucher.total
       %td
-        %span.label.label-warning= voucher.status
+        %span.label{"class" => label_class(voucher.status)}= voucher.status
       -if voucher.used_at?
         %td= I18n.l voucher.used_at, format: :short
       - else

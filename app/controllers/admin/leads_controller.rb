@@ -13,6 +13,7 @@ class Admin::LeadsController < Admin::ApplicationController
     respond_with @leads
     # @leads = apply_scopes(current_user.leads).page(params[:page])
     # respond_with(@leads)
+    # render text: current_user.unities.length
   end
   
   def prospect

@@ -29,14 +29,13 @@
                 %span.icon-bar
                 %span.icon-bar
               = link_to 'MultiCommerce', admin_root_url, class: 'brand'
-              / = current_page?(admin_root_path)
               .nav-collapse.collapse
                 %ul.nav
-                  %li{"class" => ("active" if current_page?(admin_root_path))}
+                  %li{"class" => ("active" if controller_name == 'dashboard' and action_name == 'index')}
                     = link_to 'Dashboard', admin_root_path
-                  %li{"class" => ("active" if current_page?(admin_leads_path(pending: true)))}
-                    = link_to 'Leads', admin_leads_path(pending: true)
-                  %li{"class" => ("active" if current_page?(admin_vouchers_path))}
+                  %li{"class" => ("active" if controller_name == 'leads' and action_name == 'index')}
+                    = link_to 'Leads', admin_leads_path(q: {prospected_at_null: true})
+                  %li{"class" => ("active" if controller_name == 'vouchers' and action_name == 'index')}
                     = link_to 'Vouchers', admin_vouchers_path
                 %ul.nav.pull-right
                   %li.dropdown
