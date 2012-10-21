@@ -7,7 +7,7 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        = link_to (yield :title), admin_leads_path, class: 'brand'
+        = link_to (yield :title), admin_leads_path(pending: true), class: 'brand'
         /%a.brand{href:"#"}= yield :title
         .nav-collapse
           %ul.nav.pull-right

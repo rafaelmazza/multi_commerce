@@ -6,20 +6,27 @@
     #accordion2.accordion-heading
       %a.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion2", "href" => "#collapseOne"}
         Filtros
-    #collapseOne.accordion-body.collapse.in
+    #collapseOne.accordion-body.collapse{"class" => ("in" if params.keys.include?('by_period'))}
       .accordion-inner
         = form_tag admin_leads_path, method: 'GET' do |f|
-          /= text_field_tag 'by_period[field]', 'created_at'
-          = select_tag 'by_period[field]', options_for_select(['created_at', 'prospected_at'])
-          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
-            %input.span2{"size" => "16", "type" => "text", "value" => "12-02-2012", "name" => "by_period[started_at]"}
+          = select_tag 'by_period[scope]', options_for_select([['Todos', ''], ['Pendentes', 'pending'], ['Prospectados', 'prospected'], ['Matriculados', 'enrolled']], params.try(:[], :by_period).try(:[], :scope))
+          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}
+            %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "by_period[started_at]", "placeholder" => "Data inicial", "value" => parse_datetime(params.try(:[], :by_period).try(:[], :started_at))}
             %span.add-on
               %i.icon-calendar
-          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}    
-            %input.span2{"size" => "16", "type" => "text", "value" => "12-02-2012", "name" => "by_period[ended_at]"}
+          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}    
+            %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "by_period[ended_at]", "placeholder" => "Data final", "value" => parse_datetime(params.try(:[], :by_period).try(:[], :ended_at))}
             %span.add-on
               %i.icon-calendar
           %button.btn.btn-primary{:type => "submit"} Buscar
+
+%p.btn-group.pull-right
+  = link_to 'Pendentes', admin_leads_path({pending: true}.merge(by_period: params[:by_period])), class: ['btn', ('active' if params[:pending])]
+  = link_to 'Prospectados', admin_leads_path({prospected: true}.merge(by_period: params[:by_period])), class: ['btn', ('active' if params[:prospected])]
+  = link_to 'Matriculados', admin_leads_path({enrolled: true}.merge(by_period: params[:by_period])), class: ['btn', ('active' if params[:enrolled])]
+  = link_to 'Todos', admin_leads_path(by_period: params[:by_period]), class: ['btn', ('active' if (!params[:pending] && !params[:prospected] && !params[:enrolled]))]
+
+= page_entries_info @leads, entry_name: ''
 
 = form_tag prospect_admin_leads_path, id: 'bulk_form' do |f|
   %table.table.table-hover
@@ -42,3 +49,5 @@
         %td= I18n.l lead.prospected_at, format: :short if lead.prospected_at?
         %td= I18n.l lead.enrolled_at, format: :short if lead.enrolled_at?
         %td= I18n.l lead.created_at, format: :short if lead.created_at?
+
+= paginate @leads

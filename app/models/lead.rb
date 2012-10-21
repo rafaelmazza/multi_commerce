@@ -1,5 +1,6 @@
 class Lead < ActiveRecord::Base
-  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :unity_id, :prospected_at, :enrolled_at, :created_at, :updated_at #, :address_attributes, :credit_card_attributes, :credit_card
+  attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :unity_id, :prospected_at, 
+                  :enrolled_at, :created_at, :updated_at #, :address_attributes, :credit_card_attributes, :credit_card
   
   validates :name, presence: true
   
@@ -33,11 +34,8 @@ class Lead < ActiveRecord::Base
   
   geocoded_by :address_search
   
-  # SCOPES
-  scope :prospected, proc { |constraint| where("prospected_at #{constraint}") }
-  scope :enrolled, proc { |constraint| where("enrolled_at #{constraint}") }
-  # scope :by_period, proc { |started_at, ended_at| where("created_at BETWEEN '#{started_at}' AND '#{ended_at}'") }
-  scope :by_period, proc { |field, started_at, ended_at| where("#{field} BETWEEN '#{started_at}' AND '#{ended_at}'") }
+  # concerns
+  include Filterable
   
   # CSV
   comma do

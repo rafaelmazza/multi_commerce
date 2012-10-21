@@ -4,6 +4,7 @@ $ ->
 		
 		initialize: ->
 			$('.date').datepicker()
+			$('.date-mask').mask("99/99/9999")
 			
 		events:
 			"click #toggle-checkboxes": "toggle"
