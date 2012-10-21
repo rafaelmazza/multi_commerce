@@ -1,0 +1,4 @@
+= form_tag search_admin_vouchers_path, method: 'POST' do |f|
+  .input-append
+    = text_field_tag "q[code_cont]", nil, placeholder: "Código do voucher"
+    %button.btn{:type => "submit"} Buscar

@@ -1,0 +1,3 @@
+<%= search_form_for @q, :url => search_admin_vouchers_path,:html => {:method => :post} do |f| %>
+  <%= text_field_tag "q[code_cont]" %>
+<% end %>
