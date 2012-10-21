@@ -35,7 +35,7 @@ class Lead < ActiveRecord::Base
   geocoded_by :address_search
   
   # concerns
-  include Filterable
+  # include Filterable
   
   # CSV
   comma do

@@ -33,11 +33,10 @@ MultiCommerce::Application.routes.draw do
     # root to: "leads#index"
     resources :leads, only: [:index] do
       post :prospect, on: :collection
+      match "search" => "leads#index", :via => [:get, :post], :as => :search, on: :collection
     end
     resources :vouchers, only: [:index, :show] do
       resources :payments, only: [:index]
-      # post :search, on: :collection
-      # match "search" => "vouchers#search", :via => [:get, :post], :as => :search, on: :collection
       match "search" => "vouchers#index", :via => [:get, :post], :as => :search, on: :collection
     end
   end

@@ -2,14 +2,17 @@ class Admin::LeadsController < Admin::ApplicationController
   respond_to :html, :csv
   load_and_authorize_resource
   
-  has_scope :pending
-  has_scope :prospected
-  has_scope :enrolled
-  has_scope :by_period, :using => [:scope, :started_at, :ended_at]
+  # has_scope :pending
+  # has_scope :prospected
+  # has_scope :enrolled
+  # has_scope :by_period, :using => [:scope, :started_at, :ended_at]
   
   def index
-    @leads = apply_scopes(current_user.leads).page(params[:page])
-    respond_with(@leads)
+    @search = current_user.leads.search(params[:q])
+    @leads = @search.result.page(params[:page])
+    respond_with @leads
+    # @leads = apply_scopes(current_user.leads).page(params[:page])
+    # respond_with(@leads)
   end
   
   def prospect

@@ -9,6 +9,7 @@ $ ->
 		events:
 			"click #toggle-checkboxes": "toggle"
 			"click a.bulk_action": "submitBulkForm"
+			"change #scope": "scopeChanged"
 			
 		toggle: ->
 	    checkBoxes = $("input:checkbox:not('#toggle-checkboxes')")
@@ -20,5 +21,11 @@ $ ->
 	    else
 	      alert('nothing selected')
 	    false
+		
+		scopeChanged: (e) ->
+			date_column = e.target.value
+			console.log('q[' + date_column + '_lteq]')
+			$('#start_date').attr('name', 'q[' + date_column + '_gteq]')
+			$('#end_date').attr('name', 'q[' + date_column + '_lteq]')
 		
 	new IndexView

@@ -15,7 +15,7 @@
 %table.table.table-hover
   %thead
     %tr
-      %th= check_box_tag ''
+      / %th= check_box_tag ''
       %th= sort_link(@search, :lead_name, "Nome")
       %th Código
       %th= sort_link(@search, :status, "Total")
@@ -23,7 +23,7 @@
   %tbody
   - @vouchers.each do |voucher|
     %tr{"data-url" => admin_voucher_path(voucher)}
-      %td= check_box_tag ''
+      / %td= check_box_tag ''
       %td= voucher.lead.name
       %td= voucher.code
       %td= number_to_currency voucher.total
