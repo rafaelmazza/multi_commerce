@@ -7,4 +7,6 @@ class Unity < ActiveRecord::Base
   has_many :vouchers
   
   geocoded_by :address
+  
+  paginates_per 3
 end

@@ -37,6 +37,8 @@ class Lead < ActiveRecord::Base
   # concerns
   # include Filterable
   
+  paginates_per 10
+  
   # CSV
   comma do
     name

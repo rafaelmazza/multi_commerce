@@ -52,9 +52,10 @@
     %thead
       %tr
         %th= check_box_tag false, false, nil, {id: 'toggle-checkboxes'}
+        %th ID
         %th= sort_link(@search, :name, "Nome")
         %th Email
-        %th Telefone
+        / %th Telefone
         %th= sort_link(@search, :prospected_at, "Prospectado")
         %th= sort_link(@search, :enrolled_at, "Matriculado")
         %th= sort_link(@search, :created_at, "Criado")
@@ -62,9 +63,10 @@
     - @leads.each do |lead|
       %tr.success
         %td= check_box_tag 'bulk_ids[]', lead.id
+        %td= lead.id
         %td= lead.name
         %td= lead.email
-        %td= lead.phone
+        / %td= lead.phone
         %td= I18n.l lead.prospected_at, format: :short if lead.prospected_at?
         %td= I18n.l lead.enrolled_at, format: :short if lead.enrolled_at?
         %td= I18n.l lead.created_at, format: :short if lead.created_at?

@@ -18,7 +18,13 @@ class Admin::LeadsController < Admin::ApplicationController
   
   def prospect
     Lead.update_all(["prospected_at = ?", Time.now], id: params[:bulk_ids])
-    flash[:alert] = 'Leads prospectados com sucesso'
+    flash[:alert] = 'Lead(s) prospectado(s) com sucesso'
+    redirect_to action: :index
+  end
+  
+  def enroll
+    Lead.update_all(["enrolled_at = ?", Time.now], id: params[:bulk_ids])
+    flash[:alert] = 'Lead(s) matriculado(s) com sucesso'
     redirect_to action: :index
   end
 end

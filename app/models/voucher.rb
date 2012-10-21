@@ -29,6 +29,8 @@ class Voucher < ActiveRecord::Base
   # scope :paid, where(status: 'Aprovado')
   # scope :pending, where("vouchers.status != ?", 'Aprovado')
   
+  paginates_per 10
+  
   # CSV
   comma do
     lead :name

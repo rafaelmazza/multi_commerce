@@ -7,13 +7,8 @@
           %span.icon-bar
           %span.icon-bar
         = link_to 'Leads', admin_leads_path(q: {prospected_at_null: true}), class: 'brand'
-        /%a.brand{href:"#"}= yield :title
-        / %ul.nav
-        /   %li= link_to 'Exportar para Excel', admin_leads_path(params.merge(:format => :csv))
         .nav-collapse
           %ul.nav.pull-right
-            / %li.active
-            /   %a{href:"#"} Home
             %li.dropdown
               %a.dropdown-toggle{href: '#', "data-toggle" => "dropdown"} 
                 Opções
@@ -28,8 +23,8 @@
               %ul.dropdown-menu
                 %li
                   = link_to 'Marcar como prospectado', prospect_admin_leads_path, id: 'bulk_prospect', class: ['bulk_action']
-                  %a{href: '#'} Matricular          
-                %li.divider
-                %li
-                  = link_to 'Desmarcar como prospectado', prospect_admin_leads_path, id: 'bulk_prospect', class: ['bulk_action']
-                  %a{href: '#'} Matricular
+                  = link_to 'Marcar como matriculado', enroll_admin_leads_path, id: 'bulk_prospect', class: ['bulk_action']
+                / %li.divider
+                / %li
+                /   = link_to 'Desmarcar como prospectado', prospect_admin_leads_path, id: 'bulk_prospect', class: ['bulk_action']
+                /   %a{href: '#'} Matricular
