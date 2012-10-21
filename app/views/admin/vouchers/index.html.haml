@@ -12,7 +12,7 @@
 
 = page_entries_info @vouchers, entry_name: ''
 
-%table.table.table-hover
+%table.table.table-hover.table-bordered
   %thead
     %tr
       / %th= check_box_tag ''
@@ -20,6 +20,7 @@
       %th Código
       %th= sort_link(@search, :status, "Total")
       %th= sort_link(@search, :status, "Status")
+      %th= sort_link(@search, :used_at, "Validado em")      
   %tbody
   - @vouchers.each do |voucher|
     %tr{"data-url" => admin_voucher_path(voucher)}
@@ -29,5 +30,10 @@
       %td= number_to_currency voucher.total
       %td
         %span.label.label-warning= voucher.status
+      -if voucher.used_at?
+        %td= I18n.l voucher.used_at, format: :short
+      - else
+        %td
+          = link_to 'Validar', use_admin_voucher_path(voucher), method: 'PUT', class: 'btn btn-success btn-mini'
 
 = paginate @vouchers

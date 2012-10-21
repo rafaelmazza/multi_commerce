@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require amcharts
 // require bootstrap
 // require bootstrap-datepicker
 //= require jquery.maskedinput

@@ -49,7 +49,7 @@ class Voucher < ActiveRecord::Base
   end
   
   def use
-    update_attributes used_at: Time.now
+    update_attributes! used_at: Time.now
   end
     
   def add_product(product, quantity=1)

@@ -16,6 +16,14 @@ class Admin::VouchersController < Admin::ApplicationController
     respond_with @vouchers
   end
   
+  def use
+    @voucher = current_user.vouchers.find(params[:id])
+    @voucher.use
+    flash[:alert] = 'Lead validado.' # TODO: change to notice
+    redirect_to action: :index
+    # render text: @voucher.inspect
+  end
+  
   # def search
   #   @q = current_user.vouchers.search(params[:q])
   #   @vouchers = @q.result(:distinct => true).page(params[:page])

@@ -38,6 +38,7 @@ MultiCommerce::Application.routes.draw do
     resources :vouchers, only: [:index, :show] do
       resources :payments, only: [:index]
       match "search" => "vouchers#index", :via => [:get, :post], :as => :search, on: :collection
+      put :use, on: :member
     end
   end
   
