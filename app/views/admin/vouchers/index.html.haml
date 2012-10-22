@@ -28,7 +28,7 @@
       %td= voucher.code
       %td= number_to_currency voucher.total
       %td
-        %span.label{"class" => label_class(voucher.status)}= voucher.status
+        %span{"class" => label_class(voucher.status)}= voucher.status
       -if voucher.used_at?
         %td= I18n.l voucher.used_at, format: :short
       - else

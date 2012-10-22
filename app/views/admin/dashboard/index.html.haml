@@ -2,19 +2,20 @@
 
 .row
   .span4
+    %h3 Ranking
     %table.table.table-bordered
       %thead
         %tr
           %th Posição
           %th Franqueado
       %tbody
-      - Unity.all.each_with_index do |unity, index|
+      - @ranking.each_with_index do |unity, index|
         %tr
           %td= index + 1
           %td= unity.name
   .span8
     #chart{"style"=>"width: 600px; height: 400px;"}
-    
+
 / = current_user.vouchers.where(status: 'Aprovado').sum(:total)
 
 :javascript

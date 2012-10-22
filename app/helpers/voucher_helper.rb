@@ -7,13 +7,13 @@ module VoucherHelper
   def label_class(status)
     case status
     when 'Aprovado'
-      'label-success'
+      'label label-success'
     when 'Cancelado'
-      'label-important'
+      'label label-important'
     when 'Aguardando Pagamento'
-      'label-warning'
-    when 'Em análise'
-      'label-info'    
+      'label label-warning'
+    when 'Em Análise'
+      'label label-info'  
     end
   end
 end
