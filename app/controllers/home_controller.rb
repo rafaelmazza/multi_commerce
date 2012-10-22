@@ -1,8 +1,10 @@
 class HomeController < ApplicationController
   layout 'home'
   
+  before_filter :set_campaign_theme, only: [:index]
+  
   def index
-    @lead = Lead.new
+    @lead = Lead.new(campaign_id: @campaign.try(:id))
   end
   
   def unities
@@ -21,5 +23,10 @@ class HomeController < ApplicationController
   
   def skip_payment(voucher)
     redirect_to controller: :vouchers, action: :show, id: voucher
+  end
+  
+  def set_campaign_theme
+    @campaign = Campaign.find_by_name(params[:source])
+    theme @campaign.name if @campaign
   end
 end

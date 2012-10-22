@@ -1,6 +1,6 @@
 class Lead < ActiveRecord::Base
   attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :unity_id, :prospected_at, 
-                  :enrolled_at, :created_at, :updated_at #, :address_attributes, :credit_card_attributes, :credit_card
+                  :enrolled_at, :created_at, :updated_at, :campaign_id
   
   validates :name, presence: true
   
@@ -28,6 +28,7 @@ class Lead < ActiveRecord::Base
   belongs_to :unity, counter_cache: true
   has_many :vouchers
   # has_one :address
+  belongs_to :campaign
   
   # attr_accessor :credit_card
   attr_accessor :current_voucher

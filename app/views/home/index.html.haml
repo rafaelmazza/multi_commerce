@@ -15,6 +15,7 @@
       = image_tag "application/arrow.png", height: 136, width: 564
   #box-sign-up
     = semantic_form_for @lead, html: { id: "sign-up-form" }, validate: true do |f|
+      = f.hidden_field :campaign_id
       = f.hidden_field :latitude
       = f.hidden_field :longitude
       = f.input :name, input_html: { class: "input-1" }

@@ -46,4 +46,6 @@ MultiCommerce::Application.routes.draw do
   end
   
   match "installments" => "vouchers#installments" #tmp
+  
+  match "/:source" => "home#index"
 end
