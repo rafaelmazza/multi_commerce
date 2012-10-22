@@ -195,7 +195,7 @@ describe Akatus::Xml do
     
     context 'when visa' do
       let(:credit_card) do
-        CreditCard.new card_holder_name: 'JOHN DOO', number: '1234', security_code: '111', installments: 1, expiration_date: '2013-01-01'
+        CreditCard.new card_holder_name: 'JOHN DOO', number: '1234', security_code: '111', installments: 1, expiration_date: '05/2013'
         # {card_holder_name: 'JOHN DOO', number: '1234', cvv: '111', installments: 1, expiration_date: '2013-01-01'}
       end
       
@@ -213,7 +213,9 @@ describe Akatus::Xml do
       end
       
       context "transacao" do
-        before { @node = subject.xpath "//carrinho//transacao" }
+        before do
+          @node = subject.xpath "//carrinho//transacao" 
+        end
         
         it 'includes numero' do
           @node.css('numero').text.should == '1234'
@@ -228,7 +230,7 @@ describe Akatus::Xml do
         end
                 
         it 'includes expiracao' do
-          @node.css('expiracao').text.should == '2013-01-01'
+          @node.css('expiracao').text.should == '05/2013'
         end
 
         it "should include desconto_total" do

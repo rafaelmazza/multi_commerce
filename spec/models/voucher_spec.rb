@@ -70,11 +70,11 @@ describe Voucher do
     end
   end
   
-  describe '#update!' do
+  describe '#update_total!' do
     it 'updates voucher total' do
       line_items = 3.times.map { create(:line_item, product: create(:product, price: 10)) }
       voucher = create(:voucher, line_items: line_items)
-      voucher.update!
+      voucher.update_total!
       voucher.total.should == 30.0
     end
   end

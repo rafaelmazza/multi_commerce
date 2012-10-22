@@ -20,6 +20,6 @@ class LineItem < ActiveRecord::Base
   private
   
   def update_voucher
-    voucher.update!
+    voucher.update_total!
   end
 end

@@ -27,19 +27,19 @@ describe Akatus::Payment do
       end
     end
 
-    context "when payment format is barcode" do
-      it "should pass response to barcode responder" do
-        voucher.payment_method = "boleto"
-        xml_mock = mock generate: "barcode_request"
-        Akatus::Xml.stub(:new).and_return xml_mock
-        Akatus::Request.stub(:post).with("uri", "barcode_request").and_return(response)
-    
-        # Akatus::Responders::Barcode.should_receive("process").with "barcode_reponse"
-        Akatus::Responders::Barcode.should_receive("process").with voucher, response
-    
-        described_class.perform voucher
-      end
-    end
+    # context "when payment format is barcode" do
+    #   it "should pass response to barcode responder" do
+    #     voucher.payment_method = "boleto"
+    #     xml_mock = mock generate: "barcode_request"
+    #     Akatus::Xml.stub(:new).and_return xml_mock
+    #     Akatus::Request.stub(:post).with("uri", "barcode_request").and_return(response)
+    # 
+    #     # Akatus::Responders::Barcode.should_receive("process").with "barcode_reponse"
+    #     Akatus::Responders::Barcode.should_receive("process").with voucher, response
+    # 
+    #     described_class.perform voucher
+    #   end
+    # end
     
     # context "when payment format is barcode" do
     #   it "should pass response to barcode responder" do
