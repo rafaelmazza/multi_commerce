@@ -43,6 +43,7 @@ gem 'has_scope'
 gem 'comma', '~> 3.0'
 gem 'ransack'
 gem 'cells'
+gem 'themes_for_rails'
 
 group :test do
   gem 'shoulda-matchers'
