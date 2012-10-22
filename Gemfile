@@ -42,6 +42,7 @@ gem 'has_scope'
 # gem 'active_attr'
 gem 'comma', '~> 3.0'
 gem 'ransack'
+gem 'cells'
 
 group :test do
   gem 'shoulda-matchers'

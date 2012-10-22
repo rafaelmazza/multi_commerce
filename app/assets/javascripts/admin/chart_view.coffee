@@ -14,4 +14,4 @@ AmCharts.ready ->
 			@chart.depth3D = 10
 			@chart.angle = 15
 			@chart.write(@el)
-  # new ChartView
+	new ChartView

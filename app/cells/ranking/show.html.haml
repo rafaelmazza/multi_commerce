@@ -1,0 +1,11 @@
+%h3 Ranking
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Posição
+      %th Franqueado
+  %tbody
+  - @ranking.each_with_index do |unity, index|
+    %tr
+      %td= index + 1
+      %td= unity.name

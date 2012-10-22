@@ -2,34 +2,6 @@
 
 .row
   .span4
-    %h3 Ranking
-    %table.table.table-bordered
-      %thead
-        %tr
-          %th Posição
-          %th Franqueado
-      %tbody
-      - @ranking.each_with_index do |unity, index|
-        %tr
-          %td= index + 1
-          %td= unity.name
+    = render_cell :ranking, :show
   .span8
-    #chart{"style"=>"width: 600px; height: 400px;"}
-
-/ = current_user.vouchers.where(status: 'Aprovado').sum(:total)
-
-:javascript
-
-  var chartData = [{
-      status: "Aprovados",
-      total: "#{current_user.vouchers.where(status: 'Aprovado').sum(:total)}",
-  }, {
-      status: "Cancelados",
-      total: "#{number_to_currency(current_user.vouchers.where(status: 'Cancelado').sum(:total))}"
-  },{
-      status: "Aguardando pagamento",
-      total: "#{number_to_currency(current_user.vouchers.where(status: 'Aguardando Pagamento').sum(:total))}"
-  },{
-      status: "Em análise",
-      total: "#{number_to_currency(current_user.vouchers.where(status: 'Em análise').sum(:total))}"
-  }];
+    = render_cell :sales_chart, :show
