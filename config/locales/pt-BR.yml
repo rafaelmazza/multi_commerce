@@ -43,3 +43,11 @@ pt-BR:
       previous: "&lsaquo; Anterior"
       next: "Próxima &rsaquo;"
       truncate: "..."
+
+  akatus:
+    payment:
+      status:
+        waiting: Aguardando Pagamento
+        on_approval: Em Análise
+        approved: Aprovado
+        canceled: Cancelado

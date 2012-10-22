@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Voucher < ActiveRecord::Base
   belongs_to :unity
   belongs_to :lead
@@ -21,10 +22,13 @@ class Voucher < ActiveRecord::Base
     self.credit_card = CreditCard.new
   end
   
+  CREDIT_CARDS = ['cartao_visa', 'cartao_master', 'cartao_amex', 'cartao_elo', 'cartao_diners']
+  
+  STATUSES = ['Aguardando Pagamento', 'Em Análise', 'Aprovado', 'Cancelado']
+  # validates :status, inclusion: {in: STATUSES}
+  
   payment_method_is_credit_card = Proc.new { |v| v.payment_method? && v.payment_method != 'boleto' }
   validates :cpf, cpf: true, presence: true, on: :update, if: payment_method_is_credit_card
-  
-  # Aguardando Pagamento, Em Análise, Aprovado ou Cancelado.
   
   # scope :paid, where(status: 'Aprovado')
   # scope :pending, where("vouchers.status != ?", 'Aprovado')
@@ -47,7 +51,7 @@ class Voucher < ActiveRecord::Base
   validate :validate_credit_card
   
   def validate_credit_card
-    errors.add(:credit_card, 'credit card validation errors') if credit_card? and not credit_card.valid?
+    # errors.add(:credit_card, 'credit card validation errors') if credit_card? and not credit_card.valid? # TODO:
   end
   
   def use
@@ -76,6 +80,10 @@ class Voucher < ActiveRecord::Base
   def credit_card_attributes=(attributes)
     @credit_card = CreditCard.new(attributes)
   end
+  
+  def payment_processed?
+    !status.blank?
+  end
 
   private
 
@@ -84,6 +92,7 @@ class Voucher < ActiveRecord::Base
   end
   
   def credit_card?
-    payment_method? && payment_method != 'boleto'
+    # payment_method? && payment_method != 'boleto'
+    payment_method? && CREDIT_CARDS.include?(payment_method)
   end
 end

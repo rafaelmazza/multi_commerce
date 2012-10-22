@@ -78,4 +78,11 @@ describe Voucher do
       voucher.total.should == 30.0
     end
   end
+  
+  describe '#payment_processed?' do
+    it 'returns true if voucher payment is processed' do
+      voucher = create(:voucher, status: nil)
+      voucher.payment_processed?.should == false
+    end
+  end
 end

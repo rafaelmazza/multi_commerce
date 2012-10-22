@@ -74,7 +74,9 @@ class Lead < ActiveRecord::Base
   private
   
   def generate_voucher
-    voucher = self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
+    voucher = self.vouchers.where(unity_id: unity.id, status: nil).find(:last)
+    voucher = self.vouchers.create(unity_id: unity.id) unless voucher
+    # voucher = self.vouchers.find_or_create_by_unity_id(unity_id: unity.id)
     voucher.build_address unless voucher.address
     voucher
   end
