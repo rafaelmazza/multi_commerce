@@ -48,10 +48,11 @@ class Voucher < ActiveRecord::Base
     cpf
   end
   
-  validate :validate_credit_card
+  validate :validate_credit_card, if: payment_method_is_credit_card
   
   def validate_credit_card
     # errors.add(:credit_card, 'credit card validation errors') if credit_card? and not credit_card.valid? # TODO:
+    credit_card.valid? # TODO:
   end
   
   def use
@@ -85,15 +86,15 @@ class Voucher < ActiveRecord::Base
   def payment_processed?
     !status.blank?
   end
+  
+  def credit_card?
+    # payment_method? && payment_method != 'boleto'
+    payment_method? && CREDIT_CARDS.include?(payment_method)
+  end
 
   private
 
   def generate_code
     self.code = MultiCommerce::VoucherGenerator.generate
-  end
-  
-  def credit_card?
-    # payment_method? && payment_method != 'boleto'
-    payment_method? && CREDIT_CARDS.include?(payment_method)
   end
 end
