@@ -4,6 +4,17 @@ class Unity < ActiveRecord::Base
   
   attr_accessible :code, :name, :phone, :email, :address, :status, :situation, :franchise_acronym, :latitude, :longitude, :user_ids, :franchise_id
   
+  STATUSES = {
+    none: 0,
+    updated: 1,
+    outdated: 2,
+    blocked: 3,
+    active: 4,
+    closed: 5
+  }
+  
+  default_scope where(status: STATUSES[:active].to_s)
+  
   has_and_belongs_to_many :users, uniq: true
   belongs_to :franchise
   has_many :leads
