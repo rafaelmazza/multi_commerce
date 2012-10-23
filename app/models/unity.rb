@@ -34,8 +34,8 @@ class Unity < ActiveRecord::Base
     find(:all, select: select, group: group, order: order, joins: joins, conditions: conditions, limit: limit)
   end
   
-  def self.nearby(lead)
-    unities = near(lead.location)
+  def self.nearby(lead, radius=9)
+    unities = near(lead.location, radius)
     unities = search_by_address(lead.address_search) if unities.empty?
     unities
   end  
