@@ -68,9 +68,9 @@ class Lead < ActiveRecord::Base
     generate_voucher  
   end
   
-  # def credit_card_attributes=(attributes)
-  #   @credit_card = CreditCard.new(attributes)
-  # end
+  def geolocated?
+    latitude? and longitude?
+  end
   
   private
   

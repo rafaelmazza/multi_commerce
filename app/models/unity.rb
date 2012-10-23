@@ -1,4 +1,7 @@
 class Unity < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search_by_address, :against => :address
+  
   attr_accessible :code, :name, :phone, :email, :address, :status, :situation, :franchise_acronym, :latitude, :longitude, :user_ids, :franchise_id
   
   has_and_belongs_to_many :users
@@ -19,4 +22,8 @@ class Unity < ActiveRecord::Base
     conditions = "leads.enrolled_at IS NOT NULL AND unities.franchise_id = #{franchise.id}"
     find(:all, select: select, group: group, order: order, joins: joins, conditions: conditions, limit: limit)
   end
+  
+  def self.nearby(lead)
+    lead.geolocated? ? near(lead) : search_by_address(lead.address_search)
+  end  
 end

@@ -44,6 +44,7 @@ gem 'comma', '~> 3.0'
 gem 'ransack'
 gem 'cells'
 gem 'themes_for_rails'
+gem 'pg_search'
 
 group :test do
   gem 'shoulda-matchers'
