@@ -56,6 +56,7 @@ class Voucher < ActiveRecord::Base
   
   def use
     update_attributes! used_at: Time.now
+    lead.enroll
   end
     
   def add_product(product, quantity=1)

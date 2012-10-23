@@ -77,6 +77,10 @@ class Lead < ActiveRecord::Base
     address_search
   end
   
+  def enroll
+    update_attributes! enrolled_at: Time.now
+  end
+  
   private
   
   def generate_voucher
