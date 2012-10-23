@@ -10,5 +10,5 @@
     %h2= unity.phone
     = link_to "como chegar »", external_map_url(unity), class: "how-to-get", target: "_blank"
   .result-right
-    = link_to (image_tag static_map_url(unity)), "#"
+    = link_to (image_tag static_map_url(unity)), external_map_url(unity), target: "_blank"
   .payment_container

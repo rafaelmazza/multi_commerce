@@ -6,6 +6,10 @@ describe MultiCommerce::Parser do
   # let(:geocoding) { File.read(Rails.root.join('spec', 'support', 'fixtures', 'geocoding.json')) }
   subject { described_class.new erp_response }
   
+  before do
+    Franchise.stub find_by_acronym: create(:franchise)
+  end
+  
   context '#parse' do
     it 'gets unity data and persist' do
       subject.parse
@@ -25,7 +29,7 @@ describe MultiCommerce::Parser do
       expected.first[:name].should == "AGUAI"
       expected.first[:email].should == "aguai@wizard.com.br"
       expected.first[:phone].should == "19 3661 1367"
-      expected.first[:address].should == "Rua Valins, 1042, Centro, Aguaí, SP"
+      expected.first[:address].should == "Rua Valins, 1042, Centro, Aguaí, SP, 13860000"
       expected.first[:franchise_acronym].should == "W"
       expected.first[:status].should == "4"
       expected.first[:situation].should == "1"

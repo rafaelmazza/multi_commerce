@@ -16,12 +16,12 @@ describe HomeController do
   
   describe 'GET unities' do
     let(:lead) { mock.as_null_object }
-    let(:unities) { 3.times.map {mock.as_null_object} }
+    let(:unities) { 3.times.map {create(:unity)} }
     
     before do
       Lead.stub find: lead
       unities.stub page: unities
-      Unity.stub(:near).with(lead).and_return(unities)
+      Unity.stub(:near).with(lead.location, 9).and_return(unities)
     end
     
     it 'assigns lead' do

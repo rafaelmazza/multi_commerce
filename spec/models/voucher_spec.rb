@@ -18,6 +18,7 @@ describe Voucher do
   
   describe '#use' do
     let(:time_now) { Time.now }
+    subject { create(:voucher, lead: create(:lead)) }
     
     before do
       Time.stub :now => time_now

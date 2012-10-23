@@ -36,13 +36,13 @@ pt-BR:
       # get_discount: Quero desconto
 
   # kaminari
-  views:
-    pagination:
-      first: "&laquo; Primeira"
-      last: "Última &raquo;"
-      previous: "&lsaquo; Anterior"
-      next: "Próxima &rsaquo;"
-      truncate: "..."
+  # views:
+  #   pagination:
+  #     first: "&laquo; Primeira"
+  #     last: "Última &raquo;"
+  #     previous: "&lsaquo; Anterior"
+  #     next: "Próxima &rsaquo;"
+  #     truncate: "..."
 
   akatus:
     payment:
