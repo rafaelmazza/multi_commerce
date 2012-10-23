@@ -72,6 +72,11 @@ class Lead < ActiveRecord::Base
     latitude? and longitude?
   end
   
+  def location
+    return [latitude, longitude] if geolocated?
+    address_search
+  end
+  
   private
   
   def generate_voucher

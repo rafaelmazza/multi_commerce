@@ -24,6 +24,8 @@ class Unity < ActiveRecord::Base
   end
   
   def self.nearby(lead)
-    lead.geolocated? ? near(lead) : search_by_address(lead.address_search)
+    unities = near(lead.location)
+    unities = search_by_address(lead.address_search) if unities.empty?
+    unities
   end  
 end
