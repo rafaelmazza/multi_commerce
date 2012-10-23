@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :unity_ids, :franchise_ids
   
   # has_and_belongs_to_many :unities
-  has_and_belongs_to_many :franchises
+  has_and_belongs_to_many :franchises, uniq: true
     
   # restrict user to franchise domain
   def self.find_for_authentication(conditions={})
