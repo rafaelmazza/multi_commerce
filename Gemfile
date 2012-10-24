@@ -20,31 +20,31 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem 'haml'
-gem 'formtastic'
-gem 'postgres_ext'
-gem 'geocoder'
-gem 'nokogiri'
-gem 'rest-client'
-gem 'kaminari'
-gem 'faraday'
-gem 'sidekiq'
-gem 'sinatra', require: false
-gem 'slim'
-gem 'devise'
-gem 'cancan'
-gem 'rails_admin'
-gem 'client_side_validations'
-gem 'client_side_validations-formtastic'
-gem 'correios'
-gem 'has_scope'
+gem 'jquery-rails', '~> 2.1.3'
+gem 'haml', '~> 3.1.7'
+gem 'formtastic', '~> 2.2.1'
+gem 'postgres_ext', '~> 0.0.8'
+gem 'geocoder', '~> 1.1.4'
+gem 'nokogiri', '~> 1.5.5'
+gem 'rest-client', '~> 1.6.7'
+gem 'kaminari', '~> 0.14.1'
+gem 'faraday', '~> 0.8.4'
+gem 'sidekiq', '~> 2.3.3'
+gem 'sinatra', '~> 1.3.3', require: false
+gem 'slim', '~> 1.3.2'
+gem 'devise', '~> 2.1.2'
+gem 'cancan', '~> 1.6.8'
+gem 'rails_admin', '~> 0.1.2'
+gem 'client_side_validations', '~> 3.2.0'
+gem 'client_side_validations-formtastic', '~> 2.2.0'
+gem 'correios', git: 'git@github.com:rafaelmazza/correios.git'
+# gem 'has_scope'
 # gem 'active_attr'
 gem 'comma', '~> 3.0'
-gem 'ransack'
-gem 'cells'
-gem 'themes_for_rails'
-gem 'pg_search'
+gem 'ransack', '~> 0.7.0'
+gem 'cells', '~> 3.8.6'
+gem 'themes_for_rails', '~> 0.5.1'
+gem 'pg_search', '~> 0.5.7'
 
 group :test do
   gem 'shoulda-matchers'
@@ -65,18 +65,3 @@ group :development, :test do
   gem 'jasmine'
   gem 'guard-jasmine'
 end
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

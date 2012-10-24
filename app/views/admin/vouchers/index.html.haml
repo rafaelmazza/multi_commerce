@@ -16,7 +16,8 @@
     %tr
       / %th= check_box_tag ''
       %th= sort_link(@search, :lead_name, "Nome")
-      %th Código
+      %th= sort_link(@search, :voucher_timetable_title, "Horário")      
+      %th Código      
       %th= sort_link(@search, :status, "Total")
       %th= sort_link(@search, :status, "Status")
       %th= sort_link(@search, :used_at, "Validado em")      
@@ -25,6 +26,7 @@
     %tr{"data-url" => admin_voucher_path(voucher), class: ("success" if voucher.status == 'Aprovado')}
       / %td= check_box_tag ''
       %td= voucher.lead.name
+      %td= voucher.timetable.try(:title)      
       %td= voucher.code
       %td= number_to_currency voucher.total
       %td

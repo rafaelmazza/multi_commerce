@@ -14,13 +14,10 @@ jQuery ->
   		if (zipcode.match(/^\d{5}-?\d{3}$/))
   			$.get('/addresses/' + zipcode, (response) ->
   				console.log(response)
-  				if (response['error'])
-  					alert(response['error'])
-  				else
-  					$('#street').val(response.street).change()
-  					$('#district').val(response.district).change()
-  					$('#city').val(response.city).change()
-  					$('#state').val(response.state).change()
+  				$('#street').val(response.street).change()
+  				$('#district').val(response.district).change()
+  				$('#city').val(response.city).change()
+  				$('#state').val(response.state).change()
   			)
 	
   class ButtonGroupView extends Backbone.View
@@ -30,7 +27,6 @@ jQuery ->
       @form = this.$el.parents('form').eq(0)
       @name = this.$el.attr('data-toggle-name');
       @hidden = $('input[name="' + @name + '"]', @form);
-      console.log(@name)
       
     events:
       "click button": "updateTimetable"

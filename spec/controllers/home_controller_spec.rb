@@ -19,6 +19,7 @@ describe HomeController do
     let(:unities) { 3.times.map {create(:unity)} }
     
     before do
+      controller.stub current_franchise: create(:franchise)
       Lead.stub find: lead
       unities.stub page: unities
       Unity.stub(:near).with(lead.location, 9).and_return(unities)

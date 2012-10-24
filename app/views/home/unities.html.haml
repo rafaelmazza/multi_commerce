@@ -7,7 +7,7 @@
         = hidden_field_tag "page", "1"
         = hidden_field_tag "lead[latitude]"
         = hidden_field_tag "lead[longitude]"        
-        = text_field_tag "lead[address_search]", @lead.address_search, placeholder: "Digite seu endereço, bairro, rua ou cep"
+        = text_field_tag "lead[address_search]", @lead.address_search, placeholder: "Digite seu endereço, bairro, rua ou cep", class: 'autocomplete'
         / = text_field_tag "lead[address_search]", @lead.address_search, id: "input-search", placeholder: "Digite seu endereço, bairro, rua ou cep"
         = submit_tag "Buscar »", class: "btn-search"
         

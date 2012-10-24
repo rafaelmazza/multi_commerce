@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   
   def unities
     @lead = Lead.find(session[:lead_id])
-    @unities = Unity.nearby(@lead).page params[:page]
+    @unities = current_franchise.unities.nearby(@lead).page params[:page]
   end
   
   def subscribe
