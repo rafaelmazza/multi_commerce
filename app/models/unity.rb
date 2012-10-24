@@ -1,8 +1,10 @@
 class Unity < ActiveRecord::Base
   include PgSearch
-  pg_search_scope :search_by_address, :against => :address
+  # pg_search_scope :search_by_address, :against => :address
+  pg_search_scope :search_by_address, :against => [:address_street, :address_number, :address_district, :address_zipcode, :address_city, :address_state]
   
-  attr_accessible :code, :name, :phone, :email, :address, :status, :situation, :franchise_acronym, :latitude, :longitude, :user_ids, :franchise_id
+  attr_accessible :code, :name, :phone, :email, :address, :status, :situation, :franchise_acronym, :latitude, :longitude, :user_ids, :franchise_id,
+                  :address_street, :address_number, :address_district, :address_zipcode, :address_city, :address_state
   
   STATUSES = {
     none: 0,
@@ -37,5 +39,9 @@ class Unity < ActiveRecord::Base
     unities = near(lead.location, radius)
     unities = search_by_address(lead.address_search) if unities.empty?
     unities
-  end  
+  end
+  
+  def address
+    [address_street, address_number, address_district, address_city, address_state, 'Brasil'].compact.join(', ')
+  end
 end

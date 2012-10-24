@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module MultiCommerce
   class Parser
     def initialize(data)
@@ -39,7 +40,13 @@ module MultiCommerce
         el[:name] = find "nomeFantasia", table.children
         el[:phone] = find "telefone", table.children
         el[:email] = find "email", table.children
-        el[:address] = make_address table
+        # el[:address] = make_address table
+        el[:address_street] = find "endereco", table.children
+        el[:address_number] = find "end_num", table.children
+        el[:address_district] = find "bairro", table.children
+        el[:address_city] = find "cidade", table.children
+        el[:address_state] = find "estado", table.children
+        el[:address_zipcode] = find "cep", table.children
         # el[:address] = find "enderecoCompleto", table.children
         el[:status] = find "codStatus", table.children
         el[:situation] = find "situacao", table.children

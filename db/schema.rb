@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022204753) do
+ActiveRecord::Schema.define(:version => 20121024135327) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -106,11 +106,16 @@ ActiveRecord::Schema.define(:version => 20121022204753) do
     t.string  "franchise_acronym"
     t.string  "email"
     t.string  "phone"
-    t.string  "address"
     t.float   "latitude"
     t.float   "longitude"
     t.integer "leads_count",       :default => 0
     t.integer "franchise_id"
+    t.string  "address_street"
+    t.string  "address_number"
+    t.string  "address_district"
+    t.string  "address_zipcode"
+    t.string  "address_city"
+    t.string  "address_state"
   end
 
   create_table "unities_users", :id => false, :force => true do |t|

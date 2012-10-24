@@ -48,9 +48,17 @@ FactoryGirl.define do
   factory :unity do
     sequence(:code) {|n| "00#{n}"}
     sequence(:name) {|n| "Unidade #{n}"}
-    sequence(:address) {|n| "address #{n}"}
+    # sequence(:address) {|n| "address #{n}"}
     sequence(:email) {|n| "school#{n}@cafeazul.com.br"}
     sequence(:phone) {|n| "phone #{n}"}
+    
+    sequence(:address_street) { |n| "rua #{n}" }
+    sequence(:address_number)
+    sequence(:address_city) { |n| "cidade #{n}" }
+    sequence(:address_state) { |n| "S#{n}" }
+    sequence(:address_zipcode) { |n| "12345-67#{n}" }
+    sequence(:address_district) { |n| "bairro #{n}" }
+    
     status "4"
     situation "2"
     leads_count 0

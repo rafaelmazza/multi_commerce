@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module MultiCommerce
   class Geocoder
     def self.perform
@@ -15,6 +16,7 @@ module MultiCommerce
         zipcode = zipcode.gsub(/-/, '')
         p "#{zipcode} || #{latitude} || #{longitude}"
         # unity = Unity.find_by_code(code)
+        # unity = Unity.search_by_address(zipcode).first
         unity = Unity.search_by_address(zipcode).first
         if unity
           unity.latitude = latitude
