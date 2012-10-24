@@ -4,7 +4,7 @@ class SalesChartCell < Cell::Rails
   def show
     @sales = current_user.vouchers.group('vouchers.status').sum(:total)
     @data = @sales.each_pair.map {|label, total| {status: label, total: total}}
-    render
+    render if not @data.empty?
   end
 
 end
