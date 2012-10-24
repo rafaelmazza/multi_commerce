@@ -1,49 +1,12 @@
-/ - content_for :title, 'Leads'
 = render 'navbar'
 
-.accordion
-  .accordion-group
-    #accordion2.accordion-heading
-      %a.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion2", "href" => "#collapseOne"}
-        Filtros
-    /#collapseOne.accordion-body.collapse{"class" => ("in" if params.keys.include?('by_period'))}
-    #collapseOne.accordion-body.collapse.in
-      .accordion-inner
-        = form_tag search_admin_leads_path, method: 'POST' do |f|
-          / = select_tag 'q[unity_franchise_id_eq]', options_from_collection_for_select(current_user.franchises, 'id', 'name'), :prompt => "Marca" if current_user.manager?
-          = select_tag 'scope', options_for_select([['Todos', 'created_at'], ['Pendentes', 'prospected_at'], ['Prospectados', 'prospected_at'], ['Matriculados', 'enrolled_at']]), :prompt => "Categoria", id: 'scope'
-          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}
-            %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "q[created_at_gteq]", "placeholder" => "Data inicial", "value" => parse_datetime(params.try(:[], :q).try(:[], :created_at_gteq)), id: 'start_date'}
-            %span.add-on
-              %i.icon-calendar
-          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}    
-            %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "q[created_at_lteq]", "placeholder" => "Data final", "value" => parse_datetime(params.try(:[], :q).try(:[], :created_at_lteq)), id: 'end_date'}
-            %span.add-on
-              %i.icon-calendar
-          %button.btn.btn-primary{:type => "submit"} Buscar
-        / = form_tag admin_leads_path, method: 'GET' do |f|
-        /   = select_tag 'by_period[scope]', options_for_select([['Todos', ''], ['Pendentes', 'pending'], ['Prospectados', 'prospected'], ['Matriculados', 'enrolled']], params.try(:[], :by_period).try(:[], :scope))
-        /   .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}
-        /     %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "by_period[started_at]", "placeholder" => "Data inicial", "value" => parse_datetime(params.try(:[], :by_period).try(:[], :started_at))}
-        /     %span.add-on
-        /       %i.icon-calendar
-        /   .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}    
-        /     %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "by_period[ended_at]", "placeholder" => "Data final", "value" => parse_datetime(params.try(:[], :by_period).try(:[], :ended_at))}
-        /     %span.add-on
-        /       %i.icon-calendar
-        /   %button.btn.btn-primary{:type => "submit"} Buscar
-
-/ %p.btn-group.pull-right
-/   = link_to 'Pendentes', admin_leads_path({pending: true}.merge(by_period: params[:by_period])), class: ['btn', ('active' if params[:pending])]
-/   = link_to 'Prospectados', admin_leads_path({prospected: true}.merge(by_period: params[:by_period])), class: ['btn', ('active' if params[:prospected])]
-/   = link_to 'Matriculados', admin_leads_path({enrolled: true}.merge(by_period: params[:by_period])), class: ['btn', ('active' if params[:enrolled])]
-/   = link_to 'Todos', admin_leads_path(by_period: params[:by_period]), class: ['btn', ('active' if (!params[:pending] && !params[:prospected] && !params[:enrolled]))]
+= render 'filters'
 
 %p.btn-group.pull-right
-  = link_to 'Pendentes', admin_leads_path(q: {prospected_at_null: true}), class: ['btn']
-  = link_to 'Prospectados', admin_leads_path(q: {prospected_at_not_null: true}), class: ['btn']
-  = link_to 'Matriculados', admin_leads_path(q: {enrolled_at_not_null: true}), class: ['btn']
-  = link_to 'Todos', admin_leads_path, class: ['btn']
+  = link_to 'Pendentes', admin_leads_path(merge_search_params({prospected_at_null: true}, [:enrolled_at_not_null, :prospected_at_not_null])), class: ['btn', ('active' if params[:active].keys.include?('prospected_at_null') if params[:active])]
+  = link_to 'Prospectados', admin_leads_path(merge_search_params({prospected_at_not_null: true}, [:prospected_at_null, :enrolled_at_not_null])), class: ['btn', ('active' if params[:active].keys.include?('prospected_at_not_null') if params[:active])]
+  = link_to 'Matriculados', admin_leads_path(merge_search_params({enrolled_at_not_null: true}, [:prospected_at_null, :prospected_at_not_null])), class: ['btn', ('active' if params[:active].keys.include?('enrolled_at_not_null') if params[:active])]
+  = link_to 'Todos', admin_leads_path(merge_search_params({}, [:enrolled_at_not_null, :prospected_at_not_null, :enrolled_at_not_null])), class: ['btn', ('active' if not params[:active])]
 
 %p= page_entries_info @leads, entry_name: ''
 
@@ -52,10 +15,9 @@
     %thead
       %tr
         %th= check_box_tag false, false, nil, {id: 'toggle-checkboxes'}
-        %th ID
+        / %th ID
         %th= sort_link(@search, :name, "Nome")
         %th Email
-        / %th Telefone
         %th= sort_link(@search, :prospected_at, "Prospectado")
         %th= sort_link(@search, :enrolled_at, "Matriculado")
         %th= sort_link(@search, :created_at, "Criado")
@@ -63,10 +25,9 @@
     - @leads.each do |lead|
       %tr.success
         %td= check_box_tag 'bulk_ids[]', lead.id
-        %td= lead.id
+        / %td= lead.id
         %td= lead.name
         %td= lead.email
-        / %td= lead.phone
         %td= I18n.l lead.prospected_at, format: :short if lead.prospected_at?
         %td= I18n.l lead.enrolled_at, format: :short if lead.enrolled_at?
         %td= I18n.l lead.created_at, format: :short if lead.created_at?

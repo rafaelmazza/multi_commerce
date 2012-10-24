@@ -6,7 +6,7 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        = link_to 'Leads', admin_leads_path(q: {prospected_at_null: true}), class: 'brand'
+        = link_to 'Leads', admin_leads_path(q: {prospected_at_null: true}, active: {prospected_at_null: true}), class: 'brand'
         .nav-collapse
           %ul.nav.pull-right
             %li.dropdown
