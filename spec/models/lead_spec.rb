@@ -21,6 +21,7 @@ describe Lead do
   it { should belong_to(:unity) }
   it { should have_many(:vouchers) }
   it { should belong_to(:campaign) }
+  it { should belong_to(:franchise) }
   
   describe '#subscribe' do
     let(:lead) { create(:lead) }

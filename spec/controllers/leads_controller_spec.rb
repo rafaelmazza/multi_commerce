@@ -3,6 +3,8 @@ require 'spec_helper'
 describe LeadsController do
   describe 'POST create' do
     context 'valid attributes' do
+      let(:current_franchise) { create(:franchise) }
+      
       it 'should save lead' do
         expect { post :create, :lead => attributes_for(:lead) }.to change(Lead, :count).by(1)
       end
@@ -10,6 +12,11 @@ describe LeadsController do
       it 'redirects to unities page' do
         post :create, :lead => attributes_for(:lead)
         response.should redirect_to action: :unities, controller: :home
+      end
+      
+      it 'associates lead to current franchise' do
+        post :create, :lead => attributes_for(:lead, franchise_id: current_franchise.id)
+        Lead.last.franchise.should == current_franchise
       end
       
       context 'when email already exists' do
