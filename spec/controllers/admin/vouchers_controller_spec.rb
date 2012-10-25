@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Admin::VouchersController do
+  before do
+    controller.stub current_franchise: create(:franchise)
+  end
+  
   context 'when logged as unity' do
     login_unity
 
