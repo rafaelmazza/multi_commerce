@@ -31,4 +31,4 @@ $ ->
         e.preventDefault()
 
   # google.maps.event.addDomListener(window, 'load', (new AddressAutocompleteView));
-  # new AddressAutocompleteView if $('.autocomplete').length > 0
+  new AddressAutocompleteView if $('.autocomplete').length > 0
