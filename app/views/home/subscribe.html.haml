@@ -24,7 +24,7 @@
         %span.text-result-medium Preencha seus dados:
         %fieldset#your-data
           = f.semantic_fields_for :address do |a|
-            = a.input :zipcode, input_html: { id: 'zipcode', class: "input-1", autocomplete: 'off' }, wrapper_html: { class: "wrapper" }
+            = a.input :zipcode, input_html: { id: 'zipcode', class: "input-1" }, wrapper_html: { class: "wrapper" }
             = a.input :street, input_html: { id: 'street', class: "input-4" }, wrapper_html: { class: "wrapper" }
             = a.input :complement, input_html: { id: 'complement', class: "input-4" }, wrapper_html: { class: "wrapper" }
             = a.input :number, input_html: { id: 'number', class: "input-1" }, wrapper_html: { class: "wrapper" }

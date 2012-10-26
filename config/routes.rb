@@ -8,7 +8,10 @@ MultiCommerce::Application.routes.draw do
 
   devise_for :users
 
-  mount Sidekiq::Web, at: "/sidekiq"
+  backend_user_authenticated = lambda { |request| request.env["warden"].authenticate? and request.env["warden"].user }
+  constraints backend_user_authenticated do
+    mount Sidekiq::Web => '/sidekiq'
+  end
   
   root to: "home#index"
   

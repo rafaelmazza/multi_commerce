@@ -91,6 +91,10 @@ class Voucher < ActiveRecord::Base
     # payment_method? && payment_method != 'boleto'
     payment_method? && CREDIT_CARDS.include?(payment_method)
   end
+  
+  def payment_approved?
+    status == 'Aprovado'
+  end
 
   private
 

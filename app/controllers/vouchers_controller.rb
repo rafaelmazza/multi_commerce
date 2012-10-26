@@ -1,6 +1,7 @@
 class VouchersController < ApplicationController
   respond_to :html, :json
   
+  protect_from_forgery except: :update_payment_status
   before_filter :validate_akatus_token, only: :update_payment_status
   
   layout 'home'
@@ -47,6 +48,7 @@ class VouchersController < ApplicationController
     return unless params[:referencia] and params[:status]
     voucher = Voucher.find(params[:referencia])
     voucher.update_attribute(:status, params[:status])
+    UserMailer.delay_for(1.minute).payment_approved(voucher) if voucher.payment_approved?
     render nothing: true
   end
   

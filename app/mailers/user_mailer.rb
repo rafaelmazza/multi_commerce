@@ -6,4 +6,10 @@ class UserMailer < ActionMailer::Base
     subject = "Pagamento realizado"
     mail(:to => voucher.lead.email, :subject => subject)
   end
+  
+  def payment_approved(voucher)
+    @voucher = voucher
+    subject = "Pagamento aprovado"
+    mail(:to => voucher.lead.email, :subject => subject)
+  end  
 end
