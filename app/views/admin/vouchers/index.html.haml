@@ -8,11 +8,6 @@
   = link_to 'Cancelados', admin_vouchers_path(merge_search_params({status_eq: 'Cancelado'})), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Cancelado')]
   = link_to 'Aguardando pagamento', admin_vouchers_path(merge_search_params({status_eq: 'Aguardando Pagamento'})), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Aguardando Pagamento')]
   = link_to 'Todos', admin_vouchers_path({}), class: ['btn', ('active' if not params[:active])]
-  / = link_to 'Aprovados', admin_vouchers_path({q: params[:q] ? params[:q].merge({status_eq: 'Aprovado'}) : {status_eq: 'Aprovado'}}), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Aprovado')]
-  / = link_to 'Em análise', admin_vouchers_path({q: params[:q] ? params[:q].merge({status_eq: 'Em análise'}) : {status_eq: 'Em análise'}}), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Em análise')]
-  / = link_to 'Cancelados', admin_vouchers_path({q: params[:q] ? params[:q].merge({status_eq: 'Cancelado'}) : {status_eq: 'Cancelado'}}), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Cancelado')]
-  / = link_to 'Aguardando pagamento', admin_vouchers_path({q: params[:q] ? params[:q].merge({status_eq: 'Aguardando Pagamento'}) : {status_eq: 'Aguardando Pagamento'}}), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Aguardando Pagamento')]
-  / = link_to 'Todos', admin_vouchers_path({q: {code_cont: params.try(:[], :q).try(:[], :code_cont)}}), class: ['btn', ('active' if not params.try(:[], :q).try(:[], :code_cont))]
 
 = page_entries_info @vouchers, entry_name: ''
 
@@ -21,9 +16,10 @@
     %tr
       / %th= check_box_tag ''
       %th= sort_link(@search, :lead_name, "Nome")
+      %th Telefone
       %th= sort_link(@search, :voucher_timetable_title, "Horário")      
       %th Código      
-      %th= sort_link(@search, :status, "Total")
+      / %th= sort_link(@search, :status, "Total")
       %th= sort_link(@search, :status, "Status")
       %th= sort_link(@search, :used_at, "Validado em")      
   %tbody
@@ -31,9 +27,10 @@
     %tr{"data-url" => admin_voucher_path(voucher), class: ("success" if voucher.status == 'Aprovado')}
       / %td= check_box_tag ''
       %td= voucher.lead.name
+      %td= phone(voucher.lead)
       %td= voucher.timetable.try(:title)      
       %td= voucher.code
-      %td= number_to_currency voucher.total
+      / %td= number_to_currency voucher.total
       %td
         %span{"class" => label_class(voucher.status)}= voucher.status
       -if voucher.used_at?

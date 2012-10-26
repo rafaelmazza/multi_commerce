@@ -6,6 +6,8 @@ class Admin::LeadsController < Admin::ApplicationController
     @search = @admin_scope.leads.search(params[:q])
     @leads = @search.result.page(params[:page])
     respond_with @leads
+    
+    # render text: Lead.where(unity_id: nil).length
   end
   
   def prospect

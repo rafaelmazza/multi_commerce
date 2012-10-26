@@ -6,8 +6,10 @@
   = link_to 'Pendentes', admin_leads_path(merge_search_params({prospected_at_null: true}, [:enrolled_at_not_null, :prospected_at_not_null])), class: ['btn', ('active' if params[:active].keys.include?('prospected_at_null') if params[:active])]
   = link_to 'Prospectados', admin_leads_path(merge_search_params({prospected_at_not_null: true}, [:prospected_at_null, :enrolled_at_not_null])), class: ['btn', ('active' if params[:active].keys.include?('prospected_at_not_null') if params[:active])]
   = link_to 'Matriculados', admin_leads_path(merge_search_params({enrolled_at_not_null: true}, [:prospected_at_null, :prospected_at_not_null])), class: ['btn', ('active' if params[:active].keys.include?('enrolled_at_not_null') if params[:active])]
+  - if current_user.manager?
+    = link_to 'Incompletos', admin_leads_path(merge_search_params({unity_id_null: true}, [:enrolled_at_not_null, :prospected_at_not_null, :enrolled_at_not_null])), class: ['btn', ('active' if params[:active].keys.include?('unity_id_null') if params[:active])]
   = link_to 'Todos', admin_leads_path(merge_search_params({}, [:enrolled_at_not_null, :prospected_at_not_null, :enrolled_at_not_null])), class: ['btn', ('active' if not params[:active])]
-
+  
 %p= page_entries_info @leads, entry_name: ''
 
 = form_tag prospect_admin_leads_path, id: 'bulk_form' do |f|
@@ -15,9 +17,8 @@
     %thead
       %tr
         %th= check_box_tag false, false, nil, {id: 'toggle-checkboxes'}
-        / %th ID
         %th= sort_link(@search, :name, "Nome")
-        %th Email
+        %th Telefone
         %th= sort_link(@search, :prospected_at, "Prospectado")
         %th= sort_link(@search, :enrolled_at, "Matriculado")
         %th= sort_link(@search, :created_at, "Criado")
@@ -25,9 +26,8 @@
     - @leads.each do |lead|
       %tr.success
         %td= check_box_tag 'bulk_ids[]', lead.id
-        / %td= lead.id
         %td= lead.name
-        %td= lead.email
+        %td= phone(lead)
         %td= I18n.l lead.prospected_at, format: :short if lead.prospected_at?
         %td= I18n.l lead.enrolled_at, format: :short if lead.enrolled_at?
         %td= I18n.l lead.created_at, format: :short if lead.created_at?
