@@ -23,9 +23,9 @@ $ ->
       if (e.keyCode == this.RETURN_KEY_CODE)
         @geocoder.geocode({ 'address': @el.value }, (results, status) ->
           if (status == google.maps.GeocoderStatus.OK)
-            console.log(results)
-            $('#lead_latitude').val(results[0].geometry.location.Xa)
-            $('#lead_longitude').val(results[0].geometry.location.Ya)
+            # console.log(results)
+            $('#lead_latitude').val(results[0].geometry.location.Ya)
+            $('#lead_longitude').val(results[0].geometry.location.Za)
             that.$el.change()
         )
         e.preventDefault()
