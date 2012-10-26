@@ -16,6 +16,7 @@
   #box-sign-up
     = semantic_form_for @lead, html: { id: "sign-up-form" }, validate: true do |f|
       = hidden_field_tag "lead[franchise_id]", current_franchise.id
+      = hidden_field_tag "lead[query_string]", request.query_string
       = f.hidden_field :campaign_id
       = f.hidden_field :latitude
       = f.hidden_field :longitude

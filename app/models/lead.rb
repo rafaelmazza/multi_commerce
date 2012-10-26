@@ -1,6 +1,6 @@
 class Lead < ActiveRecord::Base
   attr_accessible :name, :email, :phone_code, :phone, :address_search, :latitude, :longitude, :unity_id, :prospected_at, 
-                  :enrolled_at, :created_at, :updated_at, :campaign_id, :franchise_id, :voucher_ids
+                  :enrolled_at, :created_at, :updated_at, :campaign_id, :franchise_id, :voucher_ids, :query_string
   
   validates :name, presence: true
   

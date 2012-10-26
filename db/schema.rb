@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025122359) do
+ActiveRecord::Schema.define(:version => 20121026185155) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20121025122359) do
     t.datetime "enrolled_at"
     t.integer  "campaign_id"
     t.integer  "franchise_id"
+    t.string   "query_string"
   end
 
   create_table "line_items", :force => true do |t|
