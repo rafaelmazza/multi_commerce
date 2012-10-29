@@ -1,0 +1,9 @@
+%h2 Relatório diário de leads cadastrados:
+
+%ul
+  - @report.each do |franchise_name, counts|
+    %li
+      %strong= franchise_name
+      %ul
+        - counts.each do |campaign_name, total|
+          %li= "#{campaign_name}: #{total}"

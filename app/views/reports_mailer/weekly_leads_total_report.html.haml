@@ -1,0 +1,13 @@
+%h2 Relatório semanal de leads cadastrados:
+
+%ul
+  - @report.each do |franchise_name, dates|
+    %li
+      %strong= franchise_name
+      - dates.each do |date, campaigns|
+        %ul
+          %li
+            = date
+            %ul
+              - campaigns.each_pair do |k, m|
+                %li= "#{k}: #{m}"
