@@ -12,6 +12,6 @@ class Admin::VouchersController < Admin::ApplicationController
     @voucher = current_user.vouchers.find(params[:id])
     @voucher.use
     flash[:alert] = 'Lead validado.' # TODO: change to notice
-    redirect_to action: :index
+    redirect_to admin_lead_path(@voucher.lead)
   end
 end

@@ -79,7 +79,11 @@ class Lead < ActiveRecord::Base
   end
   
   def enroll
-    update_attributes! enrolled_at: Time.now
+    now = Time.now
+    attributes = {enrolled_at: now}
+    attributes.merge!(prospected_at: now) unless prospected_at?
+    update_attributes! attributes
+    # update_attributes! enrolled_at: Time.now
   end
   
   private

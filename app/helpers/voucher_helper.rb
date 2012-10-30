@@ -13,7 +13,9 @@ module VoucherHelper
     when 'Aguardando Pagamento'
       'label label-warning'
     when 'Em Análise'
-      'label label-info'  
+      'label label-info'
+    when 'Invalidado'
+      'label'
     end
   end
 end

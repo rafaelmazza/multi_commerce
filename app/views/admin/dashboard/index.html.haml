@@ -1,4 +1,24 @@
-= render 'admin/vouchers/search'
+/ = render 'admin/vouchers/search'
+
+/ .accordion
+/   .accordion-group
+/     #accordion2.accordion-heading
+/       %a.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion2", "href" => "#collapseOne"}
+/         Filtros
+/     #collapseOne.accordion-body.collapse.in
+/       .accordion-inner
+/         = form_tag search_admin_leads_path, method: 'POST' do |f|
+/           .input-append
+/             = text_field_tag "q[name_or_vouchers_code_cont]", nil, placeholder: "Código do voucher ou nome"
+/             %button.btn{:type => "submit"} Buscar
+
+.row
+  .span12
+    %h3 Busca
+    = form_tag search_admin_leads_path, method: 'POST' do |f|
+      .input-append
+        = text_field_tag "q[name_or_vouchers_code_cont]", nil, placeholder: "Código do voucher ou nome do lead", class: 'input-xlarge'
+        %button.btn{:type => "submit"} Buscar
 
 .row
   .span4

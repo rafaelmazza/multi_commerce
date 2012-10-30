@@ -22,14 +22,16 @@
         %th= sort_link(@search, :prospected_at, "Prospectado")
         %th= sort_link(@search, :enrolled_at, "Matriculado")
         %th= sort_link(@search, :created_at, "Criado")
+        %th
     %tbody
     - @leads.each do |lead|
-      %tr.success
+      %tr
         %td= check_box_tag 'bulk_ids[]', lead.id
         %td= lead.name
         %td= phone(lead)
         %td= I18n.l lead.prospected_at, format: :short if lead.prospected_at?
         %td= I18n.l lead.enrolled_at, format: :short if lead.enrolled_at?
         %td= I18n.l lead.created_at, format: :short if lead.created_at?
+        %td= link_to '', admin_lead_path(lead), class: 'icon-info-sign'
 
 = paginate @leads
