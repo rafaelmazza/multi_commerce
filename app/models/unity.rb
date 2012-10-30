@@ -4,7 +4,7 @@ class Unity < ActiveRecord::Base
   pg_search_scope :search_by_address, :against => [:address_street, :address_number, :address_district, :address_zipcode, :address_city, :address_state]
   
   attr_accessible :code, :name, :phone, :email, :address, :status, :situation, :franchise_acronym, :latitude, :longitude, :user_ids, :franchise_id,
-                  :address_street, :address_number, :address_district, :address_zipcode, :address_city, :address_state
+                  :address_street, :address_number, :address_district, :address_zipcode, :address_city, :address_state, :enrolled_leads_count
   
   STATUSES = {
     none: 0,
@@ -24,7 +24,7 @@ class Unity < ActiveRecord::Base
   
   geocoded_by :address
   
-  paginates_per 3
+  paginates_per 10
   
   def self.ranking(limit=10)
     select = 'unities.*, count(leads.id) as enrolled_leads_count'

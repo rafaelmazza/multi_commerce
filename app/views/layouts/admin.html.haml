@@ -35,6 +35,9 @@
                     = link_to 'Painel', admin_root_path
                   %li{"class" => ("active" if controller_name == 'leads')}
                     = link_to 'Leads', admin_leads_path(q: {prospected_at_null: true}, active: {prospected_at_null: true})
+                  - if current_user.manager?
+                    %li{"class" => ("active" if controller_name == 'unities')}
+                      = link_to 'Franqueados', admin_unities_path
                   / %li{"class" => ("active" if controller_name == 'vouchers')}
                   /   = link_to 'Vouchers', admin_vouchers_path
                 %ul.nav.pull-right
