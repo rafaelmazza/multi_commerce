@@ -1,4 +1,15 @@
-%h3 Vouchers
+%h3 Vendas
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th Status
+      %th Total
+  %tbody
+    - @data.each do |row|
+      %tr
+        %td= row[:status]
+        %td= number_to_currency(row[:total])
+        
 #chart{"style"=>"width: 600px; height: 400px;"}
 
 :javascript
