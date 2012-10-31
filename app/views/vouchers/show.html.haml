@@ -8,12 +8,11 @@
 #voucher
   #logo
     = image_tag "application/wizard-bw.gif"
-    %h1 Voucher de compra (ou Desc)
+    %h1 Voucher
 
   #info
     %ul
       %li 
-        / %span.label Curso desejado
         - @voucher.products.each do |product|
           %span.value= product.name
       %li
