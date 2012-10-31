@@ -4,19 +4,40 @@ module MultiCommerce
     def initialize(data)
       @data = data
     end
-    
+
     def parse
       parse_unity.each do |unity_params|
+        password = generate_password(unity_params[:email])
+        
         unity = Unity.find_or_create_by_code unity_params[:code]
-        user = User.find_or_create_by_email(email: unity_params[:email], password: unity_params[:email].split('@').first)
+        user = User.find_or_create_by_email(email: unity_params[:email], password: password)        
         franchise = Franchise.find_by_acronym(unity_params[:franchise_acronym])
-        user.franchises << franchise if not user.franchises.include?(franchise)
+        
+        user.franchises << franchise unless user.franchises.include?(franchise)
         user.save
-        unity.users << user if not unity.users.include?(user)
+        
+        unity.users << user unless unity.users.include?(user)
         unity.franchise = franchise
         unity.update_attributes unity_params
       end
     end
+    
+    def generate_password(email)
+      email.split('@').first
+    end
+    
+    # def parse
+    #   parse_unity.each do |unity_params|
+    #     unity = Unity.find_or_create_by_code unity_params[:code]
+    #     user = User.find_or_create_by_email(email: unity_params[:email], password: unity_params[:email].split('@').first)
+    #     franchise = Franchise.find_by_acronym(unity_params[:franchise_acronym])
+    #     user.franchises << franchise if not user.franchises.include?(franchise)
+    #     user.save
+    #     unity.users << user if not unity.users.include?(user)
+    #     unity.franchise = franchise
+    #     unity.update_attributes unity_params
+    #   end
+    # end
     
     def parse_unity
       doc = Nokogiri::XML @data
