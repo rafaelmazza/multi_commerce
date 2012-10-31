@@ -48,6 +48,7 @@ MultiCommerce::Application.routes.draw do
     end
     resources :unities, only: [:index] do
       match "search" => "unities#index", :via => [:get, :post], :as => :search, on: :collection
+      get :ranking, on: :collection
     end
   end
   

@@ -8,13 +8,11 @@
       %th.span1= sort_link(@search, :email, "Código")  
       %th= sort_link(@search, :name, "Nome")
       %th.span1= sort_link(@search, :leads_count, "Leads")
-      %th.span1= sort_link(@search, :enrolled_leads_count, "Matriculados")
   %tbody
   - @unities.each do |unity|
     %tr
       %td= unity.code    
       %td= unity.name
       %td= unity.leads_count
-      %td= unity.enrolled_leads_count
 
 = paginate @unities
