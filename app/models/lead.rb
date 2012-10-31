@@ -36,6 +36,10 @@ class Lead < ActiveRecord::Base
   
   geocoded_by :address_search
   
+  scope :prospected, where('prospected_at IS NOT NULL')
+  scope :not_prospected, where(prospected_at: nil)
+  
+  scope :complete, where('unity_id IS NOT NULL')
   scope :incomplete, where(unity_id: nil).where("updated_at <= ?", 1.hour.ago)
   
   # concerns
