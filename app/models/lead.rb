@@ -36,6 +36,8 @@ class Lead < ActiveRecord::Base
   
   geocoded_by :address_search
   
+  scope :incomplete, where(unity_id: nil).where("updated_at <= ?", 1.hour.ago)
+  
   # concerns
   # include Filterable
   
