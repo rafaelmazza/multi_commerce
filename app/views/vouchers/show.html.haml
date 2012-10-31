@@ -1,18 +1,41 @@
-%p
-  = @voucher.lead.name
-%p
-  = @voucher.lead.email
-%p
-  = @voucher.lead.phone_code
-%p
-  = @voucher.lead.phone
-%p
-  = @voucher.unity.name
-%p
-  = @voucher.unity.address
-%p
-  = @voucher.code
-%p
-  = @voucher.total
-%p
-  = @voucher.status
+#instructions
+  %h2 Instruções
+  %ul
+    %li Imprima o voucher abaixo e leve até a unidade escolhida
+    %li É imprescindível a apresentação deste voucher com um documento de identidade
+    %li Caso não possua impressora, anote o número do voucher e leve até a unidade
+  
+#voucher
+  #logo
+    = image_tag "application/wizard-bw.gif"
+    %h1 Voucher de compra (ou Desc)
+
+  #info
+    %ul
+      %li 
+        %span.label Curso desejado
+        %span.value Inglês -- IMPRIMIR O NOME DO PRODUTO
+      %li
+        %span.label Nome
+        %span.value= @voucher.lead.name
+      %li
+        %span.label Telefone
+        %span.value= "(#{@voucher.lead.phone_code}) #{@voucher.lead.phone}"
+      %li
+        %span.label E-mail
+        %span.value= @voucher.lead.email
+      %li
+        %span.label Nome
+        %span.value= @voucher.lead.name
+  
+  .separator
+    &nbsp;
+
+  #franchisee
+    %h2= @voucher.unity.name
+    %address= @voucher.unity.address
+    %p.tel (11) 9989-9090 - IMPRIMIR O TELEFONE
+  
+  #number
+    %h2 VOUCHER Nº:
+    %p= @voucher.code

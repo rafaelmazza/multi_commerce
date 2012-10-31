@@ -16,21 +16,21 @@
   #box-sign-up
     = semantic_form_for @lead, html: { id: "sign-up-form" }, validate: true do |f|
       = hidden_field_tag "lead[franchise_id]", current_franchise.id
-      = hidden_field_tag "lead[query_string]", request.query_string
+      = f.hidden_field :query_string, value: @lead.query_string? ? @lead.query_string : request.query_string
       = f.hidden_field :campaign_id
       = f.hidden_field :latitude
       = f.hidden_field :longitude
-      = f.input :name, input_html: { class: "input-1" }
-      = f.input :email, input_html: { class: "input-1" }
+      = f.input :name, input_html: { class: "text" }
+      = f.input :email, input_html: { class: "text" }
       = f.inputs phone: "Telefone", id: "phone" do
         = f.input :phone_code, wrapper_html: { class: "phone_code" }, input_html: { maxlength: 2 }
         = f.input :phone, wrapper_html: { class: "phone" }, input_html: { maxlength: 9 }
       = f.input :address_search,
                                   as: :string, 
-                                  input_html: { class: "input-1 autocomplete",
-                                                placeholder: "Digite seu endereço, bairro, rua ou cep"}
+                                  input_html: { class: "text autocomplete",
+                                                placeholder: "Digite seu bairro, rua ou CEP"}
 
-      = f.action :submit, label: :subscribe, button_html: { class: "btn" }, wrapper_html: { class: "btn-label" }
+      = f.action :submit, label: :subscribe, button_html: { class: "btn-signup" }, wrapper_html: { class: "btn-label" }
     %span.text-sign-up As informações são confidenciais, para uso exclusivo da Wizard, e não serão repassadas para terceiros.
 #reasons
   #five-reasons

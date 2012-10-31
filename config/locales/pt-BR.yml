@@ -26,6 +26,7 @@ pt-BR:
         city: Cidade
         state: Estado
       credit_card:
+        cpf: CPF
         card_holder_name: Nome do portador
         number: Número
         expiration_date: Data de vencimento

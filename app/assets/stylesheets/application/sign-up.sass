@@ -12,6 +12,12 @@
   margin-right: 52px
   margin-top: -6px
   width: 286px
+  p.inline-errors
+    margin: 0
+    font-size: 10px
+    color: red
+    clear: both
+    height: 12px
 
 #sign-up-left
   float: left
@@ -83,14 +89,15 @@
 
 /*input.input-1 for multiple fields*/
 
-input.input-1
+input.text
   background: image-url("application/bg-input-1.png") no-repeat scroll center center transparent
   border: medium none
   height: 31px
   margin-bottom: 10px
-  padding-left: 5px
+  //padding-left: 0px
   width: 206px
   float: left
+  text-indent: 7px
 
 #sign-up-form
   #phone
@@ -99,14 +106,15 @@ input.input-1
     li
       float: left
     .phone_code
-      width: 55px
+      width: 55px !important
       input
-        background: image-url("application/bg-input-2.png") no-repeat scroll center center transparent
+        background: image-url("application/bg-input-2.png") no-repeat scroll center center transparent !important
         border: medium none
         height: 31px
         margin-bottom: 10px
         padding-left: 5px
-        width: 46px
+        width: 46px !important
+        text-indent: 7px
     .phone
       width: 155px
       input
@@ -116,8 +124,9 @@ input.input-1
         margin-bottom: 10px
         padding-left: 5px
         width: 151px
+        text-indent: 7px
   input
-    &.btn
+    &.btn-signup
       background: image-url("application/btn-sign-up.png") no-repeat scroll center top transparent !important
       border: medium none !important
       clear: both
