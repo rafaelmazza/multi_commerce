@@ -31,12 +31,17 @@ class VouchersController < ApplicationController
     
     if @voucher.valid?
       @voucher.update_total!
-      Akatus::Payment.perform(@voucher)
+      # Akatus::Payment.perform(@voucher) # TODO: uncomment
       # render action: :show, id: @voucher.id, layout: 'voucher'
-      redirect_to action: :show, id: @voucher.id
+      # redirect_to action: :show, id: @voucher.id
+      redirect_to success_voucher_path(@voucher)
     else
       render 'home/subscribe'
     end
+  end
+  
+  def success
+    @voucher = Voucher.find(params[:id])
   end
   
   def update

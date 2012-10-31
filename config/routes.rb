@@ -20,6 +20,7 @@ MultiCommerce::Application.routes.draw do
   resources :vouchers do
     # post :update_payment_method, on: :member
     put :checkout, on: :member
+    get :success, on: :member
   end
   
   match "update_payment_status" => "vouchers#update_payment_status", via: :post
@@ -28,6 +29,7 @@ MultiCommerce::Application.routes.draw do
   match "inscricao/:unity_id" => "home#subscribe", via: :get
   match "busca" => "home#search", via: :post
   # match "voucher" => "home#voucher", via: :get, as: 'voucher'
+  # match "sucesso" => "vouchers#success", via: :get, as: 'success'
   
   # match "/address" => "addresses#index", via: :get
   match "addresses/:zipcode" => "addresses#show"
