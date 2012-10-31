@@ -32,7 +32,8 @@ class VouchersController < ApplicationController
     if @voucher.valid?
       @voucher.update_total!
       Akatus::Payment.perform(@voucher)
-      render action: :show, id: @voucher.id
+      # render action: :show, id: @voucher.id, layout: 'voucher'
+      redirect_to action: :show, id: @voucher.id
     else
       render 'home/subscribe'
     end

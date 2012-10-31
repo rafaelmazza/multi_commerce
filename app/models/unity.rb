@@ -24,7 +24,7 @@ class Unity < ActiveRecord::Base
   
   geocoded_by :address
   
-  paginates_per 10
+  paginates_per 3
   
   def self.ranking(limit=10)
     select = 'unities.*, count(leads.id) as enrolled_leads_count'

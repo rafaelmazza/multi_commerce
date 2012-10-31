@@ -3,6 +3,8 @@ pt-BR:
     models:
       user: usuário
     attributes:
+      voucher:
+        cpf: CPF
       user:
         password_confirmation: Confirme sua nova senha
         current_password: Senha atual

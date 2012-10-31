@@ -13,8 +13,9 @@
   #info
     %ul
       %li 
-        %span.label Curso desejado
-        %span.value Inglês -- IMPRIMIR O NOME DO PRODUTO
+        / %span.label Curso desejado
+        - @voucher.products.each do |product|
+          %span.value= product.name
       %li
         %span.label Nome
         %span.value= @voucher.lead.name
@@ -34,7 +35,7 @@
   #franchisee
     %h2= @voucher.unity.name
     %address= @voucher.unity.address
-    %p.tel (11) 9989-9090 - IMPRIMIR O TELEFONE
+    %p.tel= @voucher.unity.phone
   
   #number
     %h2 VOUCHER Nº:
