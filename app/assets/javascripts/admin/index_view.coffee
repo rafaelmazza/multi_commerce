@@ -16,10 +16,10 @@ $ ->
 	    checkBoxes.attr("checked", !checkBoxes.attr("checked"))
 	
 		submitBulkForm: ->
-			if ($('input:checked').length > 0)
+			if ($("input:checked:not('#toggle-checkboxes')").length > 0)
 	      $('#bulk_form').submit()
 	    else
-	      alert('nothing selected')
+	      alert('Nenhum item selecionado')
 	    false
 		
     # scopeChanged: (e) ->

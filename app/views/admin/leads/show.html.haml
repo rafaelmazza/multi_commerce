@@ -1,0 +1,46 @@
+%h3 Lead
+
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th Nome
+      %th Telefone
+      %th Prospectado em
+      %th Matriculado em
+      %th Criado em
+  %tbody
+    %tr
+      %td= @lead.name
+      %td= phone(@lead)
+      %td= I18n.l @lead.prospected_at, format: :short if @lead.prospected_at?
+      %td= I18n.l @lead.enrolled_at, format: :short if @lead.enrolled_at?
+      %td= I18n.l @lead.created_at, format: :short if @lead.created_at?
+
+%h3 Vouchers
+        
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      / %th= check_box_tag ''
+      %th Horário
+      %th Código      
+      / %th= sort_link(@search, :status, "Total")
+      %th Status
+      %th Validado em
+  %tbody
+  - @lead.vouchers.each do |voucher|
+    /%tr{"data-url" => admin_voucher_path(voucher), class: ("success" if voucher.status == 'Aprovado')}
+    %tr{class: ("success" if voucher.status == 'Aprovado')}
+      / %td= check_box_tag ''
+      %td= voucher.timetable.try(:title)      
+      %td= voucher.code
+      / %td= number_to_currency voucher.total
+      %td
+        %span{"class" => label_class(voucher.status)}= voucher.status
+      - if voucher.used_at?
+        %td= I18n.l voucher.used_at, format: :short
+      - elsif voucher.status == 'Invalidado'
+        %td
+      - else
+        %td
+          = link_to 'Validar', use_admin_voucher_path(voucher), method: 'PUT', class: 'btn btn-success btn-mini'

@@ -36,6 +36,12 @@ class Lead < ActiveRecord::Base
   
   geocoded_by :address_search
   
+  scope :prospected, where('prospected_at IS NOT NULL')
+  scope :not_prospected, where(prospected_at: nil)
+  
+  scope :complete, where('unity_id IS NOT NULL')
+  scope :incomplete, where(unity_id: nil).where("updated_at <= ?", 1.hour.ago)
+  
   # concerns
   # include Filterable
   
@@ -79,7 +85,11 @@ class Lead < ActiveRecord::Base
   end
   
   def enroll
-    update_attributes! enrolled_at: Time.now
+    now = Time.now
+    attributes = {enrolled_at: now}
+    attributes.merge!(prospected_at: now) unless prospected_at?
+    update_attributes! attributes
+    # update_attributes! enrolled_at: Time.now
   end
   
   private

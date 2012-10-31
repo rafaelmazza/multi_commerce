@@ -36,7 +36,7 @@ MultiCommerce::Application.routes.draw do
   namespace :admin do
     root to: "dashboard#index"
     # root to: "leads#index"
-    resources :leads, only: [:index] do
+    resources :leads, only: [:index, :show] do
       post :prospect, on: :collection
       post :enroll, on: :collection
       match "search" => "leads#index", :via => [:get, :post], :as => :search, on: :collection
@@ -46,9 +46,13 @@ MultiCommerce::Application.routes.draw do
       match "search" => "vouchers#index", :via => [:get, :post], :as => :search, on: :collection
       put :use, on: :member
     end
+    resources :unities, only: [:index] do
+      match "search" => "unities#index", :via => [:get, :post], :as => :search, on: :collection
+      get :ranking, on: :collection
+    end
   end
   
   match "installments" => "vouchers#installments" #tmp
   
-  match "/:source" => "home#index"
+  match "/:source" => "home#index", constraints: {source: /!(favicon)/}
 end

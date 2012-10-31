@@ -1,0 +1,22 @@
+- content_for :title, 'Franqueados'
+
+= render 'navbar'
+
+= render 'filters'
+  
+%p= page_entries_info @unities, entry_name: ''
+
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th.span1= sort_link(@search, :email, "Código")  
+      %th= sort_link(@search, :name, "Nome")
+      %th.span1= sort_link(@search, :leads_count, "Leads")
+  %tbody
+  - @unities.each do |unity|
+    %tr
+      %td= unity.code    
+      %td= unity.name
+      %td= unity.leads_count
+
+= paginate @unities

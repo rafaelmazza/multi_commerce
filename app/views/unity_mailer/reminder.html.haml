@@ -1,0 +1,10 @@
+%p 
+  Prezado franqueado da unidade
+  = @unity.name
+%p 
+  Ainda resta(m)
+  = @leads.length
+  lead(s) a ser(em) prospectado(s).
+%p
+  = link_to "Clique aqui", admin_root_url(host: @unity.franchise.url)
+  acessar seu painel e efetuar as prospecções.

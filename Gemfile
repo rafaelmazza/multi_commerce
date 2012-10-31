@@ -45,6 +45,7 @@ gem 'ransack', '~> 0.7.0'
 gem 'cells', '~> 3.8.6'
 gem 'themes_for_rails', '~> 0.5.1'
 gem 'pg_search', '~> 0.5.7'
+gem 'newrelic_rpm'
 
 group :test do
   gem 'shoulda-matchers'

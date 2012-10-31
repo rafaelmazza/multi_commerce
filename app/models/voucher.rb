@@ -57,6 +57,7 @@ class Voucher < ActiveRecord::Base
   
   def use
     update_attributes! used_at: Time.now
+    siblings.each(&:invalidate)
     lead.enroll
   end
     
@@ -96,7 +97,15 @@ class Voucher < ActiveRecord::Base
     status == 'Aprovado'
   end
 
+  def invalidate
+    update_attributes! status: 'Invalidado'
+  end
+
   private
+  
+  def siblings
+    lead.vouchers - [self]
+  end
 
   def generate_code
     self.code = MultiCommerce::VoucherGenerator.generate

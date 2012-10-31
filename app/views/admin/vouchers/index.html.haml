@@ -7,6 +7,7 @@
   = link_to 'Em Análise', admin_vouchers_path(merge_search_params({status_eq: 'Em Análise'})), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Em Análise')]
   = link_to 'Cancelados', admin_vouchers_path(merge_search_params({status_eq: 'Cancelado'})), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Cancelado')]
   = link_to 'Aguardando pagamento', admin_vouchers_path(merge_search_params({status_eq: 'Aguardando Pagamento'})), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Aguardando Pagamento')]
+  = link_to 'Invalidados', admin_vouchers_path(merge_search_params({status_eq: 'Invalidado'})), class: ['btn', ('active' if params[:q] && params[:q].try(:[], :status_eq) == 'Invalidado')]
   = link_to 'Todos', admin_vouchers_path({}), class: ['btn', ('active' if not params[:active])]
 
 = page_entries_info @vouchers, entry_name: ''

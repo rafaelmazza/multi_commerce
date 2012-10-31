@@ -4,6 +4,8 @@ pt-BR:
       user: usuário
     attributes:
       user:
+        password_confirmation: Confirme sua nova senha
+        current_password: Senha atual
         password: Senha
         
   home:

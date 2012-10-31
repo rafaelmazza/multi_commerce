@@ -4,9 +4,10 @@
       %a.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion2", "href" => "#collapseOne"}
         Filtros
     /#collapseOne.accordion-body.collapse{"class" => ("in" if params.keys.include?('by_period'))}
-    #collapseOne.accordion-body.collapse{"class" => ("in" if params[:q] and (!params[:q][:created_at_gteq].blank? || !params[:q][:created_at_lteq].blank?))}
+    #collapseOne.accordion-body.collapse{"class" => ("in" if params[:q] and (!params[:q][:created_at_gteq].blank? || !params[:q][:created_at_lteq].blank? || !params[:q][:name_or_vouchers_code_cont].blank?))}
       .accordion-inner
         = form_tag search_admin_leads_path, method: 'POST' do |f|
+          = text_field_tag "q[name_or_vouchers_code_cont]", params.try(:[], :q).try(:[], :name_or_vouchers_code_cont), placeholder: "Código do voucher ou nome"
           / = select_tag 'q[unity_franchise_id_eq]', options_from_collection_for_select(current_user.franchises, 'id', 'name'), :prompt => "Marca" if current_user.manager?
           /= select_tag 'scope', options_for_select([['Todos', 'created_at'], ['Pendentes', 'prospected_at'], ['Prospectados', 'prospected_at'], ['Matriculados', 'enrolled_at']], params[:scope]), :prompt => "Selecione uma categoria", id: 'scope'
           .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}

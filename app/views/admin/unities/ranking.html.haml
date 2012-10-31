@@ -1,0 +1,44 @@
+- content_for :title, 'Ranking Franqueados'
+
+= render 'navbar'
+
+/ = render 'filters'
+
+.accordion
+  .accordion-group
+    #accordion2.accordion-heading
+      %a.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion2", "href" => "#collapseOne"}
+        Filtros
+    /#collapseOne.accordion-body.collapse{"class" => ("in" if params[:q] and !params[:q][:name_or_code_or_email_cont].blank?)}
+    #collapseOne.accordion-body.collapse.in
+      .accordion-inner
+        = form_tag search_admin_unities_path, method: 'POST' do |f|
+          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}
+            %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "q[leads_enrolled_at_gteq]", "placeholder" => "Data inicial", "value" => parse_datetime(params.try(:[], :q).try(:[], :leads_enrolled_at_gteq)), id: 'start_date'}
+            %span.add-on
+              %i.icon-calendar
+          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}    
+            %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "q[leads_enrolled_at_lteq]", "placeholder" => "Data final", "value" => parse_datetime(params.try(:[], :q).try(:[], :leads_enrolled_at_lteq)), id: 'end_date'}
+            %span.add-on
+              %i.icon-calendar            
+          %button.btn.btn-primary{:type => "submit"} Buscar
+  
+%p= page_entries_info @unities, entry_name: ''
+
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th.span1= sort_link(@search, :email, "Código")  
+      %th= sort_link(@search, :name, "Nome")
+      %th.span1= sort_link(@search, :leads_count, "Leads")
+      / %th.span1= sort_link(@search, :enrolled_leads_count, "Matriculados")
+      %th.span1 Matriculados
+  %tbody
+  - @unities.each do |unity|
+    %tr
+      %td= unity.code    
+      %td= unity.name
+      %td= unity.leads_count
+      %td= unity.enrolled_leads_count
+
+= paginate @unities

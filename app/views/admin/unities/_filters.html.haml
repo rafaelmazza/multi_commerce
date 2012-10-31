@@ -1,0 +1,20 @@
+.accordion
+  .accordion-group
+    #accordion2.accordion-heading
+      %a.accordion-toggle{"data-toggle" => "collapse", "data-parent" => "#accordion2", "href" => "#collapseOne"}
+        Filtros
+    /#collapseOne.accordion-body.collapse{"class" => ("in" if params[:q] and !params[:q][:name_or_code_or_email_cont].blank?)}
+    #collapseOne.accordion-body.collapse.in
+      .accordion-inner
+        = form_tag search_admin_unities_path, method: 'POST' do |f|
+          .input-append
+            = text_field_tag "q[name_or_code_or_email_cont]", params.try(:[], :q).try(:[], :name_or_code_or_email_cont), placeholder: "Código, nome ou email da unidade", class: 'input-xlarge'
+          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}
+            %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "q[leads_enrolled_at_gteq]", "placeholder" => "Data inicial", "value" => parse_datetime(params.try(:[], :q).try(:[], :leads_enrolled_at_gteq)), id: 'start_date'}
+            %span.add-on
+              %i.icon-calendar
+          .input-append.date{"data-date" => "12-02-2012", "data-date-format" => "dd/mm/yyyy"}    
+            %input.span2.date-mask{"size" => "16", "type" => "text", "name" => "q[leads_enrolled_at_lteq]", "placeholder" => "Data final", "value" => parse_datetime(params.try(:[], :q).try(:[], :leads_enrolled_at_lteq)), id: 'end_date'}
+            %span.add-on
+              %i.icon-calendar            
+          %button.btn.btn-primary{:type => "submit"} Buscar

@@ -4,10 +4,13 @@ class Admin::LeadsController < Admin::ApplicationController
     
   def index
     @search = @admin_scope.leads.search(params[:q])
-    @leads = @search.result.page(params[:page])
+    @leads = @search.result(distinct: true).page(params[:page])
     respond_with @leads
-    
-    # render text: Lead.where(unity_id: nil).length
+  end
+  
+  def show
+    @lead = @admin_scope.leads.find(params[:id])
+    respond_with @lead
   end
   
   def prospect

@@ -1,5 +1,5 @@
 pt-BR:
-  views:
+  # views:
   admin:
     home:
       name: Home
