@@ -1,4 +1,6 @@
 class VouchersController < ApplicationController
+  include ActionView::Helpers::NumberHelper
+  
   respond_to :html, :json
   
   protect_from_forgery except: :update_payment_status
@@ -65,14 +67,23 @@ class VouchersController < ApplicationController
     p = { 
       :email => 'akatus@cafeazul.com.br',
       :amount => params['amount'].gsub('\D', ''),
-      :payment_method => params['payment_method'],
+      :payment_method => params['payment_method'],      
+      # :amount => 100,
+      # :payment_method => 'cartao_visa',
       :api_key => '6494F2BA-CDEA-487A-9633-3B2CBFCA47F6'
     }
     uri.query = URI.encode_www_form(p)
     res = Net::HTTP.start(uri.host, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
       http.get uri.request_uri, 'User-Agent' => 'MyLib v1.2'
     end
-    respond_with(res.body)
+
+    result = JSON.load(res.body)    
+    result['resposta']['parcelas'].map! do |v| 
+      v.merge('valor' => number_to_currency(v['valor']), 'total' => number_to_currency(v['total']))
+    end
+          
+    # render text: result
+    respond_with result
   end
   
   private

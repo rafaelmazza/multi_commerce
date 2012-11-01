@@ -101,6 +101,6 @@
     {{#each parcelas}}
     %li  
       %span.number {{this.quantidade}}x 
-      %span.amount de R$ {{this.valor}}
+      %span.amount de {{this.valor}}
       / %input{type: 'radio', name: 'voucher[credit_card_attributes][installments]'} {{this.quantidade}}x - R$ {{this.valor}} (R$ {{this.total}})
     {{/each}}
