@@ -9,6 +9,11 @@
   float: left
   margin-bottom: 20px
 
+fieldset
+  margin: 0
+  padding: 0
+  border: none
+
 h2
   color: #3D7996
   font-size: 15px
@@ -66,10 +71,6 @@ select
       color: red
       font-size: 10px
       margin-left: 5px
-  fieldset
-    margin: 0
-    padding: 0
-    border: none
     
 #open-result
   background-color: #F0F7FA
@@ -121,10 +122,10 @@ select
         margin-bottom: 10px
         outline: medium none
         text-decoration: none
-        text-indent: -99999px
+        text-indent: -1000em
         width: 208px
     &#credit-card
-      width: 550px
+      width: 550px //800
       float: left
       margin-bottom: 20px
       li
@@ -168,8 +169,7 @@ select
 
 #info
   clear: both
-  width: 100%
-  float: left
+  height: 410px
 
 #total
   background-color: #FFFFFF
@@ -236,12 +236,3 @@ select
       .amount
         font-size: 11px
         color: #777
-        
-#billing
-  p.inline-errors
-    display: block
-    clear: both
-    margin: 0
-    color: red
-    margin-left: 125px
-    font-size: 12px

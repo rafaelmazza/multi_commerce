@@ -59,7 +59,7 @@
           %h2 Escolha uma Forma de Pagamento:
           %fieldset#payment
             %label
-              = f.radio_button :payment_method, :boleto, checked: true, class: 'payment_method'
+              = f.radio_button :payment_method, :boleto, checked: true, class: ['payment_method', 'boleto']
               = image_tag "application/barcode.png"
             %label
               = f.radio_button :payment_method, :cartao_visa, class: ['payment_method', 'credit-card']
