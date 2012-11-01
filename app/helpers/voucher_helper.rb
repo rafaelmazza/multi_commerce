@@ -16,6 +16,8 @@ module VoucherHelper
       'label label-info'
     when 'Invalidado'
       'label'
+    else
+      'label label-inverse'
     end
   end
 end

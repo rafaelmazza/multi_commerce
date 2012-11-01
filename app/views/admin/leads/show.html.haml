@@ -36,7 +36,7 @@
       %td= voucher.code
       / %td= number_to_currency voucher.total
       %td
-        %span{"class" => label_class(voucher.status)}= voucher.status
+        %span{"class" => label_class(voucher.status)}= voucher.status || 'Gratuito'
       - if voucher.used_at?
         %td= I18n.l voucher.used_at, format: :short
       - elsif voucher.status == 'Invalidado'
@@ -44,3 +44,38 @@
       - else
         %td
           = link_to 'Validar', use_admin_voucher_path(voucher), method: 'PUT', class: 'btn btn-success btn-mini'
+          
+  
+/ .span4
+/   %table.table.table-hover.table-bordered
+/     %thead
+/       %tr
+/         %th Status
+/         %th Descrição
+/     %tbody
+/       %tr
+/         %th
+/           %i.label.label-success Aprovado
+/         %th
+/           Pagamento aprovado
+/     
+
+%h4 Legenda
+%p
+  %i.label.label-success Aprovado
+  Pagamento aprovado
+%p
+  %i.label.label-important Cancelado
+  Pagamento cancelado
+%p
+  %i.label.label-warning Aguardando Pagamento
+  Aguardando o pagamento do boleto
+%p
+  %i.label.label-info Em Análise
+  Pagamento via cartão de crédito em análise
+%p
+  %i.label Invalidado
+  Voucher invalidado
+%p
+  %i.label.label-inverse Gratuito
+  Voucher gratuito
