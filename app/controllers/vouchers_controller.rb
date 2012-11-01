@@ -34,7 +34,7 @@ class VouchersController < ApplicationController
     
     if @voucher.valid?
       @voucher.update_total!
-      #Akatus::Payment.perform(@voucher)
+      Akatus::Payment.perform(@voucher)
       redirect_to success_voucher_path(@voucher)
     else
       render 'home/subscribe'
