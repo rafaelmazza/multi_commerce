@@ -4,8 +4,13 @@
   #sign-up
     #sign-up-left
       #text-1
-        %h2 Cadastro realizado!
+        %h2
+          = @voucher.status.blank? ? "Cadastro realizado!" : "Compra realizada!"
       #text-2
-        %h4 Parabéns! Imprima o seu voucher clicando no botão abaixo e leve até a Wizard que você escolheu!
+        - if @voucher.status
+          %h4 Parabéns! Em alguns instantes você receberá um e-mail de confirmação.
+        - if @voucher.payment_url?
+          %h4= link_to 'Clique aqui para efetuar o pagamento', @voucher.payment_url, target: 'blank'
+        %h4 Imprima o seu voucher clicando no botão abaixo e leve até a unidade que você escolheu!
       #text-3
         = link_to "Imprimir voucher e ir até a unidade", voucher_path(@voucher), id: 'print-voucher'

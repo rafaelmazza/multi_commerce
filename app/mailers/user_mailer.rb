@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default :from => 'do-not-reply@cafeazulhost.com.br'
+  default :from => 'Leads <do-not-reply@cafeazulhost.com.br>'
   
   def payment_processed(voucher)
     @voucher = voucher

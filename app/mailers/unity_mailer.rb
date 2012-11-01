@@ -1,5 +1,5 @@
 class UnityMailer < ActionMailer::Base
-  default :from => 'do-not-reply@cafeazulhost.com.br'
+  default :from => 'Leads <do-not-reply@cafeazulhost.com.br>'
   
   def reminder(unity, leads)
     @unity, @leads = unity, leads
