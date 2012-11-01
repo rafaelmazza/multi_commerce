@@ -14,4 +14,9 @@ class Admin::VouchersController < Admin::ApplicationController
     flash[:alert] = 'Lead validado.' # TODO: change to notice
     redirect_to admin_lead_path(@voucher.lead)
   end
+  
+  def show
+    # render text: @voucher.inspect
+    UserMailer.delay.payment_processed(@voucher)
+  end
 end
