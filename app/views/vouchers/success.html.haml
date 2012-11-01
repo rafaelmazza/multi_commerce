@@ -10,7 +10,7 @@
         - if @voucher.status
           %h4 Parabéns! Em alguns instantes você receberá um e-mail de confirmação.
         - if @voucher.payment_url?
-          %h4= link_to 'Clique aqui para efetuar o pagamento', @voucher.payment_url, target: 'blank'
+          %h4= link_to 'Clique aqui para imprimir o boleto bancário', @voucher.payment_url, target: 'blank'
         %h4 Imprima o seu voucher clicando no botão abaixo e leve até a unidade que você escolheu!
       #text-3
         = link_to "Imprimir voucher e ir até a unidade", voucher_path(@voucher), id: 'print-voucher'
