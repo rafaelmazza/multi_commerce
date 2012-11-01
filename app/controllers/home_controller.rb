@@ -25,7 +25,8 @@ class HomeController < ApplicationController
   private
   
   def skip_payment(voucher)
-    redirect_to controller: :vouchers, action: :show, id: voucher
+    # redirect_to controller: :vouchers, action: :show, id: voucher
+    redirect_to controller: :vouchers, action: :success, id: voucher
   end
   
   def set_campaign_theme

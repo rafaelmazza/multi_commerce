@@ -26,7 +26,7 @@ jQuery ->
     initialize: ->
       @form = this.$el.parents('form').eq(0)
       @name = this.$el.attr('data-toggle-name');
-      @hidden = $('input[name="' + @name + '"]', @form);
+      @hidden = $('input[name="' + @name + '"]', @form)
       
     events:
       "click button": "updateTimetable"
