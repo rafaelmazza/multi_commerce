@@ -25,6 +25,6 @@ class User < ActiveRecord::Base
   private
   
   def set_role_behavior
-    self.class.send :include, eval("Roles::#{role.camelize}")
+    self.class.send :include, eval("Roles::#{role.camelize}") if role
   end
 end

@@ -20,6 +20,7 @@ class VouchersController < ApplicationController
   def show
     @voucher = Voucher.find(params[:id])
     render layout: 'voucher'
+    authorize! :manage, @voucher
   end
   
   def checkout
@@ -33,9 +34,7 @@ class VouchersController < ApplicationController
     
     if @voucher.valid?
       @voucher.update_total!
-      # Akatus::Payment.perform(@voucher) # TODO: uncomment
-      # render action: :show, id: @voucher.id, layout: 'voucher'
-      # redirect_to action: :show, id: @voucher.id
+      Akatus::Payment.perform(@voucher)
       redirect_to success_voucher_path(@voucher)
     else
       render 'home/subscribe'
@@ -44,6 +43,7 @@ class VouchersController < ApplicationController
   
   def success
     @voucher = Voucher.find(params[:id])
+    authorize! :manage, @voucher
   end
   
   def update

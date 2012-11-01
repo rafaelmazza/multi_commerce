@@ -8,15 +8,16 @@
         = hidden_field_tag "lead[latitude]"
         = hidden_field_tag "lead[longitude]"        
         = text_field_tag "lead[address_search]", @lead.address_search, placeholder: "Digite seu endereço, bairro, rua ou cep", class: 'autocomplete'
-        / = text_field_tag "lead[address_search]", @lead.address_search, id: "input-search", placeholder: "Digite seu endereço, bairro, rua ou cep"
         = submit_tag "Buscar »", class: "btn-search"
         
   #lead_content
     = semantic_form_for @lead do |f|
       = f.hidden_field :unity_id
 
-      #unities
-        /= render partial: "unity", collection: @unities, locals: { address_search: @lead.address_search }
-        = render partial: "unity", collection: @unities
-        = paginate @unities
-      /= render partial: "payment_template", locals: { f: f }
+      - if @unities.empty?
+        #not-found
+          %p Not found
+      - else
+        #unities
+          = render partial: "unity", collection: @unities
+          = paginate @unities
