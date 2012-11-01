@@ -5,12 +5,12 @@
       var errorElement, wrapper;
       if (element.data('valid') !== false) {
         wrapper = element.closest('li');
-        errorElement = $('<div/>', {
+        errorElement = $('<p/>', {
           "class": settings.inline_error_class,
           text: message
         });
         wrapper.addClass('error');
-        return wrapper.prepend(errorElement);
+        return wrapper.append(errorElement);
       } else {
         return element.parent().find("p." + settings.inline_error_class).text(message);
       }

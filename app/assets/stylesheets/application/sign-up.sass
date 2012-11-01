@@ -12,12 +12,6 @@
   margin-right: 52px
   margin-top: -6px
   width: 286px
-  p.inline-errors
-    margin: 0
-    font-size: 10px
-    color: red
-    clear: both
-    height: 12px
   .notice
     color: #851700
     display: block
@@ -25,8 +19,18 @@
     font-weight: bold
     margin-left: 40px
     text-align: center
+    *margin-left: 0px
     a 
       color: #851700
+  p.inline-errors
+    opacity: 0.87
+    display: inline-block
+    margin: 0
+    background-color: #900
+    border: 1px solid #FFF
+    font-size: 10px
+    color: white
+    padding: 5px
 
 #sign-up-left
   float: left
@@ -93,20 +97,21 @@
   li
     list-style: none
 
-
 input.text
   background: image-url("application/bg-input-1.png") no-repeat scroll center center transparent
   border: medium none
-  height: 31px
+  height: 24px
   margin-bottom: 10px
   width: 206px
   float: left
   text-indent: 7px
+  padding-top: 7px
 
 #sign-up-form
   #phone
     ol
       padding: 0
+      margin: 0
     li
       float: left
     .phone_code
@@ -124,9 +129,10 @@ input.text
       input
         background: image-url("application/bg-input-3.png") no-repeat scroll center center transparent
         border: medium none
-        height: 31px
+        height: 26px
         margin-bottom: 10px
         padding-left: 5px
+        padding-top: 5px
         width: 151px
         text-indent: 7px
   input
@@ -148,4 +154,12 @@ input.text
 #box-sign-up span
   float: left
   width: 225px
+  
+fieldset
+  border: none
+  margin: 0
+  padding: 0
+  &#phone
+    float: left
+    width: 215px
 
