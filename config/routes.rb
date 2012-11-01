@@ -30,6 +30,7 @@ MultiCommerce::Application.routes.draw do
   match "busca" => "home#search", via: :post
   # match "voucher" => "home#voucher", via: :get, as: 'voucher'
   # match "sucesso" => "vouchers#success", via: :get, as: 'success'
+  match "privacidade" => "home#privacy_policy", as: 'privacy_policy'
   
   # match "/address" => "addresses#index", via: :get
   match "addresses/:zipcode" => "addresses#show"

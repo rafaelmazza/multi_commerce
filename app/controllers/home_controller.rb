@@ -19,6 +19,9 @@ class HomeController < ApplicationController
     skip_payment(@voucher) unless current_franchise.payment_enabled?
   end
   
+  def privacy_policy    
+  end
+  
   private
   
   def skip_payment(voucher)
