@@ -1,4 +1,19 @@
-%p Pagamento processado
+%p 
+  Prezado
+  = "#{@voucher.lead.name},"
 
-%p Status do pagamento:
-= @voucher.status
+%p 
+  Recebemos seu pedido de compra para o
+  - @voucher.products.each do |product|
+    %span= product.name
+
+- if not @voucher.payment_url.blank?
+  %p= link_to 'Cilque aqui para efetuar o pagamento do boleto', @voucher.payment_url, target: 'blank'
+  %p Após a confirmação do pagamento, você receberá um email com a confirmação de compra.
+
+- if @voucher.credit_card?
+  %p Sua compra está em processo de análise pela operadora do cartão e em breve você receberá a confirmação da mesma.
+
+%p Obrigado por estudar conosco!
+
+%p Wizard - Você Bilíngue

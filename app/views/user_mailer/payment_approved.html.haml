@@ -1,4 +1,20 @@
-%p Pagamento aprovado
+%p 
+  Prezado
+  = "#{@voucher.lead.name},"
 
-%p Status do pagamento:
-= @voucher.status
+%p Sua compra foi confirmada! 
+%p Imprima este email e dirija-se até a unidade escolhida para o agendamento e início das aulas.
+
+%p 
+  Código do voucher:  
+  = @voucher.code
+
+%p 
+  Endereço da unidade:
+  %br
+    = @voucher.unity.address  
+  = @voucher.unity.phone
+
+%p Obrigado por estudar conosco!
+
+%p Wizard - Você Bilíngue

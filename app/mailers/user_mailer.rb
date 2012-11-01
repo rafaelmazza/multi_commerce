@@ -3,13 +3,13 @@ class UserMailer < ActionMailer::Base
   
   def payment_processed(voucher)
     @voucher = voucher
-    subject = "Pagamento realizado"
+    subject = "Wizard Idiomas - Pedido em processamento"
     mail(:to => voucher.lead.email, :subject => subject)
   end
   
   def payment_approved(voucher)
     @voucher = voucher
-    subject = "Pagamento aprovado"
+    subject = "Wizard Idiomas - Compra confirmada"
     mail(:to => voucher.lead.email, :subject => subject)
   end  
 end
