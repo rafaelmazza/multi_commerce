@@ -1,6 +1,6 @@
 #lead_content
   %p= alert
-  = semantic_form_for @voucher, url: checkout_voucher_path(@voucher), validate: false do |f|
+  = semantic_form_for @voucher, url: checkout_voucher_path(@voucher), validate: true do |f|
     = f.hidden_field :id
     .result-search
       .result-center
@@ -20,9 +20,9 @@
           / = hidden_field_tag "voucher[timetable_id]", timetable.id
           %ul
             - Timetable.all.each do |timetable|
-              %li{"data-toggle" => "buttons-radio", "data-toggle-name" => "voucher[timetable_id]"}
-                = button_tag timetable.title, type: "button", class: 'btn btn-large btn-secondary', value: timetable.id, "data-toggle" => "button"
-          = f.hidden_field :timetable_id, value: Timetable.find_by_title('Flex').id
+              %li.btn-group{"data-toggle" => "buttons-radio", "data-toggle-name" => "voucher[timetable_id]"}
+                = button_tag timetable.title, type: "button", class: ['btn', 'btn-large', 'btn-secondary', 'timetable-button', ('btn-secondary-selected' if (@voucher.timetable_id == timetable.id))], value: timetable.id, "data-toggle" => "button"
+          = f.hidden_field :timetable_id, value: @voucher.timetable_id || Timetable.find_by_title('Flex').id
         #billing
           #info
             %h2 Preencha seus dados:
@@ -90,7 +90,8 @@
           %fieldset#button
             = f.submit "Comprar Curso", class: "btn-purchase"
           #content-footer
-            = link_to "« voltar", :back, id: "content-footer-link-back"
+            = link_to "« voltar", unities_path, id: "content-footer-link-back"
+            / = link_to "« voltar", :back, id: "content-footer-link-back"
             = link_to t('.print_voucher'), voucher_url(@voucher), id: "print-voucher", class: "btn btn-small"
           
 %script#installments-options{type: "text/x-handlebars-template"}

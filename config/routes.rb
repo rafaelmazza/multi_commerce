@@ -25,7 +25,7 @@ MultiCommerce::Application.routes.draw do
   
   match "update_payment_status" => "vouchers#update_payment_status", via: :post
   
-  match "unidades" => "home#unities", via: :get
+  match "unidades" => "home#unities", via: :get, as: 'unities'
   match "inscricao/:unity_id" => "home#subscribe", via: :get
   match "busca" => "home#search", via: :post
   # match "voucher" => "home#voucher", via: :get, as: 'voucher'

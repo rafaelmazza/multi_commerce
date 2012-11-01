@@ -30,14 +30,19 @@ jQuery ->
       
     events:
       "click button": "updateTimetable"
+      "hover button": "hover"
 
     updateTimetable: (e) ->
       timetableID = e.target.value
       @hidden.val(timetableID)
       voucherID = $('#voucher_id').val()
-      $.post('/vouchers/' + voucherID, {_method: 'PUT', voucher: {timetable_id: timetableID}}, (response) ->
+      $.post('/vouchers/' + voucherID + '.json', {_method: 'PUT', voucher: {timetable_id: timetableID}}, (response) ->
         console.log(response)
+        $('.timetable-button').removeClass('btn-secondary-selected')
+        $(e.target).addClass('btn-secondary-selected')
       )
+    
+    hover: (e) ->
+      $('timetable-button').toggleClass('.btn-secondary-selected')
       
   new SubscribeView
-  # new ButtonGroupView
