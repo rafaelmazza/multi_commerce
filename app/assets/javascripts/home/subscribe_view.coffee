@@ -12,12 +12,14 @@ jQuery ->
   	searchAddress: ->
   		zipcode = this.$('#zipcode').val()
   		if (zipcode.match(/^\d{5}-?\d{3}$/))
+        this.$('#zipcode').parents('li').append('<img id="loading" src="/assets/application/loading.gif"/>')
   			$.get('/addresses/' + zipcode, (response) ->
   				console.log(response)
   				$('#street').val(response.street).change()
   				$('#district').val(response.district).change()
   				$('#city').val(response.city).change()
   				$('#state').val(response.state).change()
+  				$('#loading').remove();
   			)
 	
   class ButtonGroupView extends Backbone.View

@@ -29,6 +29,8 @@
             %fieldset#your-data
               = f.semantic_fields_for :address do |a|
                 = a.input :zipcode, input_html: { id: 'zipcode', class: "input-medium" }, wrapper_html: { class: "wrapper" }
+                / %span#loading{"style" => "display: inline"}
+                /   = image_tag 'application/loading.gif'
                 = a.input :street, input_html: { id: 'street', class: "input-large" }, wrapper_html: { class: "wrapper" }
                 = a.input :number, input_html: { id: 'number', class: "input-medium" }, wrapper_html: { class: "wrapper" }
                 = a.input :complement, input_html: { id: 'complement', class: "input-medium" }, wrapper_html: { class: "wrapper" }
