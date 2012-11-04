@@ -1,0 +1,12 @@
+.container.box{"style" => "width: 500px"}
+  .content
+    .row
+      .form
+        %h2 Selecione uma unidade
+        %p 
+          Sua conta está associada a mais de uma unidade. 
+          %br
+          Por favor, selecione a unidade desejada.
+        %ul
+        - current_user.unities.each do |unity|
+          %li= link_to unity.name, admin_select_unity_path(unity)

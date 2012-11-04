@@ -48,6 +48,16 @@
                         %li
                           = link_to 'Ranking', ranking_admin_unities_path
                 %ul.nav.pull-right
+                  - if @current_unity
+                    %li.dropdown
+                      %a.dropdown-toggle{href: '#', "data-toggle" => "dropdown"} 
+                        %span
+                          = @current_unity.try :name
+                        %b.caret
+                      %ul.dropdown-menu
+                        - current_user.unities.each do |unity|
+                          %li
+                            = link_to unity.name, admin_select_unity_path(unity)
                   %li.dropdown
                     %a.dropdown-toggle{href: '#', "data-toggle" => "dropdown"} 
                       %span
