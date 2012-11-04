@@ -59,7 +59,13 @@ module MultiCommerce
       {}.tap do |el|
         el[:code] = find "codEmitente", table.children
         el[:name] = find "nomeFantasia", table.children
-        el[:phone] = find "telefone", table.children
+        
+        # el[:phone] = find "telefone", table.children
+        unformatted_phone = find "telefone", table.children
+        unformatted_phone =~ /(\d{2}) (\d+) (\d+)/
+        el[:phone_code] = $1.to_s
+        el[:phone] = $2.to_s + $3.to_s
+        
         el[:email] = find "email", table.children
         # el[:address] = make_address table
         el[:address_street] = find "endereco", table.children

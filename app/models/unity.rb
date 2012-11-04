@@ -3,7 +3,7 @@ class Unity < ActiveRecord::Base
   # pg_search_scope :search_by_address, :against => :address
   pg_search_scope :search_by_address, :against => [:address_street, :address_number, :address_district, :address_zipcode, :address_city, :address_state]
   
-  attr_accessible :code, :name, :phone, :email, :address, :status, :situation, :franchise_acronym, :latitude, :longitude, :user_ids, :franchise_id,
+  attr_accessible :code, :name, :phone, :phone_code, :email, :address, :status, :situation, :franchise_acronym, :latitude, :longitude, :user_ids, :franchise_id,
                   :address_street, :address_number, :address_district, :address_zipcode, :address_city, :address_state, :enrolled_leads_count
   
   STATUSES = {
