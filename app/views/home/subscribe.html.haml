@@ -1,8 +1,8 @@
 #lead_content
   - if alert
     #alert
-      / %p= alert
-      %p Ocorreu um erro ao tentar processar seu pagamento. Tente novamente mais tarde!
+      %p= alert
+      / %p Ocorreu um erro ao tentar processar seu pagamento. Tente novamente mais tarde!
   = semantic_form_for @voucher, url: checkout_voucher_path(@voucher), validate: true do |f|
     = f.hidden_field :id
     .result-search

@@ -41,9 +41,9 @@ class Akatus::Payment
       process(voucher, response)
       UserMailer.delay.payment_processed(voucher)
     rescue Faraday::Error::ConnectionFailed => error
-      raise Akatus::ConnectionFailed, 'connection failed'
+      raise Akatus::ConnectionFailed, I18n.t('akatus.errors.messages.connection_failed')
     rescue Faraday::Error::TimeoutError => error
-      raise Akatus::ConnectionFailed, 'time out'
+      raise Akatus::ConnectionFailed, I18n.t('akatus.errors.messages.time_out')
     rescue Akatus::PaymentFailed => error
       raise error
     end      

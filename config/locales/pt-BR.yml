@@ -56,3 +56,7 @@ pt-BR:
         on_approval: Em Análise
         approved: Aprovado
         canceled: Cancelado
+    errors:
+      messages:
+        connection_failed: Ocorreu um erro ao tentar processar seu pagamento. Tente novamente mais tarde!
+        time_out: Ocorreu um erro ao tentar processar seu pagamento. Tente novamente mais tarde!
