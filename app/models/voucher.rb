@@ -11,6 +11,7 @@ class Voucher < ActiveRecord::Base
   attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, 
                   :lead_attributes, :address_attributes, :cpf, :line_item_ids, :transaction_key, :payment_url, :code
   
+  before_validation :normalize_cpf
   before_create :generate_code
   
   attr_accessor :credit_card
@@ -103,6 +104,10 @@ class Voucher < ActiveRecord::Base
   end
 
   private
+  
+  def normalize_cpf
+    self.cpf = self.cpf.gsub(/\D/, '') if cpf?
+  end
   
   def siblings
     lead.vouchers - [self]

@@ -5,4 +5,5 @@
 //= require rails.validations
 //= require rails.validations.formtastic
 //= require handlebars
+//= require jquery.maskedinput
 //= require_tree ./home

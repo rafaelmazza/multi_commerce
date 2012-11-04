@@ -9,4 +9,12 @@ class Address < ActiveRecord::Base
   validates :district, presence: true
   validates :city, presence: true
   validates :state, presence: true
+  
+  before_validation :normalize_zipcode
+  
+  private
+  
+  def normalize_zipcode
+    self.zipcode = self.zipcode.gsub('/\D', '')
+  end
 end
