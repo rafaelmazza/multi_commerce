@@ -9,7 +9,7 @@ module MultiCommerce
       parse_unity.each do |unity_params|
         password = generate_password(unity_params[:email])
         
-        unity = Unity.find_or_create_by_code unity_params[:code]
+        unity = Unity.unscoped.find_or_create_by_code unity_params[:code]
         user = User.find_or_create_by_email(email: unity_params[:email], password: password)        
         franchise = Franchise.find_by_acronym(unity_params[:franchise_acronym])
         
