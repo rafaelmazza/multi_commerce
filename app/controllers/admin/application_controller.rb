@@ -16,7 +16,7 @@ class Admin::ApplicationController < ApplicationController
   
   def unity_scope
     return current_user if not session[:unity_id]
-    @current_unity ||= Unity.find(session[:unity_id])
+    @current_unity ||= current_user.unities.find(session[:unity_id])
   end
   
   def show_available_unities

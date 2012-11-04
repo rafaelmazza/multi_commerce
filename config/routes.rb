@@ -38,7 +38,7 @@ MultiCommerce::Application.routes.draw do
   
   namespace :admin do
     root to: "dashboard#index"
-    match 'unities/available' => "dashboard#available_unities"
+    match 'unities/available' => "dashboard#available_unities", as: :available_unities
     match 'unities/select/:unity_id' => "dashboard#select_unity", as: :select_unity
     
     # root to: "leads#index"
