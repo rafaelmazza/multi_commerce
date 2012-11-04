@@ -7,6 +7,7 @@ class Voucher < ActiveRecord::Base
   has_one :address
   has_many :products, through: :line_items
   # has_many :payments, class_name: Akatus::Payment
+  has_one :franchise, through: :unity
   
   attr_accessible :used_at, :unity_id, :payment_method, :total, :timetable_id, :status, :credit_card, :credit_card_attributes, 
                   :lead_attributes, :address_attributes, :cpf, :line_item_ids, :transaction_key, :payment_url, :code

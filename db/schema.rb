@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121026185155) do
+ActiveRecord::Schema.define(:version => 20121104170559) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(:version => 20121026185155) do
     t.string  "url"
     t.string  "acronym"
     t.boolean "payment_enabled", :default => false
+    t.string  "title"
   end
 
   create_table "franchises_users", :id => false, :force => true do |t|
