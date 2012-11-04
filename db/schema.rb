@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121104185104) do
+ActiveRecord::Schema.define(:version => 20121104233608) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -79,6 +79,12 @@ ActiveRecord::Schema.define(:version => 20121104185104) do
     t.integer  "franchise_id"
     t.string   "query_string"
   end
+
+  add_index "leads", ["created_at"], :name => "index_leads_on_created_at"
+  add_index "leads", ["email"], :name => "index_leads_on_email"
+  add_index "leads", ["enrolled_at"], :name => "index_leads_on_enrolled_at"
+  add_index "leads", ["id"], :name => "index_leads_on_id", :unique => true
+  add_index "leads", ["prospected_at"], :name => "index_leads_on_prospected_at"
 
   create_table "line_items", :force => true do |t|
     t.integer  "voucher_id"
