@@ -8,7 +8,7 @@ module MultiCommerce
       end
     end
     
-    def self.update_geolocations
+    def self.import
       csv_path = "#{Rails.root}/lib/csv/geolocations.csv"
       CSV.open(csv_path).each do |row|
         zipcode, latitude, longitude = row

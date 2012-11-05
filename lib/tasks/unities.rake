@@ -11,9 +11,13 @@ namespace :unities do
     MultiCommerce::Importer.perform
   end
   
+  desc 'Import geocode info from old app'
+  task :import_geocode => :environment do
+    MultiCommerce::Geocoder.import
+  end
+  
   desc 'Geocode unitities'
   task :geocode => :environment do
-    MultiCommerce::Geocoder.update_geolocations
     MultiCommerce::Geocoder.perform
   end
 end

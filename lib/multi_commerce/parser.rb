@@ -10,6 +10,9 @@ module MultiCommerce
         password = generate_password(unity_params[:email])
         
         unity = Unity.unscoped.find_or_create_by_code unity_params[:code]
+        
+        old_address = unity.address
+        
         user = User.find_or_create_by_email(email: unity_params[:email], password: password)        
         franchise = Franchise.find_by_acronym(unity_params[:franchise_acronym])
         
@@ -18,7 +21,11 @@ module MultiCommerce
         
         unity.users << user unless unity.users.include?(user)
         unity.franchise = franchise
-        unity.update_attributes unity_params
+        # unity.update_attributes unity_params
+        unity.attributes = unity_params
+        
+        unity.geocode unless old_address == unity.address
+        unity.save
       end
     end
     
