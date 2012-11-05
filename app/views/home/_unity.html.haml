@@ -7,7 +7,7 @@
   .result-center
     %h2= unity.name
     %span= unity.address
-    %h2= unity.phone
+    %h2= formatted_phone(unity)
     = link_to "como chegar »", external_map_url(unity), class: "how-to-get", target: "_blank"
   .result-right
     = link_to (image_tag static_map_url(unity)), external_map_url(unity), target: "_blank"

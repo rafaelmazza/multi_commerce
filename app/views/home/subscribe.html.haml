@@ -9,7 +9,7 @@
       .result-center
         %h2= @voucher.unity.name
         %span= @voucher.unity.address
-        %h2= @voucher.unity.phone
+        %h2= formatted_phone(@voucher.unity)
     .result-search
       #open-result
         #period

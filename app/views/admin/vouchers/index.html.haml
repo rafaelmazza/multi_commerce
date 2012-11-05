@@ -28,7 +28,7 @@
     %tr{"data-url" => admin_voucher_path(voucher), class: ("success" if voucher.status == 'Aprovado')}
       / %td= check_box_tag ''
       %td= voucher.lead.name
-      %td= phone(voucher.lead)
+      %td= formatted_phone(voucher.lead)
       %td= voucher.timetable.try(:title)      
       %td= voucher.code
       / %td= number_to_currency voucher.total

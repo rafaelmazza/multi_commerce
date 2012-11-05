@@ -20,7 +20,7 @@
         %span.value= @voucher.lead.name
       %li
         %span.label Telefone
-        %span.value= "(#{@voucher.lead.phone_code}) #{@voucher.lead.phone}"
+        %span.value= formatted_phone(@voucher.lead)
       %li
         %span.label E-mail
         %span.value= @voucher.lead.email
@@ -34,7 +34,7 @@
   #franchisee
     %h2= @voucher.unity.name
     %address= @voucher.unity.address
-    %p.tel= @voucher.unity.phone
+    %p.tel= formatted_phone(@voucher.unity)
   
   #number
     %h2 VOUCHER Nº:

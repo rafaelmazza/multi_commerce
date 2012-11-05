@@ -11,7 +11,7 @@
   %tbody
     %tr
       %td= @lead.name
-      %td= phone(@lead)
+      %td= formatted_phone(@lead)
       %td= I18n.l @lead.prospected_at, format: :short if @lead.prospected_at?
       %td= I18n.l @lead.enrolled_at, format: :short if @lead.enrolled_at?
       %td= I18n.l @lead.created_at, format: :short if @lead.created_at?
