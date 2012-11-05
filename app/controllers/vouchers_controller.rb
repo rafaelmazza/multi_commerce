@@ -1,6 +1,8 @@
 class VouchersController < ApplicationController
   include ActionView::Helpers::NumberHelper
   
+  load_and_authorize_resource only: ['show', 'success']
+  
   respond_to :html, :json
   
   protect_from_forgery except: :update_payment_status
@@ -20,7 +22,7 @@ class VouchersController < ApplicationController
   def show
     @voucher = Voucher.find(params[:id])
     render layout: 'voucher'
-    authorize! :manage, @voucher
+    # authorize! :manage, @voucher
   end
   
   def checkout
@@ -43,7 +45,7 @@ class VouchersController < ApplicationController
   
   def success
     @voucher = Voucher.find(params[:id])
-    authorize! :manage, @voucher
+    # authorize! :manage, @voucher
   end
   
   def update
