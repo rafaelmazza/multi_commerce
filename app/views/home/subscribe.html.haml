@@ -72,7 +72,7 @@
             %label
               = f.radio_button :payment_method, :cartao_master, class: ['payment_method', 'credit-card']
               = image_tag "application/master.png"
-          %fieldset#credit-card
+          %fieldset#credit-card{"style" => (("display: inline !important") if @voucher.credit_card?)}
             %h2 Dados do cartão de crédito:
             / = semantic_fields_for @lead, validate: true do |l|
             /   = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }, validate: true
