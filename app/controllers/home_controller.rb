@@ -10,6 +10,9 @@ class HomeController < ApplicationController
   def unities
     logger.debug 'aqui session unities'
     logger.debug session.inspect
+    p 'olha unities'
+    p session.inspect
+    
     @lead = Lead.find(session[:lead_id])
     @unities = current_franchise.unities.nearby(@lead).page params[:page]
   end

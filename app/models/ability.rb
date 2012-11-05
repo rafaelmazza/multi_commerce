@@ -4,6 +4,8 @@ class Ability
   def initialize(user, session)
     logger.debug 'aqui session ability'
     logger.debug session.inspect
+    p 'olha ability'
+    p session.inspect
     user ||= User.new(role: nil) # guest user (not logged in)
     if user.role == 'manager'
       can :manage, :all
