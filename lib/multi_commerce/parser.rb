@@ -24,7 +24,7 @@ module MultiCommerce
         # unity.update_attributes unity_params
         unity.attributes = unity_params
         
-        unity.geocode unless unity.new_record? or old_address == unity.address
+        unity.geocode unless not unity.new_record? or old_address == unity.address
         unity.save
       end
     end
