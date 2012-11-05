@@ -2,8 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user, session)
-    p 'aqui session ability'
-    p session.inspect
+    logger.debug 'aqui session ability'
+    logger.debug session.inspect
     user ||= User.new(role: nil) # guest user (not logged in)
     if user.role == 'manager'
       can :manage, :all
