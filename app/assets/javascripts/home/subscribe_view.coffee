@@ -6,6 +6,7 @@ jQuery ->
   		# _.bindAll @, 'searchAddress'
   		$('#voucher_cpf').mask("999.999.999-99")
   		$('#zipcode').mask("99999-999")
+  		$('#expiration_date').mask("99/9999")
   		new ButtonGroupView
 	
   	events:
