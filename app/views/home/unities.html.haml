@@ -16,7 +16,10 @@
 
       - if @unities.empty?
         #not-found
-          %p Not found
+          %p 
+            Nenhuma unidade encontrada. 
+            %br
+            Refine sua busca utilizando o campo acima.
       - else
         #unities
           = render partial: "unity", collection: @unities
