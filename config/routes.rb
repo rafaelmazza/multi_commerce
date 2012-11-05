@@ -6,7 +6,9 @@ MultiCommerce::Application.routes.draw do
   devise_for :backend_users, path: 'backend'
   mount RailsAdmin::Engine => '/backend', :as => 'rails_admin'
 
-  devise_for :users
+  devise_for :users do
+    get 'users', :to => 'admin/dashboard#index', :as => :user_root # redirect to admin root after update password
+  end
 
   backend_user_authenticated = lambda { |request| request.env["warden"].authenticate? and request.env["warden"].user }
   constraints backend_user_authenticated do
