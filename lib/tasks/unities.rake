@@ -5,4 +5,15 @@ namespace :unities do
       UnityMailer.reminder(unity, leads).deliver if unity
     end
   end
+  
+  desc 'Import unitities form ERP'
+  task :import => :environment do
+    MultiCommerce::Importer.perform
+  end
+  
+  desc 'Geocode unitities'
+  task :geocode => :environment do
+    MultiCommerce::Geocoder.update_geolocations
+    MultiCommerce::Geocoder.perform
+  end
 end
