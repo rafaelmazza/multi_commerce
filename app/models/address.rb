@@ -15,6 +15,6 @@ class Address < ActiveRecord::Base
   private
   
   def normalize_zipcode
-    self.zipcode = self.zipcode.gsub('/\D', '')
+    self.zipcode = self.zipcode.gsub('/\D', '') if zipcode?
   end
 end

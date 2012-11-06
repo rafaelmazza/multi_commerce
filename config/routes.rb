@@ -6,7 +6,8 @@ MultiCommerce::Application.routes.draw do
   devise_for :backend_users, path: 'backend'
   mount RailsAdmin::Engine => '/backend', :as => 'rails_admin'
 
-  devise_for :users do
+  devise_for :users 
+  devise_scope :user do
     get 'users', :to => 'admin/dashboard#index', :as => :user_root # redirect to admin root after update password
   end
 
