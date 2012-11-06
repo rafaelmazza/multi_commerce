@@ -14,7 +14,7 @@ describe Lead do
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:phone_code) }  
   it { should validate_presence_of(:phone) }
-  it { should validate_presence_of(:address_search) }  
+  # it { should validate_presence_of(:address_search) }  
   it { should validate_numericality_of(:phone_code) }
   it { should validate_numericality_of(:phone) }
   

@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe VouchersController do
-  let(:voucher) { mock(:voucher).as_null_object }
+  # let(:voucher) { mock(:voucher).as_null_object }
+  let(:voucher) { create(:voucher) }
   
   describe 'GET show' do
     before do
@@ -20,9 +21,9 @@ describe VouchersController do
   end
   
   describe 'POST update_payment_status' do
-    before do
-      Voucher.stub(:find).with('referencia').and_return(voucher)
-    end
+    # before do
+    #   Voucher.stub(:find).with('referencia').and_return(voucher)
+    # end
     
     it 'does not render view' do
       post :update_payment_status, token: 'valid_token', transacao_id: 'id', status: 'Aprovado', referencia: 'referencia'
@@ -31,9 +32,9 @@ describe VouchersController do
     
     it 'updates voucher payment status' do
       Akatus::Payment.stub conf: {'akatus' => {'token_nip' => 'valid_token'}}
-      voucher.should_receive(:update_attribute).with(:status, 'Aprovado')
-      post :update_payment_status, token: 'valid_token', transacao_id: 'id', status: 'Aprovado', referencia: 'referencia'
-      voucher.status.sould == 'Aprovado'
+      # voucher.should_receive(:update_attribute).with(:status, 'Aprovado')
+      post :update_payment_status, token: 'valid_token', transacao_id: 'id', status: 'Aprovado', referencia: voucher.id
+      Voucher.last.status.should == 'Aprovado'
     end
     
     context 'when token is invalid' do
@@ -43,12 +44,4 @@ describe VouchersController do
       end
     end
   end
-  
-  # describe 'POST checkout' do
-  #   let(:voucher) { create(:voucher) }
-  # 
-  #   it 'should' do
-  #     post :checkout, id: voucher.id
-  #   end
-  # end
 end
