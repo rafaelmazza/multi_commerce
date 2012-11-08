@@ -66,10 +66,25 @@ describe HomeController do
       get :subscribe, unity_id: unity
       assigns(:voucher).should == voucher
     end
-    
-    # it 'assign products' do
-    #   get :subscribe, unity_id: unity
-    #   assigns(:products).should == products
-    # end
+  end
+  
+  describe 'GET index', wip: true do
+    context 'lead coming from a specific campaign' do
+      let(:current_franchise) { create(:franchise) }
+      let!(:campaign) { create(:campaign, name: 'google', :franchise => current_franchise) }
+
+      it 'identifies campaign from source param' do
+        controller.stub!(:current_franchise).and_return(current_franchise)
+        get :index, source: 'google'
+        assigns[:lead].campaign.should == campaign
+      end
+
+      it 'identifies campaigns restricted to the current domain' do
+        controller.stub!(:current_franchise).and_return(create(:franchise))
+
+        get :index, source: 'google'
+        assigns[:lead].campaign.should == nil
+      end
+    end
   end
 end

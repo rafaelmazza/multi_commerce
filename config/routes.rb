@@ -63,5 +63,5 @@ MultiCommerce::Application.routes.draw do
   
   match "installments" => "vouchers#installments" #tmp
   
-  match "/:source" => "home#index", constraints: {source: /!(favicon)/}
+  match "/:source" => "home#index"#, constraints: {source: /!(favicon)/}
 end

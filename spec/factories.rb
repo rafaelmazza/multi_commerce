@@ -117,4 +117,9 @@ FactoryGirl.define do
     
     price 10
   end
+  
+  factory :campaign do
+    sequence(:name) { |n| "Campaign #{n}"}
+    franchise
+  end
 end
