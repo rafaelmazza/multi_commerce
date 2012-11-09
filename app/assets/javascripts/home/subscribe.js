@@ -5,7 +5,8 @@ $(document).ready(function () {
 	  $('#credit-card, #installments-placeholder').css('display', 'inline');
 		var paymentMethod = this.value;
 		var amount = $('#voucher_total').val();
-		var url = '/installments.json';
+		var voucherID = $('#voucher_id').val();
+    var url = '/vouchers/' + voucherID + '/installments.json';
 
 		$.ajax({
 		  url: url,

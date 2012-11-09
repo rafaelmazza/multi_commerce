@@ -1,6 +1,8 @@
 require 'yaml'
 
-class Akatus::Payment  
+class Akatus::Payment
+  # include ActionView::Helpers::NumberHelper
+  
   def self.perform(voucher)
 
     xml_parser = Akatus::Xml.new voucher, conf
@@ -43,6 +45,19 @@ class Akatus::Payment
     # logger.info ''
     # logger.info response.body.inspect
     # logger.info ''
+  end
+  
+  def self.installments(amount, payment_method)
+    uri = URI(conf['akatus']['installments_simulation_uri'])
+    params = { 
+      :email => conf['akatus']['email'],
+      :amount => amount.to_s,
+      :payment_method => payment_method,
+      :api_key => conf['akatus']['api_key']
+    }
+    uri.query = URI.encode_www_form(params)
+    response = Net::HTTP.start(uri.host, use_ssl: true) { |http| http.get uri.request_uri }
+    response.body
   end
 
   private

@@ -24,6 +24,7 @@ MultiCommerce::Application.routes.draw do
     # post :update_payment_method, on: :member
     put :checkout, on: :member
     get :success, on: :member
+    get :installments, on: :member
   end
   
   match "update_payment_status" => "vouchers#update_payment_status", via: :post
@@ -61,7 +62,7 @@ MultiCommerce::Application.routes.draw do
     end
   end
   
-  match "installments" => "vouchers#installments" #tmp
+  # match "installments" => "vouchers#installments" #tmp
   
   match "/:source" => "home#index"#, constraints: {source: /!(favicon)/}
 end

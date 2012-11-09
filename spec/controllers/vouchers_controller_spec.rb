@@ -64,4 +64,19 @@ describe VouchersController do
       end
     end
   end
+  
+  describe 'GET installments', wip: true do
+    let(:akatus_response) { '{"resposta":{"descricao":"1,99% ao m\u00eas","parcelas_assumidas":0,"parcelas":[{"quantidade":1,"valor":"100.0","total":"100.0"},{"quantidade":2,"valor":"51.5","total":"102.99"},{"quantidade":3,"valor":"34.67","total":"104.0"},{"quantidade":4,"valor":"26.26","total":"105.02"},{"quantidade":5,"valor":"21.21","total":"106.04"},{"quantidade":6,"valor":"17.85","total":"107.07"},{"quantidade":7,"valor":"15.45","total":"108.11"},{"quantidade":8,"valor":"13.65","total":"109.16"},{"quantidade":9,"valor":"12.25","total":"110.21"},{"quantidade":10,"valor":"11.13","total":"111.26"},{"quantidade":11,"valor":"10.22","total":"112.33"},{"quantidade":12,"valor":"9.45","total":"113.4"}]}}' }
+
+    before do
+      stub_request(:get, 'https://www.akatus.com/api/v1/parcelamento/simulacao.json?email=akatus@cafeazul.com.br&amount=100&payment_method=cartao_visa&api_key=6494F2BA-CDEA-487A-9633-3B2CBFCA47F6')
+        .with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'})
+        .to_return(status: 200, body: akatus_response, headers: {})
+    end
+    
+    it 'returns voucher installments' do
+      get :installments, id: voucher, amount: 100, payment_method: 'cartao_visa', format: :json
+      response.body.should == akatus_response
+    end
+  end
 end

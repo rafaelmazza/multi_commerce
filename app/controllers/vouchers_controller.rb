@@ -1,6 +1,4 @@
 class VouchersController < ApplicationController
-  include ActionView::Helpers::NumberHelper
-  
   load_and_authorize_resource only: ['show', 'success']
   
   respond_to :html, :json
@@ -9,7 +7,6 @@ class VouchersController < ApplicationController
   before_filter :validate_akatus_token, only: :update_payment_status
   
   layout 'home'
-  # layout 'voucher', :only => :show
   
   rescue_from Akatus::ConnectionFailed, with: :connection_failed
   rescue_from Akatus::PaymentFailed, with: :connection_failed
@@ -22,7 +19,6 @@ class VouchersController < ApplicationController
   def show
     @voucher = Voucher.find(params[:id])
     render layout: 'voucher'
-    # authorize! :manage, @voucher
   end
   
   def checkout
@@ -45,7 +41,6 @@ class VouchersController < ApplicationController
   
   def success
     @voucher = Voucher.find(params[:id])
-    # authorize! :manage, @voucher
   end
   
   def update
@@ -62,30 +57,8 @@ class VouchersController < ApplicationController
     render nothing: true
   end
   
-  # TODO: tmp
   def installments
-    # uri = URI('https://www.akatus.com/api/v1/parcelamento/simulacao.json?email=akatus@cafeazul.com.br&amount=100&payment_method=cartao_visa&api_key=6494F2BA-CDEA-487A-9633-3B2CBFCA47F6')
-    uri = URI('https://www.akatus.com/api/v1/parcelamento/simulacao.json')
-    p = { 
-      :email => 'akatus@cafeazul.com.br',
-      :amount => params['amount'].gsub('\D', ''),
-      :payment_method => params['payment_method'],      
-      # :amount => 100,
-      # :payment_method => 'cartao_visa',
-      :api_key => '6494F2BA-CDEA-487A-9633-3B2CBFCA47F6'
-    }
-    uri.query = URI.encode_www_form(p)
-    res = Net::HTTP.start(uri.host, use_ssl: true, verify_mode: OpenSSL::SSL::VERIFY_NONE) do |http|
-      http.get uri.request_uri, 'User-Agent' => 'MyLib v1.2'
-    end
-
-    result = JSON.load(res.body)    
-    result['resposta']['parcelas'].map! do |v| 
-      v.merge('valor' => number_to_currency(v['valor']), 'total' => number_to_currency(v['total']))
-    end
-          
-    # render text: result
-    respond_with result
+    respond_with Akatus::Payment.installments(params[:amount], params[:payment_method])
   end
   
   private
