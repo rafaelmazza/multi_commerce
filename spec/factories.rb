@@ -97,6 +97,8 @@ FactoryGirl.define do
     cpf '56053209554'
     
     unity
+    franchise
+    lead
     # address
     # lead
     

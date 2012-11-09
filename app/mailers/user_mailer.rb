@@ -1,4 +1,6 @@
 class UserMailer < ActionMailer::Base
+  helper :application
+  
   def payment_processed(voucher)
     @voucher = voucher
     from = "#{voucher.franchise.title} <do-not-reply@cafeazulhost.com.br>"

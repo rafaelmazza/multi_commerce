@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe VouchersController do
-  # let(:voucher) { mock(:voucher).as_null_object }
   let(:voucher) { create(:voucher) }
   
   describe 'GET show' do
@@ -9,32 +8,53 @@ describe VouchersController do
       Voucher.stub(:find).with('voucher_id').and_return voucher
     end
     
-    it 'assigns voucher' do      
-      get :show, id: 'voucher_id'
-      assigns(:voucher).should == voucher
+    context 'for current lead' do
+      before do
+        session[:lead_id] = voucher.lead.id
+      end
+      
+      it 'assigns voucher' do      
+        get :show, id: 'voucher_id'
+        assigns(:voucher).should == voucher
+      end
+
+      it 'renders voucher layout' do
+        get :show, id: 'voucher_id'
+        response.should render_template('layouts/voucher')
+      end
     end
     
-    it 'renders voucher layout' do
-      get :show, id: 'voucher_id'
-      response.should render_template('layouts/voucher')
-    end
+    context 'for any other lead' do
+      it 'raises exception when try to access' do
+        expect { get :show, id: 'voucher_id' }.to raise_error CanCan::AccessDenied
+      end
+    end    
   end
   
   describe 'POST update_payment_status' do
-    # before do
-    #   Voucher.stub(:find).with('referencia').and_return(voucher)
-    # end
-    
-    it 'does not render view' do
-      post :update_payment_status, token: 'valid_token', transacao_id: 'id', status: 'Aprovado', referencia: 'referencia'
-      response.body.strip.should be_empty
-    end
-    
-    it 'updates voucher payment status' do
-      Akatus::Payment.stub conf: {'akatus' => {'token_nip' => 'valid_token'}}
-      # voucher.should_receive(:update_attribute).with(:status, 'Aprovado')
-      post :update_payment_status, token: 'valid_token', transacao_id: 'id', status: 'Aprovado', referencia: voucher.id
-      Voucher.last.status.should == 'Aprovado'
+    context 'when token is valid' do
+      let(:params) { {token: 'valid_token', transacao_id: 'id', status: 'Aprovado', referencia: voucher.id} }
+      
+      before do
+        Akatus::Payment.stub conf: {'akatus' => {'token_nip' => 'valid_token'}}
+        Voucher.stub(:find).with(voucher.id.to_s).and_return(voucher)
+        Sidekiq::Extensions::DelayedMailer.drain
+      end
+      
+      it 'does not render view' do
+        post :update_payment_status, params
+        response.body.strip.should be_empty
+      end
+
+      it 'updates voucher payment status' do
+        post :update_payment_status, params
+        voucher.status.should == 'Aprovado'
+      end
+      
+      it 'queue payment approved notification email' do
+        post :update_payment_status, params
+        Sidekiq::Extensions::DelayedMailer.jobs.size.should == 1
+      end
     end
     
     context 'when token is invalid' do
