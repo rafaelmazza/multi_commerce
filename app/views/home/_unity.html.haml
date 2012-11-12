@@ -1,6 +1,5 @@
 .unity.result-unity{ id: "unity_"+unity.id.to_s }
   .result-left
-    /= submit_tag "Inscrever", class: "subscribe_button btn-search-sign-in", "data-id" => unity.id.to_s
     = link_to "Inscrever", "/inscricao/#{unity.id.to_s}", class: 'subscribe btn btn-large btn-primary'
 
     %p Inscreva-se agora e ganhe desconto!

@@ -2,7 +2,6 @@
   - if alert
     #alert
       %p= alert
-      / %p Ocorreu um erro ao tentar processar seu pagamento. Tente novamente mais tarde!
   = semantic_form_for @voucher, url: checkout_voucher_path(@voucher), validate: true do |f|
     = f.hidden_field :id
     .result-search
@@ -14,13 +13,6 @@
       #open-result
         #period
           %h2 Qual o melhor horário para você estudar?
-          / %fieldset#period
-          / - @timetables.each do |timetable|
-          /   %label.course_period{"data-id" => timetable.id}
-          /     = button_tag timetable.title, type: "button", class: 'timetable'
-          /     %span= timetable.description
-          /= f.input :timetable_id, as: :radio, collection: @timetables
-          / = hidden_field_tag "voucher[timetable_id]", timetable.id
           %ul
             - Timetable.all.each do |timetable|
               %li.btn-group{"data-toggle" => "buttons-radio", "data-toggle-name" => "voucher[timetable_id]"}
@@ -32,33 +24,18 @@
             %fieldset#your-data
               = f.semantic_fields_for :address do |a|
                 = a.input :zipcode, input_html: { id: 'zipcode', class: "input-small" }, wrapper_html: { class: "wrapper" }
-                / %span#loading{"style" => "display: inline"}
-                /   = image_tag 'application/loading.gif'
                 = a.input :street, input_html: { id: 'street', class: "input-large" }, wrapper_html: { class: "wrapper" }
                 = a.input :number, input_html: { id: 'number', class: "input-medium" }, wrapper_html: { class: "wrapper" }
                 = a.input :complement, input_html: { id: 'complement', class: "input-medium" }, wrapper_html: { class: "wrapper" }
                 = a.input :district, input_html: { id: 'district', class: "input-medium" }, wrapper_html: { class: "wrapper" }
                 = a.input :city, input_html: { id: 'city', class: "input-large" }, wrapper_html: { class: "wrapper" }
                 = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { id: 'state', class: "" }, wrapper_html: { class: "wrapper" }
-              / = semantic_fields_for @lead, validate: true do |l|
-              /   = l.fields_for :address do |a|
-              /     = a.input :zipcode, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /     = a.input :street, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
-              /     = a.input :complement, input_html: { class: "input-4" }, wrapper_html: { class: "wrapper" }
-              /     = a.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /     = a.input :district, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /     = a.input :city, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /     = a.input :state, :as => :select, :collection => %w[AC AL AP AM BA CE DF ES GO MA MT MS MG PA PB PR PE PI RJ RN RS RO RR SC SP SE TO], input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /   /= l.input :phone_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /   /= l.input :phone, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /   /= l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
 
             %fieldset#your-data-right
               = render partial: "home/product", collection: current_franchise.products, locals: { f: f }
               #total
                 %span.total-left Total:
                 %span.total-right
-                  /= number_to_currency(current_franchise.products.sum(&:price))
                   = hidden_field_tag 'voucher_total', voucher_total
                   = number_to_currency(voucher_total)
           %h2 Escolha uma Forma de Pagamento:
@@ -74,29 +51,19 @@
               = image_tag "application/master.png"
           %fieldset#credit-card{"style" => (("display: inline !important") if @voucher.credit_card?)}
             %h2 Dados do cartão de crédito:
-            / = semantic_fields_for @lead, validate: true do |l|
-            /   = l.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }, validate: true
             = f.input :cpf, input_html: { class: "input-medium" }, wrapper_html: { class: "wrapper" }
             = f.semantic_fields_for :credit_card, validate: false do |c|
-              / = c.input :cpf, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
               = c.input :card_holder_name, input_html: { class: "input-large", "autocomplete" => "off" }, wrapper_html: { class: "wrapper" }
               = c.input :number, input_html: { class: "input-large", "autocomplete" => "off" }, wrapper_html: { class: "wrapper" }
               = c.input :security_code, input_html: { class: "input-medium", maxlength: 3, "autocomplete" => "off" }, wrapper_html: { class: "wrapper" }            
               = c.input :expiration_date, input_html: { class: "input-medium", id: "expiration_date" }, wrapper_html: { class: "wrapper" }, placeholder: 'MM/AAAA'
               = c.input :installments, as: :select, collection: options_for_select((1..12).to_a, 1), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }       
 
-              / = l.semantic_fields_for :credit_card, validate: false do |c|
-              /   = c.input :card_holder_name, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /   = c.input :number, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
-              /   = c.input :security_code, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
-              /   = c.input :expiration_date, input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }            
-              /   = c.input :installments, as: :select, collection: options_for_select((1..12).to_a), input_html: { class: "input-1" }, wrapper_html: { class: "wrapper" }
           #installments-placeholder
           %fieldset#button
             = f.submit "Comprar Curso", class: "btn-purchase"
           #content-footer
             = link_to "« voltar", unities_path, id: "content-footer-link-back"
-            / = link_to "« voltar", :back, id: "content-footer-link-back"
             = link_to t('.print_voucher'), voucher_url(@voucher), id: "print-voucher", class: "btn btn-small"
           
 %script#installments-options{type: "text/x-handlebars-template"}
