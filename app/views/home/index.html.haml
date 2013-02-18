@@ -31,6 +31,7 @@
                                                 placeholder: "Digite seu bairro, rua ou CEP"}
 
       = f.action :submit, label: :subscribe, button_html: { class: "btn-signup" }, wrapper_html: { class: "btn-label" }
+      = f.input :newsletter, label: 'Desejo receber contato da Wizard com informações sobre o curso'
     %span.notice 
       As informações são confidenciais, para uso exclusivo da Wizard, e não serão repassadas para terceiros. 
       = link_to 'Leia nossa política de privacidade', privacy_policy_path, target: 'blank'

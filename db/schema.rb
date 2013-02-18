@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121108124906) do
+ActiveRecord::Schema.define(:version => 20130218144618) do
 
   create_table "addresses", :force => true do |t|
     t.string  "street"
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20121108124906) do
     t.integer  "campaign_id"
     t.integer  "franchise_id"
     t.string   "query_string"
+    t.boolean  "newsletter",     :default => true, :null => false
   end
 
   add_index "leads", ["created_at"], :name => "index_leads_on_created_at"
