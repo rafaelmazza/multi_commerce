@@ -3,8 +3,8 @@ module MultiCommerce
     # extend ActiveSupport::Concern
     
     def current_franchise
-      # @current_franchise ||= Franchise.find_by_url(request.server_name)
-      @current_franchise ||= Franchise.find_by_name('wizard')
+      @current_franchise ||= Franchise.find_by_url(request.server_name)
+      # @current_franchise ||= Franchise.find_by_name('wizard')
     end
         
     def self.included m
