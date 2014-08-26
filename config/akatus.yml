@@ -1,0 +1,6 @@
+akatus:
+  api_key: <%= ENV['AKATUS_API_KEY'] %>
+  token_nip: <%= ENV['AKATUS_TOKEN_NIP'] %>
+  email: <%= ENV['AKATUS_EMAIL'] %>
+  uri: <%= ENV['AKATUS_URI'] %>
+  installments_simulation_uri: <%= ENV['AKATUS_INSTALLMENTS_SIMULATION_URI'] %>
